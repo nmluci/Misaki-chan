@@ -1,0 +1,21 @@
+{
+  "name": "luci-ds-bot",
+  "version": "1.0.0",
+  "main": "app.js",
+  "dependencies": {
+    "discord.js": "^11.5.1",
+    "nhentai-api-js": "^1.1.2",
+    "snekfetch": "^4.0.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node app.js"
+  },
+  "keywords": [],
+  "author": "Lynne Fuyuna",
+  "license": "MIT",
+  "directories": {
+    "lib": "lib"
+  },
+  "description": ""
+}
