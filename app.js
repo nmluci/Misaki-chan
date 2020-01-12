@@ -2,15 +2,6 @@ const { Collection } = require("discord.js");
 const { readdirSync } = require("fs");
 //const { TOKEN } = require("./config.json");
 const Fyn = require("./lib/FynClient");
-const http = require('http');
-
-http.createServer((req, res) => {
-res.writeHead(200, {
-    'Content-type': 'text/plain'
-});
-    res.write('Hey');
-    res.end();
-}).listen(4000);
 
 const client = new Fyn({
     fetchAllMembers: true,
