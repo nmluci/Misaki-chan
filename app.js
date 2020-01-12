@@ -1,6 +1,6 @@
 const { Collection } = require("discord.js");
 const { readdirSync } = require("fs");
-const { TOKEN } = require("./config.json");
+//const { TOKEN } = require("./config.json");
 const Fyn = require("./lib/FynClient");
 const http = require('http');
 
@@ -39,4 +39,4 @@ for (const command of (readdirSync(`./commands`).filter(x => x.endsWith(".js")))
     }
 }
 
-client.login(TOKEN);
+client.login(process.env.BOT_TOKEN);
