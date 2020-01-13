@@ -10,7 +10,7 @@ module.exports = async (client, msg) => {
     let command = args.shift().toLowerCase();
 
     if (msg.content.toLowerCase() === `<@${client.user.id}>` || msg.content.toLowerCase() === `<@!${client.user.id}>`) {
-        msg.channel.send(`Prefix: \`nhen\`\nExample: \`nhen random\``);
+        msg.channel.send(`Prefix: \`misaki\`\nExample: \`misaki random\``);
     }
     if ((/^(https:)\/\/(nhentai+)\.(net)\/g\/[0-9]+\/?/).test(msg)) return require('../lib/FynLink')(client, msg);
     if (!msg.content.startsWith(prefix.toLowerCase())) return undefined;
