@@ -7,11 +7,11 @@ exports.run = async (client, msg, args, color) => {
       .setTitle("Misaki Personal Bot")
       .setDescription(`Misaki can help you extends your lifespan by providing some services. Check out ma [Instagram](https://www.Instagram.com/nmluci).`)
       .addField('Command List',
-      `nhen random --> throw you a nh code
-      nhen help --> give how to use me
-      nhen read \`<ID>\` -- give you an opportunity to extends your lifespan right now
-      nhen lang \`<english/japanese/chinese/en/jp/ch>\` perhaps you are not idiot enough
-      nhen download \`<ID>\` for you who wanna some give a gift for your fellas out there`)
+      `Misaki random --> throw you some code
+      Misaki help --> give how to use ma services
+      Misaki read \`<ID>\` -- give you an opportunity to extends your lifespan right now
+      Misaki lang \`<english/japanese/chinese/en/jp/ch>\` perhaps you are not idiot enough
+      Misaki download \`<ID>\` for you who wanna some give a gift for your fellas out there`)
       .setFooter('Misaki (Concieved by Fuyuna, *Teehee*)')
       msg.channel.send(embed)
     } else {
