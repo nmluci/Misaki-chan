@@ -16,7 +16,7 @@ Channels   :: ${client.channels.size.toLocaleString()}
 Bot Vers.  :: ${botVersion}
 Discord.js :: v${version}
 Node       :: ${process.version}
-Owner      :: ${botAuthor}\`\`\`\``)
+Owner      :: ${botAuthor}\`\`\`\`)
 }
 
 exports.conf = {

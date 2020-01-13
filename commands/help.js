@@ -21,6 +21,7 @@ exports.run = async (client, msg, args, color) => {
       .setDescription(`By Lynne Fuyuna`)
       .addField('Latest Changelogs',`ω Add Tags feature --> \`misaki tags <tags>\``)
       .setFooter('Misaki (Concieved by Fuyuna, *Teehee*) || Changelogs')
+      .setImage('https://i.imgur.com/ferMZ8y.jpg')
       msg.channel.send(embed);
       msg.channel.send(embed2);
     } else {
