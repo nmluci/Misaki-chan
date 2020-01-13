@@ -5,15 +5,24 @@ exports.run = async (client, msg, args, color) => {
       const embed = new RichEmbed()
       .setColor(color)
       .setTitle("Misaki Personal Bot")
-      .setDescription(`Misaki can help you extends your lifespan by providing some services. Check out ma [Instagram](https://www.Instagram.com/nmluci).`)
-      .addField('Command List',
-      `misaki random --> throw you some code
-misaki help --> give how to use ma services
-misaki read \`<ID>\` -- give you an opportunity to extends your lifespan right now
-misaki lang \`<english/japanese/chinese/en/jp/ch>\` perhaps you are not idiot enough
-misaki download \`<ID>\` for you who wanna some give a gift for your fellas out there`)
+      .setDescription(`Misaki can help you extends your lifespan by providing some services. Check out ma [Instagram](https://www.Instagram.com/nm.lucius).`)
+      .addField('Command List',`
+ω misaki random --> throw you some sauce
+ω misaki help --> give how to use my loyal services
+ω misaki read \`<ID>\` --> give you an opportunity to extends your lifespan right now
+ω misaki lang \`</en/jp/ch>\` --> for those who live outside the cave
+ω misaki download \`<ID>\` for those who wanna keep it locally
+ω misaki tags \`<tags>\` for those who knows their flavor`)
       .setFooter('Misaki (Concieved by Fuyuna, *Teehee*)')
-      msg.channel.send(embed)
+      const embed2 = new RichEmbed()
+      .setColor('#FFC1FF')
+      .setTitle("Misaki Personal Bot")
+      .setThumbnail()
+      .setDescription(`By Lynne Fuyuna`)
+      .addField('Latest Changelogs',`ω Add Tags feature --> \`misaki tags <tags>\``)
+      .setFooter('Misaki (Concieved by Fuyuna, *Teehee*) || Changelogs')
+      msg.channel.send(embed);
+      msg.channel.send(embed2);
     } else {
       let cmd = args[0];
       if (client.commands.has(cmd) || client.commands.get(client.aliases.get(cmd))) {
