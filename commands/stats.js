@@ -6,7 +6,7 @@ exports.run = async (client, msg, args) => {
     const botVersion = pkg.version;
     const botAuthor = pkg.author;
 
-    msg.channel.send(`\`\`\`asciidoc
+    msg.channel.send(`\`\`\`\`asciidoc
 Mem. Usage :: ${Math.floor(process.memoryUsage().heapUsed/1048576)} MB
 Uptime     :: ${uptime}
 WS Ping    :: ${client.ping.toFixed(2)}ms
@@ -16,7 +16,7 @@ Channels   :: ${client.channels.size.toLocaleString()}
 Bot Vers.  :: ${botVersion}
 Discord.js :: v${version}
 Node       :: ${process.version}
-Owner      :: ${botAuthor}}`\`\`\`\``)
+Owner      :: ${botAuthor}\`\`\`\``)
 }
 
 exports.conf = {
