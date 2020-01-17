@@ -1,5 +1,5 @@
 {
-  "name": "luci-ds-bot",
+  "name": "rei-chan",
   "version": "1.0.15",
   "main": "app.js",
   "dependencies": {
@@ -17,5 +17,9 @@
   "directories": {
     "lib": "lib"
   },
-  "description": "Misaki-chan is an all purpose bot to serve only ME"
+  "description": "Misaki's little sister, Rei-chan. More sluttier, More Smart, More Experienced in Bed (**Teehee**)",
+  "repository": {
+    "type": "git",
+    "url": " "
+  }
 }

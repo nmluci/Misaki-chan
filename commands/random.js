@@ -7,7 +7,7 @@ exports.run = async (client, msg, args, color) => {
 }
 
 exports.conf = {
-  aliases: [],
+  aliases: ['rand'],
   cooldown: '15'
 }
 
