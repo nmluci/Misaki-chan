@@ -52,7 +52,7 @@ exports.run = async (client, msg, args, color) => {
         return msg.channel.send(embed);
       }
       if (!client.commands.has(cmd) || !client.commands.get(client.aliases.get(cmd))) {
-        msg.channel.send(`Sorry <${msg.author.id}>, I can't find command \`${cmd}\`.`);
+        msg.channel.send(`Sorry <@${msg.author.id}>, I can't find command \`${cmd}\`.`);
       }
     }
 }

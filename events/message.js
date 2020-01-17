@@ -31,7 +31,7 @@ module.exports = async (client, msg) => {
     let estimated = userCool + (cool * 1000) - now;
 
     if (userCool && estimated > 0) {
-        return msg.channel.send(`**${member.user.username}**, you have to wait **${(estimated/1000).toFixed()}s** before use the same command`).then(msg => msg.delete(4000));
+        return msg.channel.send(`<@${message.author.id}>, you have to wait **${(estimated/1000).toFixed()}s** before use the same command`).then(msg => msg.delete(4000));
     }
 
     timeStamp.set(msg.author.id, now);
