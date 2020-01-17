@@ -28,13 +28,13 @@ exports.run = async (client, msg, args, color) => {
       // console.log(input);
       msg.channel.send(`Degenerating <@${msg.author.id}> with ${sum} doujin...`).then(msg => msg.delete(3000));
       msg.author.send(`I SEE WUT R U DOIN IN THERE FUFUFU`).then(msg => msg.delete(5000));
-      msg.author.send(`I see you like ${input} ...`);
+      msg.author.send(`I see you like ${input}...`);
       let numPages = await api.search(input);
       let id = await api.search(input, client.util.getRandInt(numPages.num_pages));
       const res = await api.g(id.results.find(x => x.language == lang).id);
       await client.embeds.getInfoEmbed(res.id, msg);
-      console.log(res.id);
-      console.log(res.tags);
+      // console.log(res.id);
+      // console.log(res.tags);
       msg.channel.send('Fufufu').then(msg => msg.delete(5000));
 
     } else {
@@ -42,13 +42,12 @@ exports.run = async (client, msg, args, color) => {
       for (i = 0; i < sum; i++) {
         let numPages = await api.search(input);
         msg.channel.send(`Degenerating <@${msg.author.id}> with ${sum} doujin...`).then(msg => msg.delete(3000));
-        msg.author.send(`I SEE WUT R U DOIN IN THERE FUFUFU`).then(msg => msg.delete(5000));
-        msg.author.send(`I see you like ${input} ...`);
+        msg.author.send(`I see you like ${input}...`);
         let id = await api.search(input, client.util.getRandInt(numPages.num_pages));
         const res = await api.g(id.results.find(x => x.language == lang).id);
         await client.embeds.getInfoEmbed(res.id, msg);
-        console.log(res.id);
-        console.log(res);
+        // console.log(res.id);
+        // console.log(res);
       }
     }
 }

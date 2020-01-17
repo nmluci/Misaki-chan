@@ -3,16 +3,8 @@ let api = new nHentaiAPI();
 
 exports.run = async (client, msg, args, color) => {
     if (!msg.channel.nsfw) return msg.channel.send(`キャー先輩(≧∇≦)、私まだ未成年んだよ。\nもし先輩があたしと子作りにやるなら、いいよ。\nKyaa~ Senpai, I'm still underage.\nBut if you wanna do it with me, I'm okay.`).then(msg => msg.delete(5000));
-    args = (args[0] ? args.join(' ') : args[0]);
-    // console.log(args.length);
-    num = args.slice(args.length-1);
-    tags = args.slice(0, args.length-2);
-    let input = tags;
-    // console.log(input);
-    let lang = 'english'
-    // console.log(lang);
-    let sum = num;
-    console.log(sum);
+    let input = args[0];
+    let lang = args[1];
     if (!lang) lang = 'english';
     if (!client.config.LANG.includes(lang)) return msg.channel.send('Available langauge is \`English\`, \`Japanese\` & \`Chinese\`').then(msg => msg.delete(5000));
     if (lang == "ch") {
@@ -25,25 +17,19 @@ exports.run = async (client, msg, args, color) => {
     if (input == 'brainfuck') {
       const input = 'yaoi'
       msg.channel.send('Kya~ Hageshi sugiruu~').then(msg => msg.delete(2000));
-      // console.log(input);
+      console.log(input);
       let numPages = await api.search(input);
       let id = await api.search(input, client.util.getRandInt(numPages.num_pages));
       const res = await api.g(id.results.find(x => x.language == lang).id);
       await client.embeds.getInfoEmbed(res.id, msg);
-      console.log(res.id);
-      console.log(res.tags);
       msg.channel.send('Fufufu').then(msg => msg.delete(5000));
 
     } else {
       console.log(input);
-      for (i = 0; i < sum; i++) {
-        let numPages = await api.search(input);
-        let id = await api.search(input, client.util.getRandInt(numPages.num_pages));
-        const res = await api.g(id.results.find(x => x.language == lang).id);
-        await client.embeds.getInfoEmbed(res.id, msg);
-        console.log(res.id);
-        console.log(res);
-      }
+      let numPages = await api.search(input);
+      let id = await api.search(input, client.util.getRandInt(numPages.num_pages));
+      const res = await api.g(id.results.find(x => x.language == lang).id);
+      await client.embeds.getInfoEmbed(res.id, msg);
     }
 }
 

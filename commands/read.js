@@ -12,8 +12,7 @@ exports.run = async (client, msg, args, color) => {
         // client.embeds.getEmoji(id, m, msg);
     } catch (e) {
         if (e.message == 'Doujin Not Found') {
-            msg.channel.send(`Scum`).then(msg => msg.delete(3500));
-            return msg.channel.send(`**<@${msg.author.id}>**, You've commmited a crime by falsify the code to ME!`).then(msg => msg.delete(5000));
+            return msg.channel.send(`**${nick}**, You've commmited a crime by falsify the code to ME!`).then(msg => msg.delete(5000));
         }
     }
 }

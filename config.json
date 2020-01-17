@@ -1,7 +1,6 @@
 {
-    "PREFIX": "$r",
-    "COLOR": "#DD474D",
-    "BOT_TOKEN": "NjY2MjYwNzU5OTY1MDczNDA4.Xhx10w.VKEkCqSDpyKQIWnuho_8XOuZiEY",
+    "PREFIX": "misaki",
+    "COLOR": "#7146ff",
     "OWNERS": [
         "360824982789685248"
     ],
