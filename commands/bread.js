@@ -3,7 +3,6 @@ const { RichEmbed } = require("discord.js");
 exports.run = async (client, msg, args, color) => {
     let nick = msg.member.nickname !== null ? `${msg.member.nickname}` : msg.author.username;
     
-    
     var nuclear = [];
     for (let index = 0; index < args.length; index++) {
       nuclear.push(args[index])
@@ -13,9 +12,9 @@ exports.run = async (client, msg, args, color) => {
     if (!args[0]) return msg.channel.send(`<@${message.author.id}>, please give me your thicc \`semen\`. I mean the ID`).then(msg => msg.delete(5000));
 
     try {
-        array.forEach(element => {
-          let m = await client.embeds.getInfoEmbed(id, msg);
-        });
+        nuclear.forEach( 
+          await client.embeds.getInfoEmbed(id, msg);
+        )
         // client.embeds.getEmoji(id, m, msg);
     } catch (e) {
         if (e.message == 'Doujin Not Found') {
