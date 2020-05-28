@@ -15,7 +15,7 @@ exports.run = async (client, msg, args, color) => {
         lang = 'japanese'
     }
     if (input == 'brainfuck') {
-      const input = 'yaoi'
+      const input = 'yuri'
       msg.channel.send('Kya~ Hageshi sugiruu~').then(msg => msg.delete(2000));
       console.log(input);
       let numPages = await api.search(input);
