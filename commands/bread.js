@@ -13,8 +13,8 @@ exports.run = async (client, msg, args, color) => {
 
     try {
         nuclear.forEach( 
-          await client.embeds.getInfoEmbed(id, msg);
-        )
+          await client.embeds.getInfoEmbed(id, msg)
+        );
         // client.embeds.getEmoji(id, m, msg);
     } catch (e) {
         if (e.message == 'Doujin Not Found') {
