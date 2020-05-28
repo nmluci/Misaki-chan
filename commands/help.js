@@ -43,7 +43,7 @@ exports.run = async (client, msg, args, color) => {
         let usage = command.help.usage;
         let usages = Array.isArray(usage) ? usage : [usage];
 
-        let embed = new RichEmbed()
+        const embed = new RichEmbed()
         .setAuthor(client.user.username + ' Guide', this.client.nHlogo)
         .setTitle(`${name} | ${aliases}`)
         .setDescription(desc)
