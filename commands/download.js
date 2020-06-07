@@ -5,7 +5,7 @@ let api = new nHentaiAPI();
  exports.run = async (client, msg, args, color) => {
    const res = await api.g(args[0]);
    const embed = new RichEmbed()
-   .setAuthor('Misaki-chan Doujin Downloader', this.client.nHlogo)
+   .setAuthor('Misaki-chan Doujin Downloader', client.nHlogo)
    .setColor(color)
    .setURL(`https://dl.nhent.ai/dl/${res.id}`)
    .setTitle(`Download ${res.title.pretty}`)

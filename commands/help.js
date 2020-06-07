@@ -1,10 +1,10 @@
 const { RichEmbed } = require('discord.js');
 
 exports.run = async (client, msg, args, color) => {
-    if (args[0]) {
+    if (!args[0]) {
       const embed = new RichEmbed()
       .setColor(color)
-      .setAuthor(`Misaki-chan Personal Bot`, this.client.nHlogo)
+      .setAuthor(`Misaki-chan Personal Bot`, client.nHlogo)
       .setTitle("Manual")
       .setDescription(`Misaki let you extends your lifespan by providing some services. Check out ma [Instagram](https://www.Instagram.com/nm.lucius).`)
       .addField('Command List',`
@@ -44,7 +44,7 @@ exports.run = async (client, msg, args, color) => {
         let usages = Array.isArray(usage) ? usage : [usage];
 
         const embed = new RichEmbed()
-        .setAuthor(client.user.username + ' Guide', this.client.nHlogo)
+        .setAuthor(client.user.username + ' Guide', client.nHlogo)
         .setTitle(`${name} | ${aliases}`)
         .setDescription(desc)
         .setColor(color)
