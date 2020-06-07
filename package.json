@@ -1,21 +1,31 @@
 {
-  "name": "luci-ds-bot",
-  "version": "1.1.2",
-  "main": "app.js",
-  "dependencies": {
-    "discord.js": "^11.5.1",
-    "nhentai-api-js": "^1.1.2",
-    "snekfetch": "^4.0.4"
-  },
-  "devDependencies": {},
-  "scripts": {
-    "start": "node app.js"
-  },
-  "keywords": [],
   "author": "Lynne Fuyuna",
-  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nmluci/Misaki-chan/issues"
+  },
+  "dependencies": {
+    "discord.js": "12.2.0",
+    "nhentai-api-js": "1.1.4",
+    "npm-check-updates": "6.0.1",
+    "peer": "0.5.3",
+    "snekfetch": "4.0.4"
+  },
+  "description": "Misaki-chan is an all purpose bot to serve only ME",
+  "devDependencies": {},
   "directories": {
     "lib": "lib"
   },
-  "description": "Misaki-chan is an all purpose bot to serve only ME"
+  "homepage": "https://github.com/nmluci/Misaki-chan#readme",
+  "keywords": [],
+  "license": "MIT",
+  "main": "app.js",
+  "name": "luci-ds-bot",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nmluci/Misaki-chan.git"
+  },
+  "scripts": {
+    "start": "node app.js"
+  },
+  "version": "1.1.2"
 }
