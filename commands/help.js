@@ -17,20 +17,18 @@ exports.run = async (client, msg, args, color) => {
 ω misaki gacha \`<tags> <sum>\` --> for those who loved being gangbanged
 ω misaki ping --> for those who knows the truth`)
       .setFooter('Misaki (Concieved by Fuyuna, *Teehee*)')
-      const embed2 = new RichEmbed()
-      .setColor('#FFC1FF')
-      .setTitle("Misaki Personal Bot")
+      const misaki_changelogs = new RichEmbed()
+      .setColor('#fa91fa') 
+      .setAuthor("Fuyuna Personal Slave", client.nHlogo)
+      .setTitle('Recent Changelogs')
       .setThumbnail()
       .setDescription(`By Lynne Fuyuna`)
-      .addField('Latest Changelogs',`ω Add gacha feature --> \`misaki gacha <tags> <sum>\`
-ω fixed help command, NOW DISPLAY EACH COMMANDS USAGE \`help <command>\`
-ω fixed some minor script issues
-ω download option also going to send you the link to the doujins by PM
-ω fixed tagging issues `)
-      .setFooter('Misaki (Concieved by Fuyuna, *Teehee*) || Changelogs')
+      .addField('About',client.config.CL)
+      .setFooter('Misaki (Concieved by Fuyuna, *Teehee*)')
       .setImage('https://i.imgur.com/ferMZ8y.jpg')
       msg.channel.send(embed);
-      msg.channel.send(embed2);
+      msg.channel.send(misaki_changelogs);
+      msg.channel.send(`The potato mentioned above is  <@${'663247501729595432'}>`)
     } else {
       let cmd = args[0];
       if (client.commands.has(cmd) || client.commands.get(client.aliases.get(cmd))) {
