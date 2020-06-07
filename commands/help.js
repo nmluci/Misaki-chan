@@ -6,7 +6,7 @@ exports.run = async (client, msg, args, color) => {
       .setColor(color)
       .setAuthor(`Misaki-chan Personal Bot`, client.nHlogo)
       .setTitle("Manual")
-      .setDescription(`Misaki let you extends your lifespan by providing some services. Check out ma [Instagram](https://www.Instagram.com/nm.lucius).`)
+      .setDescription(`Misaki let you extends your lifespan by providing some services.\nCheck out ma [Instagram](https://www.Instagram.com/nm.lucius).`)
       .addField('Command List',`
 ω misaki random --> throw you some sauce
 ω misaki help --> give how to use my loyal services
@@ -24,11 +24,11 @@ exports.run = async (client, msg, args, color) => {
       .setThumbnail()
       .setDescription(`By Lynne Fuyuna`)
       .addField('About',client.config.CL)
+      .addField('N.B', `The potato mentioned above is  <@${'663247501729595432'}>`)
       .setFooter('Misaki (Concieved by Fuyuna, *Teehee*)')
       .setImage('https://i.imgur.com/ferMZ8y.jpg')
       msg.channel.send(embed);
       msg.channel.send(misaki_changelogs);
-      msg.channel.send(`The potato mentioned above is  <@${'663247501729595432'}>`)
     } else {
       let cmd = args[0];
       if (client.commands.has(cmd) || client.commands.get(client.aliases.get(cmd))) {
