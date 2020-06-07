@@ -29,5 +29,5 @@ for (const command of (readdirSync(`./commands`).filter(x => x.endsWith(".js")))
         client.aliases.set(alias.toLowerCase(), cmd.help.name.toLowerCase());
     }
 }
-client.login("MzcwOTI4NTI1OTE5NzgwODY2.Xlf5qQ.CB_05Vmvbn2HUbT9NHKC9SfBKWg")
-// client.login(process.env.BOT_TOKEN);
+
+client.login(process.env.BOT_TOKEN);

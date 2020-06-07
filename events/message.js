@@ -20,7 +20,7 @@ module.exports = async (client, msg) => {
     // cooldowns command
     let cmd = client.commands.get(command) || client.commands.get(client.aliases.get(command));
     if (!cmd) return;
-    if (cmd.conf.owner && !client.config.OWNERS.includes(msg.author.id)) return;
+    if (cmd.conf.owner && !client.config.SHUUJIN.includes(msg.author.id)) return;
     if (!cooldowns.has(cmd.help.name)) cooldowns.set(cmd.help.name, new Collection());
 
     let member = msg.member;

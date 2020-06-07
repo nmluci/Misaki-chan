@@ -1,7 +1,7 @@
 const { RichEmbed } = require('discord.js');
 
 exports.run = async (client, msg, args, color) => {
-    if (!args[0]) {
+    if (args[0]) {
       const embed = new RichEmbed()
       .setColor(color)
       .setAuthor(`Misaki-chan Personal Bot`, this.client.nHlogo)
