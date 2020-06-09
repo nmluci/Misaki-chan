@@ -8,14 +8,14 @@ exports.run = async (client, msg, args, color) => {
       .setTitle("Manual")
       .setDescription(`Misaki let you extends your lifespan by providing some services.\nCheck out ma [Instagram](https://www.Instagram.com/nm.lucius).`)
       .addField('Command List',`
-ω misaki random --> throw you some sauce
-ω misaki help --> give how to use my loyal services
-ω misaki read \`<ID>\` --> give you an opportunity to extends your lifespan right now
-ω misaki lang \`</en/jp/ch>\` --> for those who live outside the cave
-ω misaki download \`<ID>\` --> for those who wanna keep it locally
-ω misaki tags \`<tags>\` --> for those who knows their flavor
-ω misaki gacha \`<tags> <sum>\` --> for those who loved being gangbanged
-ω misaki ping --> for those who knows the truth`)
+ω misaki random
+ω misaki help
+ω misaki read \`<ID>\`
+ω misaki lang \`</en/jp/ch>\`
+ω misaki download \`<ID>\`
+ω misaki tags \`<tags>\` 
+ω misaki gacha \`<tags> <sum>\`
+ω misaki ping`)
       .setFooter('Misaki (Concieved by Fuyuna, *Teehee*)')
       const misaki_changelogs = new RichEmbed()
       .setColor('#fa91fa') 
