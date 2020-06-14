@@ -36,7 +36,7 @@ client.on('message', (Message) => {
     if (Message.content.toLowerCase().startsWith("ping")) {
         Message.channel.send("Pong!")
     };
-    if (Message.content.toLowerCase().includes('Hentong')) {
+    if (Message.content.toLowerCase().includes('hentong')) {
        Message.channel.send("ダメ").then(Message => Message.edit('そんなの絶対ダメ'))
     }
 
