@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
-const nHentaiAPI = require('nhentai-api-js');
-let api = new nHentaiAPI();
+const NanaAPI = require('nana-api');
+let api = new NanaAPI();
 
 exports.run = async (client, msg, args, color) => {
     if (!msg.channel.nsfw) return msg.channel.send(`キャー先輩(≧∇≦)、私まだ未成年んだよ。\nもし先輩があたしと子作りにやるなら、いいよ。\nKyaa~ Senpai, I'm still underage.\nBut if you wanna do it with me, I'm okay.`).then(msg => msg.delete(5000));

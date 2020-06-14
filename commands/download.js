@@ -1,6 +1,6 @@
 const { RichEmbed } = require('discord.js');
-const nHentaiAPI = require('nhentai-api-js');
-let api = new nHentaiAPI();
+const NanaAPI = require('nana-api');
+let api = new NanaAPI();
 
  exports.run = async (client, msg, args, color) => {
    const res = await api.g(args[0]);

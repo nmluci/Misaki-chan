@@ -1,5 +1,5 @@
-const nHentaiAPI = require('nhentai-api-js');
-let api = new nHentaiAPI();
+const NanaAPI = require('nana-api');
+let api = new NanaAPI();
 
 exports.run = async (client, msg, args, color) => {
     if (!msg.channel.nsfw) return msg.channel.send(`キャー先輩(≧∇≦)、私まだ未成年んだよ。\nもし先輩があたしと子作りにやるなら、いいよ。\nKyaa~ Senpai, I'm still underage.\nBut if you wanna do it with me, I'm okay.`).then(msg => msg.delete(5000));
@@ -18,8 +18,8 @@ exports.run = async (client, msg, args, color) => {
       const input = 'yuri'
       msg.channel.send('Kya~ Hageshi sugiruu~').then(msg => msg.delete(2000));
       console.log(input);
-      let numPages = await api.search(input);
-      let id = await api.search(input, client.util.getRandInt(numPages.num_pages));
+      let numPages = await api.look(input);
+      let id = await api.look(input, client.util.getRandInt(numPages.num_pages));
       const res = await api.g(id.results.find(x => x.language == lang).id);
       await client.embeds.getInfoEmbed(res.id, msg);
       msg.channel.send('Fufufu').then(msg => msg.delete(5000));
@@ -27,14 +27,14 @@ exports.run = async (client, msg, args, color) => {
       const input = 'yuri';
       msg.channel.send('きゃあ、マスターが来た\nあたし準備出来たんだよ。');
       console.log(`${input}, マスターの特別あつけ`);
-      let numPages = await api.search(input);
-      let id = await api.search(input, client.util.getRandInt(numPages.num_pages));
+      let numPages = await api.look(input);
+      let id = await api.look(input, client.util.getRandInt(numPages.num_pages));
       const res = await api.g(id.results.find(x => x.language == lang).id);
       await client.embeds.getInfoEmbed(res.id, msg);
     } else {
       console.log(input);
-      let numPages = await api.search(input);
-      let id = await api.search(input, client.util.getRandInt(numPages.num_pages));
+      let numPages = await api.look(input);
+      let id = await api.look(input, client.util.getRandInt(numPages.num_pages));
       const res = await api.g(id.results.find(x => x.language == lang).id);
       await client.embeds.getInfoEmbed(res.id, msg);
     }
