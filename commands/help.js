@@ -25,6 +25,7 @@ exports.run = async (client, msg, args, color) => {
       .setDescription(`By Lynne Fuyuna`)
       .addField('About',client.config.CL)
       .addField('N.B', `The potato mentioned above is  <@${'663247501729595432'}>`)
+      .addField('BEWARE', 'Any act done by this bot is PURELY INTENTIONAL -(fyn)')
       .setFooter('Misaki (Concieved by Fuyuna, *Teehee*)')
       .setImage('https://i.imgur.com/ferMZ8y.jpg')
       msg.channel.send(embed);
