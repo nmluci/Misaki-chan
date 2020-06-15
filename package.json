@@ -1,11 +1,12 @@
 {
   "name": "misaki-chan",
-  "version": "1.5.1",
+  "version": "2.0.1",
   "main": "app.js",
   "dependencies": {
     "discord.js": "^12.2.0",
+    "discord.js-commando": "github:discordjs/Commando",
     "nana-api": "^1.0.3",
-    "nhentai-api-js": "^1.1.4",
+    "nhentai-api-js": "^1.1.2",
     "snekfetch": "^4.0.4"
   },
   "devDependencies": {},
@@ -21,10 +22,10 @@
   "description": "Misaki-chan is an all purpose bot to serve only ME",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nmluci/Misaki-chan.git"
+    "url": "git+https://github.com/nmluci/Chizaki-chan.git"
   },
   "bugs": {
-    "url": "https://github.com/nmluci/Misaki-chan/issues"
+    "url": "https://github.com/nmluci/Chizaki-chan/issues"
   },
-  "homepage": "https://github.com/nmluci/Misaki-chan#readme"
+  "homepage": "https://github.com/nmluci/Chizaki-chan#readme"
 }

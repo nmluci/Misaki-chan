@@ -1,3 +1,4 @@
+
 class Util {
 
     static toPlural(str)

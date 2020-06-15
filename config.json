@@ -1,11 +1,7 @@
 {
     "PREFIX": "misaki",
     "COLOR": "#7146ff",
-    "SHUUJIN": ["360824982789685248"],
-    "LANG": [
-        "english",
-        "chinese",
-        "japanese"
-    ],
-    "CL": "This **ehm** bot is purely intentionally made for my single purpose. Any organism that felt threaten by some word or content that sent by this pseudo-organism is not my or this pseudo-organism problem, and therefore doing so is just a syndrome of being simply a potato dumbass."
+    "SHUUJIN": [
+        "360824982789685248"
+    ]
 }
