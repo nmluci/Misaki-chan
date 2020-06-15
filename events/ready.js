@@ -11,6 +11,6 @@ module.exports = client => {
         
     }, 100000);
  
-    console.log(`${client.user.username} is playing with ${client.users.size} slave, in ${client.channels.size} slave rooms of ${client.guilds.size} kingdom...`);
+    console.log(`${client.user.username} is playing with ${client.users.cache.size} slave, in ${client.channels.cache.size} slave rooms of ${client.guilds.cache.size} kingdom...`);
 
 }

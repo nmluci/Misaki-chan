@@ -3,19 +3,8 @@ const { readdirSync } = require("fs");
 //const { TOKEN } = require("./config.json");
 const Fyn = require("./lib/FynClient");
 
-const client = new Fyn({
-    fetchAllMembers: true,
-    disableEvents: [
-        "GUILD_SYNC",
-        "PRESENCE_UPDATE",
-        "TYPING_START"
-    ]
-});
+const client = new Fyn();
 
-// events
-for (const event of readdirSync("./events")) {
-    client.on(event.split(".")[0], (...args) => require(`./events/${event}`)(client, ...args));
-}
 
 // modules
 client.commands = new Collection();
@@ -37,9 +26,9 @@ let mention_func = true;
 client.on('message', (msg) => {
     if (mention_func) {
         if (msg.content.toLowerCase().includes('hentong')) {
-           msg.channel.send("ダメ").then(msg => msg.edit('そんなの絶対ダメ'))
+            msg.channel.send("ダメ").then(msg => msg.edit('そんなの絶対ダメ'))
         }
-    
+        
         if (msg.content.toLowerCase().includes('duit')) {
             msg.channel.send('NU')
         }
@@ -59,13 +48,14 @@ client.on('message', (msg) => {
             msg.channel.send('へんたい‼').then(msg => msg.delete(3000))
         }
         if (msg.author == 387120117592621056n) {
-            if (mention_func) {
-                msg.channel.send('Fueeee');
-                msg.author.send('Fueee');
-            }
+            
+            //glentod
+            msg.channel.send('Fueeee');
+            msg.author.send('Fueee');    
         }    
     }    
-
+    
+    
     if (msg.content.toLowerCase().includes('mention_off')) {
         if (msg.author != 387120117592621056n) {
             msg.channel.send(`I'm turned on!`);
@@ -83,6 +73,10 @@ client.on('message', (msg) => {
     }
     
 });
+// events
+for (const event of readdirSync("./events")) {
+    client.on(event.split(".")[0], (...args) => require(`./events/${event}`)(client, ...args));
+}
 
-client.login("MzcwOTI4NTI1OTE5NzgwODY2.Xlf5qQ.CB_05Vmvbn2HUbT9NHKC9SfBKWg")
-// client.login(process.env.BOT_TOKEN);
+// client.login("MzcwOTI4NTI1OTE5NzgwODY2.Xlf5qQ.CB_05Vmvbn2HUbT9NHKC9SfBKWg")
+client.login(process.env.BOT_TOKEN);

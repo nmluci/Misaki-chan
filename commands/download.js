@@ -1,10 +1,10 @@
-const { RichEmbed } = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const NanaAPI = require('nana-api');
 let api = new NanaAPI();
 
  exports.run = async (client, msg, args, color) => {
    const res = await api.g(args[0]);
-   const embed = new RichEmbed()
+   const embed = new MessageEmbed()
    .setAuthor('Misaki-chan Doujin Downloader', client.nHlogo)
    .setColor(color)
    .setURL(`https://dl.nhent.ai/dl/${res.id}`)

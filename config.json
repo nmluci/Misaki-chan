@@ -1,7 +1,7 @@
 {
     "PREFIX": "misaki",
     "COLOR": "#7146ff",
-    "SHUUJIN": 360824982789685248,
+    "SHUUJIN": ["360824982789685248"],
     "LANG": [
         "english",
         "chinese",

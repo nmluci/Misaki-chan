@@ -1,9 +1,9 @@
 {
-  "name": "luci-ds-bot",
-  "version": "1.2.0",
+  "name": "misaki-chan",
+  "version": "1.5.1",
   "main": "app.js",
   "dependencies": {
-    "discord.js": "^11.5.1",
+    "discord.js": "^12.2.0",
     "nana-api": "^1.0.3",
     "nhentai-api-js": "^1.1.4",
     "snekfetch": "^4.0.4"

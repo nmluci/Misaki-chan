@@ -4,8 +4,8 @@ exports.run = async (client, message, args, color) => {
   let start = Date.now(); message.channel.send(':ping_pong:').then(message => {
     message.delete();
     let diff = (Date.now() - start).toLocaleString();
-    let API = (client.ping).toFixed(2)
-    let embed = new Discord.RichEmbed()
+    let API = (client.ws.ping).toFixed(2)
+    let embed = new Discord.MessageEmbed()
     .setTitle(`:ping_pong: Pong!`)
     .setColor(color)
     .addField("Latency", `${diff}ms`, true)
@@ -16,7 +16,8 @@ exports.run = async (client, message, args, color) => {
 
 exports.conf = {
   aliases: ['pang', 'peng', 'pong'],
-  cooldown: '10'
+  cooldown: '10',
+  owner: true
 }
 
 exports.help = {

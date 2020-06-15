@@ -1,4 +1,4 @@
-const { RichEmbed } = require("discord.js");
+const { MessageEmbed } = require("discord.js");
 
 exports.run = async (client, msg, args, color) => {
     let nick = msg.member.nickname !== null ? `${msg.member.nickname}` : msg.author.username;

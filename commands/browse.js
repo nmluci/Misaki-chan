@@ -1,4 +1,4 @@
-const { RichEmbed } = require("discord.js");
+const { MessageEmbed } = require("discord.js");
 const NanaAPI = require('nana-api');
 let api = new NanaAPI();
 

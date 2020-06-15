@@ -1,8 +1,8 @@
-const { RichEmbed } = require("discord.js");
+const { MessageEmbed } = require("discord.js");
 const { post } = require('snekfetch');
 
 exports.run = async (client, msg, args, color) => {
-  const embed = new RichEmbed()
+  const embed = new MessageEmbed()
   .setColor(color)
   .addField('Input', '```js\n' + args.join(" ") + '```')
 

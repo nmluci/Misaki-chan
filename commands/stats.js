@@ -6,13 +6,13 @@ exports.run = async (client, msg, args) => {
     const botVersion = pkg.version;
     const botAuthor = pkg.author;
 
-    msg.channel.send(`\`\`\`\`asciidoc
+    msg.channel.send(`\`\`\`\`
 Mem. Usage :: ${Math.floor(process.memoryUsage().heapUsed/1048576)} MB
 Uptime     :: ${uptime}
-WS Ping    :: ${client.ping.toFixed(2)}ms
-Users      :: ${client.users.size.toLocaleString()}
-Servers    :: ${client.guilds.size.toLocaleString()}
-Channels   :: ${client.channels.size.toLocaleString()}
+WS Ping    :: ${client.ws.ping.toFixed(2)}ms
+Users      :: ${client.users.cache.size.toLocaleString()}
+Servers    :: ${client.guilds.cache.size.toLocaleString()}
+Channels   :: ${client.channels.cache.size.toLocaleString()}
 Bot Vers.  :: ${botVersion}
 Discord.js :: v${version}
 Node       :: ${process.version}

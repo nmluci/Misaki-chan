@@ -1,8 +1,8 @@
-const { RichEmbed } = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 
 exports.run = async (client, msg, args, color) => {
     if (!args[0]) {
-      const embed = new RichEmbed()
+      const embed = new MessageEmbed()
       .setColor(color)
       .setAuthor(`Misaki-chan Personal Bot`, client.nHlogo)
       .setTitle("Manual")
@@ -17,7 +17,7 @@ exports.run = async (client, msg, args, color) => {
 ω misaki gacha \`<tags> <sum>\`
 ω misaki ping`)
       .setFooter('Misaki (Concieved by Fuyuna, *Teehee*)')
-      const misaki_changelogs = new RichEmbed()
+      const misaki_changelogs = new MessageEmbed()
       .setColor('#fa91fa') 
       .setAuthor("Fuyuna Personal Slave", client.nHlogo)
       .setTitle('Recent Changelogs')
@@ -42,7 +42,7 @@ exports.run = async (client, msg, args, color) => {
         let usage = command.help.usage;
         let usages = Array.isArray(usage) ? usage : [usage];
 
-        const embed = new RichEmbed()
+        const embed = new MessageEmbed()
         .setAuthor(client.user.username + ' Guide', client.nHlogo)
         .setTitle(`${name} | ${aliases}`)
         .setDescription(desc)
