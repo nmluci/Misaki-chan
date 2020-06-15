@@ -45,7 +45,7 @@ client.on('message', (msg) => {
             msg.channel.send(`<@${'663247501729595432'}>`)
         }
         if (msg.content.toLowerCase() === 'random') {
-            msg.channel.send('へんたい‼').then(msg => msg.delete()))
+            msg.channel.send('へんたい‼').then(msg => msg.delete())
         }
         if (msg.author == 387120117592621056n) {
             
