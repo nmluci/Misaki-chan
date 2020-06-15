@@ -23,4 +23,4 @@ client.once('ready', () => {
     client.user.setActivity('ご主人様、ご精液を頂く')
 })
 
-client.login('NjY2MjYwNzU5OTY1MDczNDA4.Xt-QPA.zVNIxpTdQcq6IJYWmoIwrbVgMi4')
+client.login(process.env.BOT_TOKEN)
