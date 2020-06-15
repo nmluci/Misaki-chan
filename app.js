@@ -45,7 +45,7 @@ client.on('message', (msg) => {
             msg.channel.send(`<@${'663247501729595432'}>`)
         }
         if (msg.content.toLowerCase() === 'random') {
-            msg.channel.send('へんたい‼').then(msg => msg.delete(3000))
+            msg.channel.send('へんたい‼').then(msg => msg.delete()))
         }
         if (msg.author == 387120117592621056n) {
             
@@ -58,17 +58,17 @@ client.on('message', (msg) => {
     
     if (msg.content.toLowerCase().includes('mention_off')) {
         if (msg.author != 387120117592621056n) {
-            msg.channel.send(`I'm turned on!`);
+            msg.channel.send(`I'm turned on!`).then(msg => msg.delete());
             if(mention_func) mention_func = false;
-            msg.channel.send(`current status ${mention_func}`).then(msg => msg.delete(3000));
+            msg.channel.send(`current status ${mention_func}`).then(msg => msg.delete());
         }
     };
     
     if (msg.content.toLowerCase().includes('mention_on')) {
         if (msg.author != 387120117592621056n) {
-            msg.channel.send(`I'm turned on!`);
+            msg.channel.send(`I'm turned on!`).then(msg => msg.delete());
             if (!mention_func) mention_func = true;
-            msg.channel.send(`current status ${mention_func}`).then(msg => msg.delete(3000));
+            msg.channel.send(`current status ${mention_func}`).then(msg => msg.delete());
         }
     }
     
