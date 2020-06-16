@@ -9,33 +9,64 @@ const TYPE = {
 };
 
 
-module.exports = class ReadHentaiCommand extends Command {
+module.exports = class SearchHentaiCommand extends Command {
     constructor(client) {
         super(client, {
-            name: 'read',
-            aliases: ['r'],
+            name: 'search',
+            aliases: ['s'],
             group: 'ecchi',
-            memberName: 'read',
+            memberName: 'search',
             description: 'Sastifies your lust',
             args: [
                 {
-                    key: "sauce",
+                    key: "tags",
                     prompt: 'Ehm',
-                    type: "integer"
+                    type: "string"
                 }
             ],
-            nsfw: true
+            nsfw: true,
+            ownerOnly: true
         });
     }
 
-    run(msg, {sauce}) {
-        sauce = sauce.toString()
-        console.log(sauce, typeof(sauce))
-        console.log('lol')
-        getInfo(sauce)
+    run(msg, {tags}) {
+        tags = tags.toString()
+        // console.log(tags, typeof(tags))
+        // console.log('lol')
+        
+        ParseList(tags)
+
+        async function ParseList(tags) {
+            let list = await getList(tags);
+            let parsed = {};
+
+            parsed.title = list.results.filter(x => x.language == 'english').map(x => (x.title));
+            console.log(parsed.title);
+            if (parsed.title[0]) msg.say('1.'+parsed.title[0])
+            if (parsed.title[1]) msg.say('2.'+parsed.title[1])
+            if (parsed.title[2]) msg.say('3.'+parsed.title[2])
+            if (parsed.title[3]) msg.say('4.'+parsed.title[3])
+            if (parsed.title[4]) msg.say('5.'+parsed.title[4])
+            if (parsed.title[5]) msg.say('6.'+parsed.title[5])
+            if (parsed.title[6]) msg.say('7.'+parsed.title[6])
+            if (parsed.title[7]) msg.say('8.'+parsed.title[7])
+            if (parsed.title[8]) msg.say('9.'+parsed.title[8])
+            if (parsed.title[9]) msg.say('10.'+parsed.title[9])
+            msg.say('Enter da nambah')
+            
+        }
 
         let book = new MessageEmbed();
-        
+        function getList(tags) {
+            return new Promise( async (fullfill, reject) => {
+                try {
+                    fullfill(hentai_api.look(tags))
+                } catch (err) {
+                    reject (err)
+                }
+            })
+        }
+
         function toPlural(str)
             {
                 let arr = str.toLowerCase().split('');
@@ -53,9 +84,9 @@ module.exports = class ReadHentaiCommand extends Command {
             })    
         }
         
-        async function getInfo(sauce) {
+        async function getInfo(tags) {
             
-            let res = await getById(sauce);
+            let res = await getById(tags);
             // console.log(res)
             let json = {};
             json.tag = res.tags.filter(x => x.type == 'tag').map(x => toPlural(x.name));

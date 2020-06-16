@@ -16,7 +16,8 @@ module.exports = class RandHentaiCommand extends Command {
             aliases: ['rand'],
             group: 'ecchi',
             memberName: 'random',
-            description: 'Sastifies your lust'
+            description: 'Sastifies your lust',
+            nsfw: true
         });
     }
 
@@ -69,8 +70,15 @@ module.exports = class RandHentaiCommand extends Command {
             if (info.tag[0]) book.addField('Tags', info.tag[0] ? info.tag.join(', ') : info.tag);
             console.log(info)
             console.log(book)
-            msg.say(book)
+            msg.say(book).then(msg.say('ごゆっくり'))
         }
-        return msg.say('ごゆっくり～');
+        
+        
+    }
+
+    onBlock(msg, reason) {
+        if (reason == 'nsfw') {
+            msg.say('きゃぁ～、はげしくしないでよ…、あたし、いっちゃううから～')
+        }
     }
 };

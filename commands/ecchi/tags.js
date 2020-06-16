@@ -9,33 +9,55 @@ const TYPE = {
 };
 
 
-module.exports = class ReadHentaiCommand extends Command {
+module.exports = class TagsHentaiCommand extends Command {
     constructor(client) {
         super(client, {
-            name: 'read',
-            aliases: ['r'],
+            name: 'tags',
+            aliases: ['t'],
             group: 'ecchi',
-            memberName: 'read',
+            memberName: 'tags',
             description: 'Sastifies your lust',
             args: [
                 {
-                    key: "sauce",
+                    key: "tags",
                     prompt: 'Ehm',
-                    type: "integer"
+                    type: "string"
                 }
             ],
             nsfw: true
         });
     }
-
-    run(msg, {sauce}) {
-        sauce = sauce.toString()
-        console.log(sauce, typeof(sauce))
-        console.log('lol')
-        getInfo(sauce)
+    run(msg, {tags}) {
+        tags = tags.toString()
+        // console.log(tags, typeof(tags))
+        // console.log('lol')
+        
+        ParseList(tags)
+        function getRandInt(int)
+        {
+        return Math.floor(Math.random() * int);
+        }
+        
+        async function ParseList(tags) {
+            let list = await getList(tags);
+            let parsed = {};
+            let numpages = list.num_pages;
+            let id = await hentai_api.look(tags, getRandInt(numpages));
+            await getInfo(id.results.find(x => x.language == 'english').id)
+            
+        }
 
         let book = new MessageEmbed();
-        
+        function getList(tags) {
+            return new Promise( async (fullfill, reject) => {
+                try {
+                    fullfill(hentai_api.look(tags))
+                } catch (err) {
+                    reject (err)
+                }
+            })
+        }
+
         function toPlural(str)
             {
                 let arr = str.toLowerCase().split('');
@@ -53,9 +75,9 @@ module.exports = class ReadHentaiCommand extends Command {
             })    
         }
         
-        async function getInfo(sauce) {
+        async function getInfo(tags) {
             
-            let res = await getById(sauce);
+            let res = await getById(tags);
             // console.log(res)
             let json = {};
             json.tag = res.tags.filter(x => x.type == 'tag').map(x => toPlural(x.name));
