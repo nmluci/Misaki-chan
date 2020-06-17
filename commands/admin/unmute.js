@@ -18,7 +18,7 @@ module.exports = class UnBondageCommand extends Command {
                     default: ''
                 }
             ],
-            userPermissions: 'MANAGE_ROLES',
+            userPermissions: ['MANAGE_ROLES'],
             guildOnly: true
         });
     }

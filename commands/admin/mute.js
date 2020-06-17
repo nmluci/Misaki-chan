@@ -18,7 +18,8 @@ module.exports = class BondageCommand extends Command {
                     default: ''
                 }
             ],
-            userPermissions: ''
+            userPermissions: ['MANAGE_ROLES'],
+            guildOnly: true
         });
     }
 
