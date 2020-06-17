@@ -8,7 +8,7 @@ function getRandInt(int)
     }
 
 module.exports = async (msg) => {
-    console.log(msg)
+    // console.log(msg)
     if (mention_func) {
         if (msg.content.toLowerCase().includes('hentong')) {
             msg.channel.send("ダメ").then(msg => msg.edit('そんなの絶対ダメ'))
@@ -64,7 +64,7 @@ module.exports = async (msg) => {
     }
 
     if (msg.content.toLowerCase().match(/G!|\bdarling\b|\bhoney\b/gi)) {
-        const punpun = [`Kyaa?!`, `So Cruel`, `ひどい`, `ズルい`, `もうう`, `スケベ‼`, `ふええ`, `これやっぱ片思いよね～`, `ご主人、あたしが降られた、<${msg.author}>に`]
+        const punpun = [`Kyaa?!`, `So Cruel`, `ひどい`, `ズルい`, `もうう`, `スケベ‼`, `ふええ`, `これやっぱ片思いよね～`, `ご主人、あたしが降られた、${msg.author}に`]
         const henji = punpun[getRandInt(punpun.length)]
 
         msg.channel.send(henji)
