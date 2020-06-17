@@ -26,7 +26,7 @@ client.once('ready', () => {
 })
 // Extensions outside of commandos
 for (const event of readdirSync("./events")) {
-    client.on(event.split(".")[0], (...args) => require(`./events/${event}`)(client, ...args));
+    client.on(event.split(".")[0], (...args) => require(`./events/${event}`)(...args));
 }
 
 client.login(process.env.BOT_TOKEN)
