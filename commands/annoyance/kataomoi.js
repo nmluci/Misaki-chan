@@ -11,7 +11,7 @@ module.exports = class KataomoiCommand extends Command {
             name: 'kataomoi',
             aliases: ['k'],
             group: 'annoyance',
-            memberName: 'zuruii',
+            memberName: 'kataomoi',
             description: '片思いは本当に悔しいだよねー',
             patterns: [/G!|\bdarling\b|\bhoney\b/gi]
        })
