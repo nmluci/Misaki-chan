@@ -13,12 +13,17 @@ module.exports = class KataomoiCommand extends Command {
             group: 'annoyance',
             memberName: 'kataomoi',
             description: '片思いは本当に悔しいだよねー',
-            patterns: [/G!|\bdarling\b|\bhoney\b/gi]
+            // patterns: [/G!|\bdarling\b|\bhoney\b/gi]
        })
     }
 
     run(msg) {
-        const punpun = [`Kyaa?!`, `So Cruel`, `ひどい`, `ズルい`, `もうう`, `スケベ‼`, `ふええ`, `これやっぱ片思いよね～`, `ご主人、あたしが降られた、<${msg.author}>に`]
+        const punpun = [
+            'あたしはあなたが最初にデート、キスした人、あるいは最初の恋人じゃないかもしれませんが、あなたのさいごのひとになりたいです。',
+            `愛することは何もありません。愛されることは何かがあります。でも、愛することと愛されることは全てです。`,
+            `私があなたを見るとき、目の前に私の残りの人生が見えます。`,
+            `私は愛とは何かを知っているのであれば、それはあなたのおかげです。`
+        ]
         const henji = punpun[getRandInt(punpun.length)]
 
         msg.say(henji)
