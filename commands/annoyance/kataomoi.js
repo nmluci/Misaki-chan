@@ -3,10 +3,10 @@ const {Command} = require ('discord.js-commando');
 module.exports = class KataomoiCommand extends Command {
     constructor (client) {
         super(client, {
-            name: 'Kataomoi',
+            name: 'kataomoi',
             aliases: ['k'],
             group: 'annoyance',
-            memberName: 'Zuruii',
+            memberName: 'zuruii',
             description: '片思いは本当に悔しいだよねー',
             patterns: [/G!|\bdarling\b|\bhoney\b|/i]
        })
