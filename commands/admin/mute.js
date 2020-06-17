@@ -12,8 +12,13 @@ module.exports = class BondageCommand extends Command {
             guarded: true,
             args: [
                 {
-                    key: 'command',
-                    prompt: 'Gimme da command!',
+                    key: 'user',
+                    prompt: 'Gimme da nem!',
+                    type: 'user'
+                },
+                {
+                    key: 'roles',
+                    prompt: 'to wer?',
                     type: 'string'
                 }
             ],
@@ -22,8 +27,13 @@ module.exports = class BondageCommand extends Command {
         });
     }
 
-    async run(msg, args) {
-        if (msg.guild === null) return;
-        console.log(args)
+    async run(msg, {user, roles}) {
+        let muterole = msg.guild.roles.cache.filter(role => role.name === roles)
+
+        let member = msg.mentions.members.first();
+
+        console.log(member, muterole)
+        member.roles.add(muterole)
+        msg.say('きゃ!')
     }
 };

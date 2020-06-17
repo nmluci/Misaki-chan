@@ -29,4 +29,5 @@ for (const event of readdirSync("./events")) {
     client.on(event.split(".")[0], (...args) => require(`./events/${event}`)(...args));
 }
 
-client.login(process.env.BOT_TOKEN)
+// client.login(process.env.BOT_TOKEN)
+client.login("MzcwOTI4NTI1OTE5NzgwODY2.Xlf5qQ.CB_05Vmvbn2HUbT9NHKC9SfBKWg")
