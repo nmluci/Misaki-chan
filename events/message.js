@@ -2,6 +2,11 @@ const { Collection } = require("discord.js");
 const cooldowns = new Collection();
 let mention_func = true;
 
+function getRandInt(int)
+    {
+        return Math.floor(Math.random() * int);
+    }
+
 module.exports = async (msg) => {
     console.log(msg)
     if (mention_func) {
@@ -56,5 +61,12 @@ module.exports = async (msg) => {
         if (msg.author == 360824982789685248n) {
             msg.channel.send('Fuee')
         }
+    }
+
+    if (msg.content.toLowerCase().match(/G!|\bdarling\b|\bhoney\b/gi)) {
+        const punpun = [`Kyaa?!`, `So Cruel`, `ひどい`, `ズルい`, `もうう`, `スケベ‼`, `ふええ`, `これやっぱ片思いよね～`, `ご主人、あたしが降られた、<${msg.author}>に`]
+        const henji = punpun[getRandInt(punpun.length)]
+
+        msg.channel.send(henji)
     }
 }
