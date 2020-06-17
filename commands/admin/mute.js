@@ -14,8 +14,7 @@ module.exports = class BondageCommand extends Command {
                 {
                     key: 'command',
                     prompt: 'Gimme da command!',
-                    type: 'string',
-                    default: ''
+                    type: 'string'
                 }
             ],
             userPermissions: ['MANAGE_ROLES'],
@@ -24,10 +23,6 @@ module.exports = class BondageCommand extends Command {
     }
 
     async run(msg, args) {
-        const fHelp = new MessageEmbed()
-        .setAuthor('Misaki-chan', `https://i.imgur.com/OFC149y.png`)
-        .setColor('#CCCCFF')
-        .setDescription(`Created by ${this.client.owners} [Click Here](https://www.Instagram.com/nm.lucius)`)
-        return msg.say(fHelp)
-    }
+        if (msg.guild === null) return;
+        if (args) msg.say(args);   
 };

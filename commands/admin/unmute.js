@@ -24,7 +24,8 @@ module.exports = class UnBondageCommand extends Command {
     }
 
     async run(msg, args) {
-       
+        if (msg.guild === null) return;
+        if (args) msg.say(args);
     }
 };
 
