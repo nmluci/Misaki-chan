@@ -3,6 +3,7 @@ const cooldowns = new Collection();
 let mention_func = true;
 
 module.exports = async (msg) => {
+    console.log(msg)
     if (mention_func) {
         if (msg.content.toLowerCase().includes('hentong')) {
             msg.channel.send("ダメ").then(msg => msg.edit('そんなの絶対ダメ'))
