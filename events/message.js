@@ -69,4 +69,15 @@ module.exports = async (msg) => {
 
         msg.channel.send(henji)
     }
+
+    if (msg.content) {
+        const prob = ['1','0']
+        const lucc = prob[getRandInt(prob.length)]
+
+        if (lucc == '1') {
+            msg.channel.send({
+                files: ['https://i.imgur.com/t57h37K.png']
+            })
+        }
+    }
 }
