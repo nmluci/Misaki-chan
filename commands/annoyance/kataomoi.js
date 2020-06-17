@@ -1,5 +1,10 @@
 const {Command} = require ('discord.js-commando');
 
+function getRandInt(int)
+    {
+        return Math.floor(Math.random() * int);
+    }
+
 module.exports = class KataomoiCommand extends Command {
     constructor (client) {
         super(client, {
@@ -10,11 +15,6 @@ module.exports = class KataomoiCommand extends Command {
             description: '片思いは本当に悔しいだよねー',
             patterns: [/G!|\bdarling\b|\bhoney\b|/i]
        })
-    }
-
-    getRandInt(int)
-    {
-        return Math.floor(Math.random() * int);
     }
 
     run(msg) {
