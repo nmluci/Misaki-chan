@@ -21,7 +21,7 @@ module.exports = class UnBondageCommand extends Command {
                 {
                     key: 'roles',
                     prompt: 'Where to',
-                    type: 'strings'
+                    type: 'string'
                 }
             ],
             userPermissions: ['MANAGE_ROLES']
