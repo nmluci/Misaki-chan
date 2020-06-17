@@ -1,17 +1,31 @@
 const { Command } = require('discord.js-commando');
+const { MessageEmbed } = require('discord.js');
 
 module.exports = class HelpCommand extends Command {
     constructor(client) {
         super(client, {
-            name: 'dasketeh',
-            aliases: ['h'],
+            name: 'fuee',
+            aliases: [''],
             group: 'admin',
-            memberName: 'dasketeh',
-            description: 'Probably your only commands that i will accept'
+            memberName: 'fuee',
+            description: 'Probably your only commands that i will accept',
+            guarded: true,
+            args: [
+                {
+                    key: 'command',
+                    prompt: 'Gimme da command!',
+                    type: 'string',
+                    default: ''
+                }
+            ]
         });
     }
 
-    run(msg) {
-        return msg.say('Kyaa')
+    async run(msg, args) {
+        const fHelp = new MessageEmbed()
+        .setAuthor('Misaki-chan', `https://i.imgur.com/OFC149y.png`)
+        .setColor('#CCCCFF')
+        .setDescription(`Created by ME [${this.client.owners}](https://www.Instagram.com/nm.lucius)`)
+        return msg.say(fHelp)
     }
 };
