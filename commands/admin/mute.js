@@ -5,7 +5,7 @@ module.exports = class BondageCommand extends Command {
     constructor(client) {
         super(client, {
             name: 'mute',
-            aliases: [''],
+            aliases: ['mute'],
             group: 'admin',
             memberName: 'mute',
             description: 'Probably your only commands that i will accept',
