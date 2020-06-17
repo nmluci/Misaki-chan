@@ -1,4 +1,5 @@
 const {Command} = require ('discord.js-commando');
+const { MessageEmbed } = require('discord.js');
 
 function getRandInt(int)
     {
@@ -25,8 +26,10 @@ module.exports = class KataomoiCommand extends Command {
             `私は愛とは何かを知っているのであれば、それはあなたのおかげです。`
         ]
         const henji = punpun[getRandInt(punpun.length)]
-
-        msg.say(henji)
+        const henjiEmbed = new MessageEmbed()
+        .setTitle('Misaki-chan Kataomoi Edition')
+        .setDescription(henji)
+        msg.say(henjiEmbed)
         // if (msg.author == 360824982789685248n) msg.say('Fueee');
     }
     
