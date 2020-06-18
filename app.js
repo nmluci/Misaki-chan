@@ -2,6 +2,7 @@ const { CommandoClient, Command } = require('discord.js-commando');
 const path = require('path');
 const { Message } = require('discord.js');
 const { readdirSync } = require('fs');
+const message = require('./events/message');
 
 const client = new CommandoClient({
     commandPrefix: 'misaki',
@@ -19,7 +20,7 @@ client.registry
 .registerDefaultCommands()
 .registerCommandsIn(path.join(__dirname, 'commands'));
 
-client.once('ready', () => {
+client.on('ready', () => {
     console.log(`It's Inside!`);
     console.log(`Currently establishing a sub-slavery as ${client.user.username}! (${client.user.id})`);
     client.user.setActivity('ご主人様、ご精液を頂く')
@@ -27,6 +28,10 @@ client.once('ready', () => {
 // Extensions outside of commandos
 for (const event of readdirSync("./events")) {
     client.on(event.split(".")[0], (...args) => require(`./events/${event}`)(...args));
+}
+
+for (const event of readdirSync("./commands")) {
+    client.on('message', (...args) => require(`./commands/${event}`)(...args));
 }
 
 // client.login(process.env.BOT_TOKEN)

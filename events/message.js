@@ -80,4 +80,51 @@ module.exports = async (msg) => {
             })
         }
     }
+
+    if (msg.content.toLowerCase().includes('aaa')) {
+        const emo = [
+            'https://i.imgur.com/N0BacOB.png',
+            'https://i.imgur.com/106Z3ez.png',
+            'https://i.imgur.com/F1UXtKk.png'
+        ]
+
+        const emoRand = emo[getRandInt(emo.length)]
+
+        msg.channel.send({
+            files: [emoRand]
+        })
+    }
+
+    if (msg.content.toLowerCase().includes('umm')) {
+        msg.channel.send({
+            files: ['https://i.imgur.com/rdKrEkE.png']
+        })
+    }
+
+    if (msg.content.toLowerCase().includes('kyaa')) {
+        const emo = [
+            'https://i.imgur.com/5YL83h3.png',
+            'https://i.imgur.com/t6nnwVA.png',
+            'https://i.imgur.com/nImgfk8.png',
+            'https://i.imgur.com/AKSDF46.png',
+        ]
+
+        const emoRand = emo[getRandInt(emo.length)]
+
+        msg.channel.send({
+            files: [emoRand]
+        })
+    }
+
+    if (msg.content.toLowerCase().includes('oppai') | msg.content.toLowerCase().includes('boobs')) {
+        const emo = [
+            'https://i.imgur.com/Ux8uEfB.jpg'
+        ]
+
+        const emoRand = emo[getRandInt(emo.length)]
+
+        msg.channel.send({
+            files: [emoRand]
+        })
+    }
 }
