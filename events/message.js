@@ -244,7 +244,7 @@ module.exports = async (msg) => {
                 })
             }    
             
-            if (msg.content.toLowerCase().includes('kyaa')) {
+            if (msg.content.toLowerCase().includes('kyaa!')) {
                 const emo = [
                     'https://i.imgur.com/t6nnwVA.png',
                     'https://i.imgur.com/nImgfk8.png'
