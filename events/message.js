@@ -131,7 +131,7 @@ module.exports = async (msg) => {
     if (msg.content.toLowerCase().startsWith('_')) {
         const emoji = msg.content.toLowerCase().slice(1);
             
-            if (msg.content.toLowerCase().includes('annoyed' | 'annoy')) {
+            if (msg.content.toLowerCase().includes('annoyed')) {
                 msg.channel.send({
                     files: ['https://i.imgur.com/46F7z0L.png']
                 })
@@ -143,7 +143,7 @@ module.exports = async (msg) => {
                 })
             }    
     
-            if (msg.content.toLowerCase().includes('bow' | 'gomen' | 'sorry')) {
+            if (msg.content.toLowerCase().includes('gomen')) {
                 const emo = [
                     'https://i.imgur.com/pEqZRC6.png',
                     'https://i.imgur.com/Z3Vw0uZ.png'
@@ -156,7 +156,7 @@ module.exports = async (msg) => {
                 
             }
     
-            if (msg.content.toLowerCase().includes('cry' | 'crying')) {
+            if (msg.content.toLowerCase().includes('cry')) {
                 const emo = [
                         'https://i.imgur.com/aoH4Q29.png',
                         'https://i.imgur.com/dKpZ34r.png',
