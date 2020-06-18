@@ -23,7 +23,14 @@ client.registry
 client.on('ready', () => {
     console.log(`It's Inside!`);
     console.log(`Currently establishing a sub-slavery as ${client.user.username}! (${client.user.id})`);
-    client.user.setActivity('ご主人様、ご精液を頂く')
+    client.user.setPresence({
+        activity: {
+            name: `ご主人の恋話`,
+            type: 'WATCHING'
+        },
+        status: 'idle'
+    })
+    
 })
 // Extensions outside of commandos
 for (const event of readdirSync("./events")) {

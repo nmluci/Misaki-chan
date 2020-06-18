@@ -127,7 +127,10 @@ module.exports = async (msg) => {
             files: [emoRand]
         })
     }
-
+    if (msg.content.toLowerCase().includes('you hentai')) {
+        msg.say(`${msg.author}, no u! fueee~`)
+    }
+    
     if (msg.content.toLowerCase().startsWith('_')) {
         const emoji = msg.content.toLowerCase().slice(1);
             
