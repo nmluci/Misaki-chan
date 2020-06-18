@@ -1,4 +1,5 @@
 const {Command} = require('discord.js-commando');
+const { MessageEmbed } = require('discord.js');
 
 module.exports = class MentionHelperCommand extends Command {
     constructor(client) {
@@ -12,7 +13,7 @@ module.exports = class MentionHelperCommand extends Command {
     }
 
     run(msg) {
-        helpEmbed = new MessageEmbed()
+        const helpEmbed = new MessageEmbed()
         .setTitle(`Misaki's Mention Setting`)
         .setAuthor('Misaki-chan')
         .setDescription(`This command give a user an option to either turn on or turn off the mention system, kinda...`)

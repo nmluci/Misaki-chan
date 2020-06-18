@@ -14,7 +14,7 @@ module.exports = class EmojiHelperCommand extends Command {
     }
 
     run(msg) {
-        helpEmbed = new MessageEmbed()
+        const helpEmbed = new MessageEmbed()
         .setTitle(`Misaki's Emoji Sender`)
         .setAuthor('Misaki-chan')
         .setDescription(`This command doesn't actually send any emojis, instead just providing a catalog of it since well... there's many of this... kinda...`)
