@@ -12,10 +12,13 @@ module.exports = class EchoCommands extends Command {
        })
     }
 
-    run(msg) {
-        if (msg.author != 360824982789685248n) msg.say('Kyaa?!');
-        if (msg.author != 360824982789685248n) msg.say('Fueee~');
-        // if (msg.author == 360824982789685248n) msg.say('Fueee');
+    async run(msg) {
+        msg.delete()
+        const msgAuthor = msgAuthor;
+        msg.delete();
+        if (msgAuthor != 360824982789685248n) msg.say('Kyaa?!');
+        if (msgAuthor = 360824982789685248n) msg.say('Fueee~');
+        // if (msgAuthor == 360824982789685248n) msg.say('Fueee');
     }
     
 }
