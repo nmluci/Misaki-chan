@@ -23,5 +23,6 @@ module.exports = class SpamPicCommand extends Command{
         msg.say({
             files: [targets]
         })
+        msg.delete()
     }
 }
