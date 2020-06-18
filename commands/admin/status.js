@@ -31,7 +31,7 @@ module.exports = class SetSlaveTags extends Command {
         if (fuee == 'stream') fuee = 'streaming';
         if (fuee == 'listen') fuee = 'listening';
         if (fuee == 'watch') fuee = 'watching';
-
+        msg.delete()
         fuee = fuee.toString().toUpperCase();
         this.client.user.setPresence({
             activity: {

@@ -20,6 +20,7 @@ module.exports = class MimicCommand extends Command {
 
     run(message, {text}) {
         console.log(text);
-        return message.say(text);
+        message.say(text);
+        message.delete()
     }
 }
