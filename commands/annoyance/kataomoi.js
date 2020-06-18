@@ -53,6 +53,7 @@ module.exports = class KataomoiCommand extends Command {
         .setTitle('Misaki-chan Kataomoi Edition')
         .addField(`日本語`,henji)
         .addField(`English`,henjiTrans)
+        .setColor('#b16ffc')
 
         msg.say(henjiEmbed)
         // if (msg.author == 360824982789685248n) msg.say('Fueee');

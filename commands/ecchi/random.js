@@ -23,7 +23,8 @@ module.exports = class RandHentaiCommand extends Command {
 
     run(msg) {
         getInfo()
-        let book = new MessageEmbed();
+        let book = new MessageEmbed()
+        .setColor('#65fcbd');
         
         function toPlural(str)
             {

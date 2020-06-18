@@ -24,7 +24,7 @@ module.exports = class HelpCommand extends Command {
     async run(msg, args) {
         const fHelp = new MessageEmbed()
         .setAuthor('Misaki-chan', `https://i.imgur.com/OFC149y.png`)
-        .setColor('#CCCCFF')
+        .setColor('#b16ffc')
         .setDescription(`Created by ${this.client.owners} [Click Here](https://www.Instagram.com/nm.lucius)`)
         return msg.say(fHelp)
     }

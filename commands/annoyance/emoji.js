@@ -22,6 +22,7 @@ module.exports = class EmojiHelperCommand extends Command {
         .addField(`Usage`, `Well.. just enter: _ + ur emoji of choice`)
         .addField(`Example`, '_potato')
         .setFooter(`This Bot Mainly Created to Serve ME! (Fuyuna).`)
+        .setColor('#b16ffc')
 
         msg.say(helpEmbed);
     } 

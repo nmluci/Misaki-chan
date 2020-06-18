@@ -29,6 +29,13 @@ module.exports = class TagsHentaiCommand extends Command {
     }
     run(msg, {tags}) {
         tags = tags.toString()
+
+        //Censorship to ensure all actor are above 18
+        if (tags.toLowerCase().includes('brainfuck')) tags = tags.replace('brainfuck', 'yaoi')
+        if (tags.toLowerCase().includes('loli')) msg.say('Lolicon... _eww')
+        if (tags.toLowerCase().includes('milf')) msg.say('ara ara')
+        if (tags.toLowerCase().includes('shounen ai')) msg.direct('Are you one of my Master friends?')
+        if (tags.toLowerCase().includes('Big Oppai')) msg.direct('Normies')
         // console.log(tags, typeof(tags))
         // console.log('lol')
         
@@ -47,7 +54,9 @@ module.exports = class TagsHentaiCommand extends Command {
             
         }
 
-        let book = new MessageEmbed();
+        let book = new MessageEmbed()
+        .setColor('#65fcbd');
+
         function getList(tags) {
             return new Promise( async (fullfill, reject) => {
                 try {

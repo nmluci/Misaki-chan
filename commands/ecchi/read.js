@@ -34,8 +34,9 @@ module.exports = class ReadHentaiCommand extends Command {
         console.log('lol')
         getInfo(sauce)
 
-        let book = new MessageEmbed();
-        
+        let book = new MessageEmbed()
+        .setColor('#65fcbd');
+
         function toPlural(str)
             {
                 let arr = str.toLowerCase().split('');

@@ -56,7 +56,9 @@ module.exports = class SearchHentaiCommand extends Command {
             
         }
 
-        let book = new MessageEmbed();
+        let book = new MessageEmbed()
+        .setColor('#65fcbd');
+        
         function getList(tags) {
             return new Promise( async (fullfill, reject) => {
                 try {
