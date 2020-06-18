@@ -4,7 +4,7 @@ module.exports = class MentionHelperCommand extends Command {
     constructor(client) {
         super(client, {
             name: 'mention',
-            aliases: ['prs'],
+            aliases: ['mention'],
             group: 'annoyance',
             memberName: 'mention',
             description: 'Guess wut is it',
