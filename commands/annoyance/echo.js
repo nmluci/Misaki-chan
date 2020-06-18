@@ -12,11 +12,11 @@ module.exports = class EchoCommands extends Command {
        })
     }
 
-    run(msg) {
+    async run(msg) {
         const msgAuthor = msg.author;
-        msg.delete();
-        if (msgAuthor != 360824982789685248n) msg.say('Kyaa?!');
-        if (msgAuthor = 360824982789685248n) msg.say('Fueee~');
+        await msg.delete();
+        if (msgAuthor != 360824982789685248n) await msg.say('Kyaa?!');
+        if (msgAuthor = 360824982789685248n) await msg.say('Fueee~');
         // if (msgAuthor == 360824982789685248n) msg.say('Fueee');
     }
     
