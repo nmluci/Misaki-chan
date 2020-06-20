@@ -2,6 +2,7 @@ const { Command } = require('discord.js-commando');
 const request = require('node-superfetch');
 const { MessageEmbed } = require('discord.js');
 const { search } = require('node-superfetch');
+const { stripIndents } = require('common-tags')
 
 const searchGraphQL = stripIndents`
 	query ($search: String, $type: MediaType, $isAdult: Boolean) {
@@ -83,7 +84,7 @@ module.exports = class AnimeSearchCommand extends Command{
         .addField('Avg. Score', animeData.averageScore)
         .addField('Genres', animeData.genres)
         msg.say(animeEmbed)
-        
+
     }
 
     async search(query) {
