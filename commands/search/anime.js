@@ -61,7 +61,8 @@ module.exports = class AnimeSearchCommand extends Command{
                     prompt: 'anime name',
                     type: 'string'
                 }
-            ]
+            ],
+            ownerOnly: true
         })
     }
 
