@@ -1,7 +1,6 @@
 const { Command } = require('discord.js-commando');
 const request = require('node-superfetch');
 const { MessageEmbed } = require('discord.js');
-const { search } = require('node-superfetch');
 const { stripIndents } = require('common-tags')
 
 const searchGraphQL = stripIndents`
