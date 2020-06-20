@@ -95,8 +95,8 @@ module.exports = class AnimeSearchCommand extends Command{
                 type: 'ANIME'
             },
             query: searchGraphQL
-        })
-        if(!body.data.length) return null
+        });
+        console.log(body.data)
         return body.data.anime.results[0].id
     }
 
@@ -110,6 +110,7 @@ module.exports = class AnimeSearchCommand extends Command{
             },
             query: resultGraphQL
         });
+        console.log(body);
         return body.data.Media;
     }
 }
