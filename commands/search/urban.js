@@ -30,6 +30,8 @@ module.exports = class UrbanSearchCommand extends Command{
 
             if (!body.list.length) return msg.say(`It seems there's no proper definiton about ${word} according to Urban Dictionary.`).then(msg.say(`O'kawaii koto`));
             const info = body.list[0];
+            info.definition.replace('[', '')
+            info.definition.replace(']', '')
             const infoEmbed = new MessageEmbed()
             .setTitle('Misaki x Urban Dictionary')
             .setColor(0x34eb83)
