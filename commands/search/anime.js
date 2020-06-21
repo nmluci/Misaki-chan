@@ -77,7 +77,7 @@ module.exports = class AnimeSearchCommand extends Command{
         .setThumbnail(animeData.coverImage.large || animeData.coverImage.medium || null )
         .setURL(animeData.siteUrl)
         .addField('Title', animeData.title.romaji, true)
-        .addField('Description', animeData.description, true)
+        .setDescription(animeData.description)
         .addField('Season', animeData.season, true)
         .addField('Status', animeData.status, true)
         .addField('Episodes', animeData.episodes, true)
