@@ -76,7 +76,7 @@ module.exports = class MangaSearchCommand extends Command{
         .setThumbnail(mangaData.coverImage.large || mangaData.coverImage.medium || null )
         .setURL(mangaData.siteUrl)
         .addField('Title', mangaData.title.romaji, true)
-        .addField('Description', mangaData.description, true)
+        .setDescription(mangaData.description)
         .addField('Status', mangaData.status, true)
         .addField('Chapters', mangaData.chapters, true)
         .addField('Avg. Score', mangaData.averageScore)
