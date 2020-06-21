@@ -96,7 +96,7 @@ module.exports = class MangaSearchCommand extends Command{
             query: searchGraphQL
         });
         console.log(body.data)
-        return body.data.anime.results[0].id
+        return body.data.manga.results[0].id
     }
 
     async fetchManga(id) {
