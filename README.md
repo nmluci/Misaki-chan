@@ -8,4 +8,4 @@ This bot (slave) is purely made to serve ME! (forever..)
 
 ฅ^•ﻌ•^ฅ Custom made commands including nhentai...
 
--fyn
+(Fuyuna)
