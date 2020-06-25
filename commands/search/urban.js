@@ -16,7 +16,8 @@ module.exports = class UrbanSearchCommand extends Command{
                     prompt: 'word you wanna to search',
                     type: 'string'
                 }
-            ]
+            ],
+            clientPermissions: ['MANAGE_MESSAGES']
         })
     }
 
@@ -30,8 +31,8 @@ module.exports = class UrbanSearchCommand extends Command{
 
             if (!body.list.length) return msg.say(`It seems there's no proper definiton about ${word} according to Urban Dictionary.`).then(msg.say(`O'kawaii koto`));
             const info = body.list[0];
-            info.definition.replace('[', '')
-            info.definition.replace(']', '')
+            info.definition.replace('[', ' ')
+            info.definition.replace(']', ' ')
             const infoEmbed = new MessageEmbed()
             .setTitle('Misaki x Urban Dictionary')
             .setColor(0x34eb83)
@@ -41,6 +42,11 @@ module.exports = class UrbanSearchCommand extends Command{
             return msg.say(infoEmbed)
         } catch(err) {
             msg.say('Fuee')
+        }
+    }
+    onBlock(msg, reason) {
+        if (reason == 'clientPermissions') {
+            msg.say('Urghh, もう我慢できない！')
         }
     }
 

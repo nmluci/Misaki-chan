@@ -17,7 +17,8 @@ module.exports = class RandHentaiCommand extends Command {
             group: 'ecchi',
             memberName: 'random',
             description: 'Sastifies your lust',
-            nsfw: true
+            nsfw: true,
+            clientPermissions: ['MANAGE_MESSAGES']
         });
     }
 
@@ -80,6 +81,9 @@ module.exports = class RandHentaiCommand extends Command {
     onBlock(msg, reason) {
         if (reason == 'nsfw') {
             msg.say('きゃぁ～、はげしくしないでよ…、あたし、いっちゃううから～')
+        }
+        if (reason == 'clientPermissions') {
+            msg.say('Urghh, もう我慢できない！')
         }
     }
 };

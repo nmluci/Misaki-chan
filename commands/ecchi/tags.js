@@ -24,7 +24,8 @@ module.exports = class TagsHentaiCommand extends Command {
                     type: "string"
                 }
             ],
-            nsfw: true
+            nsfw: true,
+            clientPermissions: ['MANAGE_MESSAGES', 'EMBED_LINKS']
         });
     }
     run(msg, {tags}) {
@@ -34,7 +35,7 @@ module.exports = class TagsHentaiCommand extends Command {
         if (tags.toLowerCase().includes('brainfuck')) tags = tags.replace('brainfuck', 'yaoi')
         if (tags.toLowerCase().includes('loli')) msg.say('Lolicon... _eww')
         if (tags.toLowerCase().includes('milf')) msg.say('ara ara')
-        if (tags.toLowerCase().includes('shounen ai')) msg.direct('Are you one of my Master friends?')
+        if (tags.toLowerCase().includes('shounen ai') || tags.toLowerCase().includes('shounenai')) msg.direct('Are you one of my Master friends?')
         if (tags.toLowerCase().includes('Big Oppai')) msg.direct('Normies')
         // console.log(tags, typeof(tags))
         // console.log('lol')
@@ -120,6 +121,9 @@ module.exports = class TagsHentaiCommand extends Command {
     onBlock(msg, reason) {
         if (reason == 'nsfw') {
             msg.say('きゃぁ～、はげしくしないでよ…、あたし、いっちゃううから～')
+        }
+        if (reason == 'clientPermissions') {
+            msg.say('Urghh, もう我慢できない！')
         }
     }
 };

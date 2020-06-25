@@ -62,14 +62,13 @@ module.exports = class AnimeSearchCommand extends Command{
                     type: 'string'
                 }
             ],
-            ownerOnly: true
+            clientPermissions: ['MANAGE_MESSAGES']
         })
     }
 
     async run(msg, { anime }) {
         const id = await this.search(anime);
         const animeData = await this.fetchAnime(id);
-
         const animeEmbed = new MessageEmbed()
         .setTitle(animeData.title.romaji)
         .setAuthor('Misaki x AniList')
@@ -77,7 +76,7 @@ module.exports = class AnimeSearchCommand extends Command{
         .setThumbnail(animeData.coverImage.large || animeData.coverImage.medium || null )
         .setURL(animeData.siteUrl)
         .addField('Title', animeData.title.romaji, true)
-        .setDescription(animeData.description)
+        .setDescription(animeData.description.replace('<br>', ' '))
         .addField('Season', animeData.season, true)
         .addField('Status', animeData.status, true)
         .addField('Episodes', animeData.episodes, true)
@@ -113,5 +112,11 @@ module.exports = class AnimeSearchCommand extends Command{
         });
         console.log(body);
         return body.data.Media;
+    }
+
+    onBlock(msg, reason) {
+        if (reason == 'clientPermissions') {
+            msg.say('Urghh, もう我慢できない！')
+        }
     }
 }

@@ -24,7 +24,8 @@ module.exports = class ReadHentaiCommand extends Command {
                     type: "integer"
                 }
             ],
-            nsfw: true
+            nsfw: true,
+            clientPermissions: ['MANAGE_MESSAGES']
         });
     }
 
@@ -90,6 +91,9 @@ module.exports = class ReadHentaiCommand extends Command {
     onBlock(msg, reason) {
         if (reason == 'nsfw') {
             msg.say('きゃぁ～、はげしくしないでよ…、あたし、いっちゃううから～')
+        }
+        if (reason == 'clientPermissions') {
+            msg.say('Urghh, もう我慢できない！')
         }
     }
 };

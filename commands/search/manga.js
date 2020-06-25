@@ -61,7 +61,7 @@ module.exports = class MangaSearchCommand extends Command{
                     type: 'string'
                 }
             ],
-            ownerOnly: true
+            clientPermissions: ['MANAGE_MESSAGES']
         })
     }
 
@@ -76,7 +76,7 @@ module.exports = class MangaSearchCommand extends Command{
         .setThumbnail(mangaData.coverImage.large || mangaData.coverImage.medium || null )
         .setURL(mangaData.siteUrl)
         .addField('Title', mangaData.title.romaji, true)
-        .setDescription(mangaData.description)
+        .setDescription(mangaData.description.replace('<br>', ' '))
         .addField('Status', mangaData.status, true)
         .addField('Chapters', mangaData.chapters, true)
         .addField('Avg. Score', mangaData.averageScore)
@@ -111,5 +111,11 @@ module.exports = class MangaSearchCommand extends Command{
         });
         console.log(body);
         return body.data.Media;
+    }
+    
+    onBlock(msg, reason) {
+        if (reason == 'clientPermissions') {
+            msg.say('Urghh, もう我慢できない！')
+        }
     }
 }
