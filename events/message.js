@@ -13,35 +13,37 @@ function getRandInt(int)
 module.exports = async (msg) => {
     // console.log(msg)
     if (awto_franca) { 
-        if (msg.author == 360824982789685248n) {
-            const text = msg.content
-            if (msg.content.includes(franca)) return
-            const trans_text = await translate(text, { to: 'fr'})
+        if (msg.content.toLowerCase().startsWith('_franca')) {
+            const ctx = msg.content.toLowerCase()
+            if (ctx.includes(0)) {
+                if (awto_franca) awto_franca = false;
+            }
+            if (ctx.includes(1)) {
+                if (!awto_franca) awto_franca = true;
+            }
+            if (ctx.includes('invisible')) {
+                if (awto_franca) awto_franca_state = 999;
+            }
+            if (ctx.includes('back')) {
+                if (awto_franca) awto_franca = 1511;
+            }
+            if (ctx.includes('front')) {
+                if (awto_franca) awto_franca = 1001;
+            }
             msg.delete()
-            if (awto_franca_state == 999) msg.say(trans_text.text)
-            if (awto_franca_state == 1511) msg.say(trans_text.text + `(${msg.author.username})`)
-            if (awto_franca_state == 1001) msg.say(`<${msg.author.username}>` + trans_text.text)
+        }
+        if (msg.author == 360824982789685248n) {
+            if (!msg.content.includes('_franca')) {
+                const text = msg.content
+                const trans_text = await translate(text, { to: 'fr'})
+                msg.delete()
+                if (awto_franca_state == 999) msg.say(trans_text.text)
+                if (awto_franca_state == 1511) msg.say(trans_text.text + `(${msg.author.username})`)
+                if (awto_franca_state == 1001) msg.say(`<${msg.author.username}>` + trans_text.text)
+            }
         }
     }
-    if (msg.content.toLowerCase().includes('franca')) {
-        const ctx = msg.content.toLowerCase()
-        if (ctx.includes(0)) {
-            if (awto_franca) awto_franca = false;
-        }
-        if (ctx.includes(1)) {
-            if (!awto_franca) awto_franca = true;
-        }
-        if (ctx.includes('invisible')) {
-            if (awto_franca) awto_franca_state = 999;
-        }
-        if (ctx.includes('back')) {
-            if (awto_franca) awto_franca = 1511;
-        }
-        if (ctx.includes('front')) {
-            if (awto_franca) awto_franca = 1001;
-        }
-        msg.delete()
-    }
+    
     if (mention_func) {
         if (msg.content.toLowerCase().includes('hentong')) {
             msg.channel.send("ダメ").then(msg => msg.edit('そんなの絶対ダメ'))
