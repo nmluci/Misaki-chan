@@ -15,6 +15,7 @@ module.exports = async (msg) => {
     if (awto_franca) { 
         if (msg.author == 360824982789685248n) {
             const text = msg.content
+            if (msg.content.includes(franca)) return
             const trans_text = await translate(text, { to: 'fr'})
             msg.delete()
             if (awto_franca_state == 999) msg.say(trans_text.text)
