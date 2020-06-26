@@ -36,10 +36,10 @@ module.exports = async (msg) => {
             if (awto_franca) awto_franca_state = 999;
         }
         if (ctx.includes('back')) {
-            if (awto_franca) awto_franca = 1511;
+            if (awto_franca) awto_franca_state = 1511;
         }
         if (ctx.includes('front')) {
-            if (awto_franca) awto_franca = 1001;
+            if (awto_franca) awto_franca_state = 1001;
         }
         msg.delete()
     }
