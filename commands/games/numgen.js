@@ -12,7 +12,7 @@ module.exports = class NumberGeneratorCommand extends Command {
                 {
                     key: 'ends',
                     prompt: 'Endings number',
-                    type: 'int'
+                    type: 'integer'
                 }
             ]
         })
