@@ -22,7 +22,7 @@ module.exports = class TranslateCommand extends Command {
 
     async run(msg, { text }) {
         const trans_text = await translate(text, {to: 'fr'})
-        msg.say(trans_text)
+        msg.say(trans_text.text)
     }
 
 }
