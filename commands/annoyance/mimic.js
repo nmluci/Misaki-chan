@@ -14,7 +14,8 @@ module.exports = class MimicCommand extends Command {
                     prompt: 'what you wants to mimic',
                     type: 'string'
                 }
-            ]
+            ],
+            ownerOnly: true
         })
     }
 
