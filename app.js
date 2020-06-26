@@ -15,7 +15,8 @@ client.registry
     ['ecchi', 'Only for the worthy!'],
     ['admin', 'ITS ONLY FOR ME(FUYUNA)'],
     ['annoyance', 'Hmm... Nothing?'],
-    ['search', 'Search accordingly']
+    ['search', 'Search accordingly'],
+    ['games', 'Well games...']
 ])
 .registerDefaultGroups()
 .registerDefaultCommands()

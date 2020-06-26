@@ -6,6 +6,7 @@ module.exports = class LayfGameCommand extends Command {
         super(client, {
             name: 'layf',
             aliases: ['layf', 'gol'],
+            group: 'games',
             memberName: 'layf',
             description: 'Game of Layf with a Twist',
             clientPermissions: ['MANAGE_ROLES', 'MANAGE_MESSAGES', 'EMBED_LINKS']
