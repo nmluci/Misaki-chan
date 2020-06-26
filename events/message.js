@@ -1,8 +1,9 @@
 const { Collection } = require("discord.js");
 const translate = require('@vitalets/google-translate-api');
+const { ms } = require("@vitalets/google-translate-api/languages");
 const cooldowns = new Collection();
 let mention_func = true;
-let awto_franca_state = 1511;
+let awto_franca_state = ['front', 'back', 'invis'] 
 let awto_franca = false;
 
 function getRandInt(int)
@@ -11,38 +12,18 @@ function getRandInt(int)
     }
 
 module.exports = async (msg) => {
-    // console.log(msg)
-    // if (awto_franca) { 
-    //     if (msg.content.toLowerCase().startsWith('_franca')) {
-    //         return
-    //     } else if (msg.author == 360824982789685248n) {
-    //         const text = msg.content
-    //         const trans_text = await translate(text, { to: 'fr'})
-    //         msg.delete()
-    //         if (awto_franca_state == 999) msg.say(trans_text.text)
-    //         if (awto_franca_state == 1511) msg.say(trans_text.text + `(${msg.author.username})`)
-    //         if (awto_franca_state == 1001) msg.say(`<${msg.author.username}>` + trans_text.text)
-    //     }
-    // }
-    // if (msg.content.toLowerCase().startsWith('_franca')) {
-    //     const ctx = msg.content.toLowerCase()
-    //     if (ctx.includes(0)) {
-    //         if (awto_franca) awto_franca = false;
-    //     }
-    //     if (ctx.includes(1)) {
-    //         if (!awto_franca) awto_franca = true;
-    //     }
-    //     if (ctx.includes('invisible')) {
-    //         if (awto_franca) awto_franca_state = 999;
-    //     }
-    //     if (ctx.includes('back')) {
-    //         if (awto_franca) awto_franca_state = 1511;
-    //     }
-    //     if (ctx.includes('front')) {
-    //         if (awto_franca) awto_franca_state = 1001;
-    //     }
-    //     msg.delete()
-    // }
+    console.log(msg)
+    if (msg.content.startsWith('_franca1')) awto_franca = true
+    if (awto_franca) { 
+        if (msg.content.toLowerCase().startsWith('_franca0')) awto_franca = false; 
+        if (msg.author == 360824982789685248n) {
+            const text = msg.content
+            const trans_text = await translate(text, { to: 'fr'})
+            msg.delete()
+            msg.say(trans_text.text)
+        }
+    }
+
     
     if (mention_func) {
         if (msg.content.toLowerCase().includes('hentong')) {

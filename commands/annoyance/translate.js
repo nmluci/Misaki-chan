@@ -14,7 +14,6 @@ module.exports = class TranslateCommand extends Command {
                     key: 'lang',
                     prompt: 'language to',
                     type: 'string',
-                    isEmpty: true,
                     oneOf: ['fr', 'it', 'id', 'ja', 'kr', 'ru', 'es', 'ml', 'ga', 'tl']
                 },
                 {
@@ -29,8 +28,7 @@ module.exports = class TranslateCommand extends Command {
     }
 
     async run(msg, { lang , text }) {
-        if (!lang) lang = 'fr'
-        const trans_text = await translate(text, {to: lang})
+        const trans_text = await translate(text, {to: lang.toString()})
         msg.say(msg.author.username + ': ' + trans_text.text)
         msg.delete()
     }
