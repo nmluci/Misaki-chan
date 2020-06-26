@@ -2,7 +2,7 @@ const { Collection } = require("discord.js");
 const translate = require('@vitalets/google-translate-api');
 const cooldowns = new Collection();
 let mention_func = true;
-let awto_franca_state = 1;
+let awto_franca_state = 1511;
 let awto_franca = false;
 
 function getRandInt(int)
@@ -17,9 +17,9 @@ module.exports = async (msg) => {
             const text = msg.content
             const trans_text = await translate(text, { to: 'fr'})
             msg.delete()
-            if (awto_franca_state === 999) msg.say(trans_text.text)
-            if (awto_franca_state === 1511) msg.say(trans_text.text + `(${msg.author.username})`)
-            if (awto_franca_state === 1001) msg.say(`<${msg.author.username}>` + trans_text.text)
+            if (awto_franca_state == 999) msg.say(trans_text.text)
+            if (awto_franca_state == 1511) msg.say(trans_text.text + `(${msg.author.username})`)
+            if (awto_franca_state == 1001) msg.say(`<${msg.author.username}>` + trans_text.text)
         }
     }
     if (msg.content.toLowerCase().includes('franca')) {

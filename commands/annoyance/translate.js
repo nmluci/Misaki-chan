@@ -29,7 +29,6 @@ module.exports = class TranslateCommand extends Command {
     }
 
     async run(msg, { lang , text }) {
-        console.log(msg.channel)
         if (!lang) lang = 'fr'
         const trans_text = await translate(text, {to: lang})
         msg.say(msg.author.username + ': ' + trans_text.text)
