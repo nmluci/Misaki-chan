@@ -21,8 +21,11 @@ module.exports = class TranslateCommand extends Command {
     }
 
     async run(msg, { text }) {
-        const trans_text = await translate(text, {to: 'fr'})
-        msg.say(trans_text.text)
+        const lang = 'fr'
+        if (msg.author == 457832151769939969n) lang = 'it'
+        const trans_text = await translate(text, {to: lang})
+        msg.say(msg.author.username + ': ' + trans_text.text)
+        msg.delete()
     }
 
 }
