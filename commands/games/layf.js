@@ -32,7 +32,7 @@ module.exports = class LayfGameCommand extends Command {
             roles = roles.toString()
             const assignedRoles = msg.guild.roles.cache.find(role => role.name == roles)
             if (!assignedRoles) {
-                msg.say(`Roles ain't exist`)
+                // msg.say(`Roles ain't exist`)
                 if (roles == 'superb-genius') {
                     msg.guild.roles.create({
                         data: {
@@ -166,7 +166,7 @@ module.exports = class LayfGameCommand extends Command {
                 }
                 
             } else {
-                msg.say('Roles Exist!')
+                // msg.say('Roles Exist!')
                 // Fixed Roles Assignment as apparenly its not properly configured last time
                 msg.member.roles.add(assignedRoles)
             }
