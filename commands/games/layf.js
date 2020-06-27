@@ -111,12 +111,15 @@ module.exports = class LayfGameCommand extends Command {
         'You got expelled from school [super-idiot]'
         ]
 
-        msg.say(`This Feature Still Ongoing Project`)
+        msg.say(`⚠️ Alpha Feature ⚠️`)
+        msg.say(`⚠️ Not Intended to be Pleasurable ⚠️`)
 
         const results = bedlak[getRandInt(bedlak.length)]
         const startOffset = results.indexOf('[')
         const endOffset = results.indexOf(']')
         const trait = results.slice(startOffset+1, endOffset)
+        const fate = results.slice(0, startOffset)
+        msg.say(fate)
         // const trait = 'Fuee'
         assignRoles(trait.toString())
     }
