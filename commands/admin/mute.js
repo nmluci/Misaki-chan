@@ -5,7 +5,7 @@ module.exports = class BondageCommand extends Command {
     constructor(client) {
         super(client, {
             name: 'mute',
-            aliases: ['mute'],
+            aliases: ['amute'],
             group: 'admin',
             memberName: 'mute',
             description: 'Probably your only commands that i will accept',
@@ -28,12 +28,22 @@ module.exports = class BondageCommand extends Command {
     }
 
     async run(msg, {user, roles}) {
-        let muterole = msg.guild.roles.cache.filter(role => role.name === roles)
+        let muterole = msg.guild.roles.cache.find(role => role.name === roles)
+        if (!muterole) {
+            msg.guild.roles.create({
+                data: {
+                    name: roles,
+                    color: '0xff5533'
+                }
+            }).then(function (roles) {
+                msg.member.roles.add(roles)
+            })
+        } else {
+            msg.member.roles.add(roles)
+        }
 
-        let member = msg.mentions.members.first();
-
-        console.log(member, muterole)
-        member.roles.add(muterole)
+        // console.log(member, muterole)
+        msg.member.roles.add(muterole)
         msg.say('きゃ!')
     }
 };

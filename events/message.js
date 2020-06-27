@@ -12,7 +12,7 @@ function getRandInt(int)
     }
 
 module.exports = async (msg) => {
-    console.log(msg)
+    // console.log(msg)
     if (msg.content.startsWith('_franca1')) awto_franca = true
     if (awto_franca) { 
         if (msg.content.toLowerCase().startsWith('_franca0')) awto_franca = false; 
@@ -95,7 +95,7 @@ module.exports = async (msg) => {
             })
         }
     }
-
+    
     if (msg.content.toLowerCase().includes('aaa')) {
         const emo = [
             'https://i.imgur.com/N0BacOB.png',

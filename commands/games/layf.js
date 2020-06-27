@@ -14,11 +14,90 @@ module.exports = class LayfGameCommand extends Command {
     }
     
     async run(msg) {
-        function getRandInt(int)
-        {
-        return Math.floor(Math.random() * int);
-        }
+        function getRandInt(int) { return Math.floor(Math.random() * int); }
 
+        async function assignRoles(roles) {
+            roles = roles.toString()
+            let assignedRoles = msg.guild.roles.cache.find(role => role.name == roles)
+            if (!assignedRoles) {
+                // msg.say(`Roles ain't exist`)
+                if (roles == 'superb-genius') {
+                    msg.guild.roles.create({
+                        data: {
+                            name: roles,
+                            color: '#8dfa11'
+                        }
+                    }).then(function (roles) {
+                        msg.member.roles.add(roles)
+                    })
+                }
+                if (roles == 'genius') {
+                    msg.guild.roles.create({
+                        data: {
+                            name: roles,
+                            color: '#5dfa11'
+                        }
+                    }).then(function (roles) {
+                        msg.member.roles.add(roles)
+                    })
+                }
+                if (roles == 'superb-awkward') {
+                    msg.guild.roles.create({
+                        data: {
+                            name: roles,
+                            color: '#008f99'
+                        }
+                    }).then(function (roles) {
+                        msg.member.roles.add(roles)
+                    })
+                }
+                if (roles == 'awkward') {
+                    msg.guild.roles.create({
+                        data: {
+                            name: roles,
+                            color: '#05f0fc'
+                        }
+                    }).then(function (roles) {
+                        msg.member.roles.add(roles)
+                    })
+                }
+                if (roles == 'superb-deredere') {
+                    msg.guild.roles.create({
+                        data: {
+                            name: roles,
+                            color: '#f48cfa'
+                        }
+                    }).then(function (roles) {
+                        msg.member.roles.add(roles)
+                    })
+                }
+                if (roles == 'deredere') {
+                    msg.guild.roles.create({
+                        data: {
+                            name: roles,
+                            color: '#f34cfc'
+                        }
+                    }).then(function (roles) {
+                        msg.member.roles.add(roles)
+                    })
+                }
+                if (roles == 'idiot') {
+                    msg.guild.roles.create({
+                        data: {
+                            name: roles,
+                            color: '#ffffff'
+                        }
+                    }).then(function (roles) {
+                        msg.member.roles.add(roles)
+                    })
+                }
+            } else {
+                // msg.say('Roles Exist!')
+                msg.member.roles.add(roles)
+            }
+            return msg.say(`Congrats ${msg.author}, you got ${roles} roles. Be sure to treasure it nicely!`)
+        }
+        
         const bedlak = [
         'You fell from your seat while sleeping in the class [awkward]',
         'You met your crush in the pathway to school [deredere]',
@@ -30,7 +109,14 @@ module.exports = class LayfGameCommand extends Command {
         'You got a recommendation [superb-genius]',
         'You got expelled from school [super-idiot]'
         ]
+
         msg.say(`This Feature Still Ongoing Project`)
-        return msg.say(bedlak[getRandInt(bedlak.length)])
+
+        const results = bedlak[getRandInt(bedlak.length)]
+        const startOffset = results.indexOf('[')
+        const endOffset = results.indexOf(']')
+        const trait = results.slice(startOffset+1, endOffset)
+        // const trait = 'Fuee'
+        assignRoles(trait.toString())
     }
 }
