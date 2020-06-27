@@ -4,10 +4,10 @@ const { MessageEmbed, Message } = require('discord.js');
 module.exports = class UnBondageCommand extends Command {
     constructor(client) {
         super(client, {
-            name: 'unmute',
-            aliases: ['unmute'],
+            name: 'removerole',
+            aliases: ['remove', 'rrole', 'removerole'],
             group: 'admin',
-            memberName: 'unmute',
+            memberName: 'removerole',
             description: 'Probably your only commands that i will accept',
             guarded: true,
             userPermissions: ['MANAGE_ROLES'],
@@ -24,16 +24,16 @@ module.exports = class UnBondageCommand extends Command {
                     type: 'string'
                 }
             ],
-            userPermissions: ['MANAGE_ROLES']
+            userPermissions: ['MANAGE_ROLES'],
         });
     }
 
-    async run(msg, {users, roles}) {
-        let muterole = msg.guild.roles.cache.filter(role => role.name === roles)
+    async run(msg, {user, roles}) {
+        let muterole = msg.guild.roles.cache.find(role => role.name === roles)
+        let member = msg.mentions.members.first()
 
-        let member = msg.mentions.members.first();
 
-        console.log(member, muterole)
+        // console.log(member, muterole)
         member.roles.remove(muterole)
         msg.say('きゃ!')
     }

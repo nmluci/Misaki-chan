@@ -4,10 +4,10 @@ const { MessageEmbed, Message } = require('discord.js');
 module.exports = class BondageCommand extends Command {
     constructor(client) {
         super(client, {
-            name: 'mute',
-            aliases: ['amute'],
+            name: 'addrole',
+            aliases: ['add', 'addrole', 'arole'],
             group: 'admin',
-            memberName: 'mute',
+            memberName: 'addrole',
             description: 'Probably your only commands that i will accept',
             guarded: true,
             args: [
@@ -29,6 +29,7 @@ module.exports = class BondageCommand extends Command {
 
     async run(msg, {user, roles}) {
         let muterole = msg.guild.roles.cache.find(role => role.name === roles)
+        let member = msg.mentions.members.first()
         if (!muterole) {
             msg.guild.roles.create({
                 data: {
@@ -36,14 +37,14 @@ module.exports = class BondageCommand extends Command {
                     color: '0xff5533'
                 }
             }).then(function (roles) {
-                msg.member.roles.add(roles)
+                member.roles.add(roles)
             })
         } else {
-            msg.member.roles.add(roles)
+            member.roles.add(roles)
         }
 
         // console.log(member, muterole)
-        msg.member.roles.add(muterole)
+        member.roles.add(muterole)
         msg.say('きゃ!')
     }
 };

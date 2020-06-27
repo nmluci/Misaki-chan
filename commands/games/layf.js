@@ -9,7 +9,8 @@ module.exports = class LayfGameCommand extends Command {
             group: 'games',
             memberName: 'layf',
             description: 'Game of Layf with a Twist',
-            clientPermissions: ['MANAGE_ROLES', 'MANAGE_MESSAGES', 'EMBED_LINKS']
+            clientPermissions: ['MANAGE_ROLES', 'MANAGE_MESSAGES', 'EMBED_LINKS'],
+            guildOnly: true
         })
     }
     
