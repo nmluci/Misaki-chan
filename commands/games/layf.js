@@ -5,7 +5,7 @@ module.exports = class LayfGameCommand extends Command {
     constructor(client) {
         super(client, {
             name: 'layf',
-            aliases: ['layf', 'gal'],
+            aliases: ['layf', 'gol'],
             group: 'games',
             memberName: 'layf',
             description: 'Game of Layf with a Twist',
@@ -198,7 +198,7 @@ module.exports = class LayfGameCommand extends Command {
         msg.say(`⚠️ Alpha Feature ⚠️`)
         msg.say(`⚠️ Not Intended to be Pleasurable ⚠️`)
 
-        const results = commonEvent[getRandInt(bedlak.length)]
+        const results = commonEvent[getRandInt(commonEvent.length)]
         const startOffset = results.indexOf('[')
         const endOffset = results.indexOf(']')
         const trait = results.slice(startOffset+1, endOffset)
