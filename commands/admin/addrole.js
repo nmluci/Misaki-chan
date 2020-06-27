@@ -28,23 +28,27 @@ module.exports = class BondageCommand extends Command {
     }
 
     async run(msg, {user, roles}) {
-        let muterole = msg.guild.roles.cache.find(role => role.name === roles)
-        let member = msg.mentions.members.first()
-        if (!muterole) {
-            msg.guild.roles.create({
-                data: {
-                    name: roles,
-                    color: '0xff5533'
-                }
-            }).then(function (roles) {
+        try {
+            let muterole = msg.guild.roles.cache.find(role => role.name === roles)
+            let member = msg.mentions.members.first()
+            if (!muterole) {
+                msg.guild.roles.create({
+                    data: {
+                        name: roles,
+                        color: '0xff5533'
+                    }
+                }).then(function (roles) {
+                    member.roles.add(roles)
+                })
+            } else {
                 member.roles.add(roles)
-            })
-        } else {
-            member.roles.add(roles)
+            }
+    
+            // console.log(member, muterole)
+            member.roles.add(muterole)
+            msg.say('きゃ!')
+        } catch (err) {
+            return err
         }
-
-        // console.log(member, muterole)
-        member.roles.add(muterole)
-        msg.say('きゃ!')
     }
 };
