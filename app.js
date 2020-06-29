@@ -2,7 +2,6 @@ const { CommandoClient, Command } = require('discord.js-commando');
 const path = require('path');
 const { Message } = require('discord.js');
 const { readdirSync } = require('fs');
-const message = require('./events/message');
 
 const client = new CommandoClient({
     commandPrefix: 'misaki',
@@ -28,17 +27,18 @@ client.on('ready', () => {
     client.user.setPresence({
         activity: {
             name: `ご主人の恋話`,
-            type: 'WATCHING'
+            type: 'LISTENING'
         },
         status: 'idle'
     })
     
 })
+
 // Extensions outside of commandos
 for (const event of readdirSync("./events")) {
     client.on(event.split(".")[0], (...args) => require(`./events/${event}`)(...args));
 }
 
 
-// client.login(process.env.BOT_TOKEN)
-client.login('MzcwOTI4NTI1OTE5NzgwODY2.XvdCdA.P5x5cbTTwiAa_Z-TexTKUg1LBO8')
+client.login(process.env.BOT_TOKEN)
+// client.login('MzcwOTI4NTI1OTE5NzgwODY2.XvdCdA.P5x5cbTTwiAa_Z-TexTKUg1LBO8')

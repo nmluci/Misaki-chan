@@ -29,11 +29,32 @@ module.exports = class TagsHentaiCommand extends Command {
         });
     }
     run(msg, {tags}) {
+        let memberRoles
+        const currentRoles = [
+            'awkward',   'superb-awkward',
+            'deredere',  'superb-deredere',
+            'genius',    'superb-genius',
+            'idiot',     'superb-idiot',
+            'straycat',  'superb-straycat',
+            'isekai',    'TS',
+            'goshuujin'
+          ]
+        
+
+        if (msg.member.roles.cache.some( x => currentRoles.indexOf(x.name) >= 0 )) {
+            for (let i=0; i < currentRoles.length; i++) {
+                const x = msg.member.roles.cache.find(x => x.name == currentRoles[i])
+                // console.log('Roles', x)
+                if (x) memberRoles = x.name
+            }
+        }
+        console.log(memberRoles)
+        if (memberRoles.toLowerCase().includes('awkward')) msg.say(`You must be feeling so awkwards that you decided to find a ${tags} hentai...\n wut a degenerate`)
         tags = tags.toString()
 
         //Censorship to ensure all actor are above 18
         if (tags.toLowerCase().includes('brainfuck')) tags = tags.replace('brainfuck', 'yaoi')
-        if (tags.toLowerCase().includes('loli')) msg.say('Lolicon... _eww')
+        if (tags.toLowerCase().includes('loli')) msg.say('Lolicon...')
         if (tags.toLowerCase().includes('milf')) msg.say('ara ara')
         if (tags.toLowerCase().includes('shounen ai') || tags.toLowerCase().includes('shounenai')) msg.direct('Are you one of my Master friends?')
         if (tags.toLowerCase().includes('Big Oppai')) msg.direct('Normies')

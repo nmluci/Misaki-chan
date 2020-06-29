@@ -17,7 +17,7 @@ module.exports = class NicknameChangerCommand extends Command {
                     type: 'string'
                 }
             ],
-            userPermissions: ['MANAGE_ROLES', 'MANAGE_NICKNAMES'],
+            clientPermissions: ['MANAGE_ROLES', 'MANAGE_NICKNAMES'],
             guildOnly: true,
             ownerOnly: true
         });
@@ -26,6 +26,7 @@ module.exports = class NicknameChangerCommand extends Command {
     async run(msg, { name }) {
         try {
             msg.guild.member(client.user).setNickname(name)
+            return msg.say(`Ma Nem Naw is ${name}`)
         } catch (err) {
             return err
         }

@@ -15,22 +15,31 @@ module.exports = class LayfGameCommand extends Command {
     }
     
     async run(msg) {
-        function getRandInt(int) { return Math.floor(Math.random() * int); }
+        // Array that stores all possible roles for comparison
+        let allRoles = []
 
-        async function changeNickname(name) {
-            msg.member.setNickname(name)
-            msg.say(`Tada~, Your name now is ${name}!`)
-            msg.say(`It's perma-Nickname btw`)
-            msg.say({
-                files: [
-                    'https://i.imgur.com/NOOyUD1.png'
-                ]
-            })
-        }
+        function getRandInt(int) { return Math.floor(Math.random() * int) }
 
         async function assignRoles(roles) {
             roles = roles.toString()
             const assignedRoles = msg.guild.roles.cache.find(role => role.name == roles)
+
+            // Checking if member have any roles assigned
+            const memberRoles = msg.member.roles.cache
+
+            // console.log(memberRoles)
+            // console.log("Roles", allRoles)
+            // console.log("State" ,memberRoles.some(x => allRoles.indexOf('superb-deredere') >= 0))
+
+            if (memberRoles.some( x => allRoles.indexOf(x.name) >= 0 )) {
+                for (let i=0; i < allRoles.length; i++) {
+                    const x = memberRoles.find(x => x.name == allRoles[i])
+                    // console.log('Roles', x)
+                    if (x) msg.member.roles.remove(x)
+                }
+            }
+
+            // Checking whether the roles had been made in corresponding guilds
             if (!assignedRoles) {
                 // msg.say(`Roles ain't exist`)
                 if (roles == 'superb-genius') {
@@ -142,7 +151,6 @@ module.exports = class LayfGameCommand extends Command {
                     }).then(function (roles) {
                         msg.member.roles.add(roles)
                     })
-                    changeNickname(`${msg.author.username}` + `-chan`)
                 }
                 if (roles == 'goshuujin') {
                     msg.guild.roles.create({
@@ -167,10 +175,10 @@ module.exports = class LayfGameCommand extends Command {
                 
             } else {
                 // msg.say('Roles Exist!')
-                // Fixed Roles Assignment as apparenly its not properly configured last time
+                // Add the roles if the corresponding roles is exist
                 msg.member.roles.add(assignedRoles)
-                if (assignRoles == 'TS') changeNickname(`${msg.author.username}` + `-chan`)
             }
+            
             return msg.say(`Congrats ${msg.author}, you got ${roles} roles. Be sure to treasure it nicely!`)
         }
         
@@ -196,9 +204,21 @@ module.exports = class LayfGameCommand extends Command {
         'You found a secret code to control me [goshuujin]'
         ]
 
+        function generateRoles() {
+            for (let i = 0; i < commonEvent.length; i++) {
+                const res = commonEvent[i] 
+                const startOffset = res.indexOf('[')
+                const endOffset = res.indexOf(']')
+                const trait = res.slice(startOffset+1, endOffset)
+                if (!allRoles.find(x => x == trait)) allRoles.push(trait)
+            }
+        }
+        // Warning and Initialization
         msg.say(`⚠️ Alpha Feature ⚠️`)
         msg.say(`⚠️ Not Intended to be Pleasurable ⚠️`)
-
+        generateRoles()
+        
+        // Calculating traits
         const results = commonEvent[getRandInt(commonEvent.length)]
         const startOffset = results.indexOf('[')
         const endOffset = results.indexOf(']')
@@ -207,5 +227,9 @@ module.exports = class LayfGameCommand extends Command {
         msg.say(fate)
         // const trait = 'Fuee'
         assignRoles(trait.toString())
+    }
+
+    onBlock(msg, reason, mssing) {
+        if (reason == 'clientPermissions') msg.say(`Apparently, I don't have a following permissions: \n ${missing}`)
     }
 }
