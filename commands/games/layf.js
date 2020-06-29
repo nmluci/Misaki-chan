@@ -169,6 +169,7 @@ module.exports = class LayfGameCommand extends Command {
                 // msg.say('Roles Exist!')
                 // Fixed Roles Assignment as apparenly its not properly configured last time
                 msg.member.roles.add(assignedRoles)
+                if (assignRoles == 'TS') changeNickname(`${msg.author.username}` + `-chan`)
             }
             return msg.say(`Congrats ${msg.author}, you got ${roles} roles. Be sure to treasure it nicely!`)
         }
