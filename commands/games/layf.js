@@ -142,7 +142,7 @@ module.exports = class LayfGameCommand extends Command {
                     }).then(function (roles) {
                         msg.member.roles.add(roles)
                     })
-                    changeNickname(`${msg.author.username} + '-chan`)
+                    changeNickname(`${msg.author.username}` + `-chan`)
                 }
                 if (roles == 'goshuujin') {
                     msg.guild.roles.create({

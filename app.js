@@ -12,11 +12,11 @@ const client = new CommandoClient({
 client.registry
 .registerDefaultTypes()
 .registerGroups([
-    ['ecchi', 'Only for the worthy!'],
-    ['admin', 'ITS ONLY FOR ME(FUYUNA)'],
-    ['annoyance', 'Hmm... Nothing?'],
-    ['search', 'Search accordingly'],
-    ['games', 'Well games...']
+    ['ecchi', 'Ecchi'],
+    ['admin', 'Admin only'],
+    ['annoyance', 'Annoyance :V'],
+    ['search', 'Search'],
+    ['games', 'Games']
 ])
 .registerDefaultGroups()
 .registerDefaultCommands()
