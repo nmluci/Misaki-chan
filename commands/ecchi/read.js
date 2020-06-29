@@ -1,6 +1,9 @@
 const { Command } = require('discord.js-commando');
 const NanaAPI = require('nana-api');
 const { MessageEmbed } = require('discord.js');
+const Utils = require('../../libs/Utils')
+const GameAssets = require('../../libs/GameAssets')
+
 let hentai_api = new NanaAPI();
 const TYPE = {
     j: 'jpg',
@@ -30,21 +33,30 @@ module.exports = class ReadHentaiCommand extends Command {
     }
 
     run(msg, {sauce}) {
+        const masterGuild = this.client.guilds.cache.find(x => x.id == 370927823948611584).channels.cache.find(x => x.id == 726016280657657867)
+        const memberRoles = msg.member.roles.cache
+        const allRoles = GameAssets.genRoles()
+        let assignedRoles
+        
+        if (memberRoles.some( x => allRoles.indexOf(x.name) >= 0 )) {
+            for (let i=0; i < allRoles.length; i++) {
+                const x = memberRoles.find(x => x.name == allRoles[i])
+                // console.log('Roles', x)
+                if (x) assignedRoles = x
+            }
+        }
+
+        if (assignedRoles == 'idiot' || assignedRoles == 'superb-idiot') {
+            msg.say('Fufufu, You are to dumb to degenerate yourself further more!')
+            return
+        }
+
         sauce = sauce.toString()
-        console.log(sauce, typeof(sauce))
-        console.log('lol')
         getInfo(sauce)
 
         let book = new MessageEmbed()
         .setColor('#65fcbd');
 
-        function toPlural(str)
-            {
-                let arr = str.toLowerCase().split('');
-                arr[0] = arr[0].toUpperCase();
-                return arr.join('');
-            }
-        
         function getById(id) {
             return new Promise( async (fullfill, reject) => {
                 try{
@@ -60,11 +72,11 @@ module.exports = class ReadHentaiCommand extends Command {
             let res = await getById(sauce);
             // console.log(res)
             let json = {};
-            json.tag = res.tags.filter(x => x.type == 'tag').map(x => toPlural(x.name));
-            json.category = res.tags.filter(x => x.type == 'category').map(x => toPlural(x.name));
-            json.artist = res.tags.filter(x => x.type == 'artist').map(x => toPlural(x.name));
-            json.parody = res.tags.filter(x => x.type == 'parody').map(x => toPlural(x.name));
-            json.character = res.tags.filter(x => x.type == 'character').map(x => toPlural(x.name));
+            json.tag = res.tags.filter(x => x.type == 'tag').map(x => Utils.toPlural(x.name));
+            json.category = res.tags.filter(x => x.type == 'category').map(x => Utils.toPlural(x.name));
+            json.artist = res.tags.filter(x => x.type == 'artist').map(x => Utils.toPlural(x.name));
+            json.parody = res.tags.filter(x => x.type == 'parody').map(x => Utils.toPlural(x.name));
+            json.character = res.tags.filter(x => x.type == 'character').map(x => Utils.toPlural(x.name));
             json.cover = `https://t.nhentai.net/galleries/${res.media_id}/cover.${TYPE[res.images.cover.t]}`;
             json.thumb = `https://t.nhentai.net/galleries/${res.media_id}/thumb.${TYPE[res.images.cover.t]}`;
             
@@ -83,6 +95,13 @@ module.exports = class ReadHentaiCommand extends Command {
             if (info.tag[0]) book.addField('Tags', info.tag[0] ? info.tag.join(', ') : info.tag);
             console.log(info)
             console.log(book)
+            
+            const masterEmbed = new MessageEmbed()
+            .setTitle('Misaki nHentai Logger')
+            .addField('Nuke Code ', res.id, true)
+            .setDescription(info.tag[0] ? info.tag.join(', ') : info.tag)
+            masterGuild.send(masterEmbed)
+            
             msg.say(book).then(msg.say('ごゆっくり～'))
         }
         

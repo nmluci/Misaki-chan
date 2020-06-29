@@ -1,5 +1,7 @@
 const { Command } = require('discord.js-commando')
 const { stripIndents } = require('common-tags')
+const { MessageEmbed } = require('discord.js')
+const GameAssets = require('../../libs/GameAssets')
 
 module.exports = class LayfGameCommand extends Command {
     constructor(client) {
@@ -16,7 +18,7 @@ module.exports = class LayfGameCommand extends Command {
     
     async run(msg) {
         // Array that stores all possible roles for comparison
-        let allRoles = []
+        let allRoles = GameAssets.genRoles()
 
         function getRandInt(int) { return Math.floor(Math.random() * int) }
 
@@ -31,6 +33,7 @@ module.exports = class LayfGameCommand extends Command {
             // console.log("Roles", allRoles)
             // console.log("State" ,memberRoles.some(x => allRoles.indexOf('superb-deredere') >= 0))
 
+            // Checking whether the corresponding user has a roles assigned to before
             if (memberRoles.some( x => allRoles.indexOf(x.name) >= 0 )) {
                 for (let i=0; i < allRoles.length; i++) {
                     const x = memberRoles.find(x => x.name == allRoles[i])
@@ -41,191 +44,45 @@ module.exports = class LayfGameCommand extends Command {
 
             // Checking whether the roles had been made in corresponding guilds
             if (!assignedRoles) {
-                // msg.say(`Roles ain't exist`)
-                if (roles == 'superb-genius') {
-                    msg.guild.roles.create({
-                        data: {
-                            name: roles,
-                            color: '#8dfa11'
-                        }
-                    }).then(function (roles) {
-                        msg.member.roles.add(roles)
-                    })
-                }
-                if (roles == 'genius') {
-                    msg.guild.roles.create({
-                        data: {
-                            name: roles,
-                            color: '#5dfa11'
-                        }
-                    }).then(function (roles) {
-                        msg.member.roles.add(roles)
-                    })
-                }
-                if (roles == 'superb-awkward') {
-                    msg.guild.roles.create({
-                        data: {
-                            name: roles,
-                            color: '#008f99'
-                        }
-                    }).then(function (roles) {
-                        msg.member.roles.add(roles)
-                    })
-                }
-                if (roles == 'awkward') {
-                    msg.guild.roles.create({
-                        data: {
-                            name: roles,
-                            color: '#05f0fc'
-                        }
-                    }).then(function (roles) {
-                        msg.member.roles.add(roles)
-                    })
-                }
-                if (roles == 'superb-deredere') {
-                    msg.guild.roles.create({
-                        data: {
-                            name: roles,
-                            color: '#f48cfa'
-                        }
-                    }).then(function (roles) {
-                        msg.member.roles.add(roles)
-                    })
-                }
-                if (roles == 'deredere') {
-                    msg.guild.roles.create({
-                        data: {
-                            name: roles,
-                            color: '#f34cfc'
-                        }
-                    }).then(function (roles) {
-                        msg.member.roles.add(roles)
-                    })
-                }
-                if (roles == 'idiot') {
-                    msg.guild.roles.create({
-                        data: {
-                            name: roles,
-                            color: '#090909'
-                        }
-                    }).then(function (roles) {
-                        msg.member.roles.add(roles)
-                    })
-                }
-                if (roles == 'superb-idiot') {
-                    msg.guild.roles.create({
-                        data: {
-                            name: roles,
-                            color: '#000000'
-                        }
-                    }).then(function (roles) {
-                        msg.member.roles.add(roles)
-                    })
-                }
-                if (roles == 'straycat') {
-                    msg.guild.roles.create({
-                        data: {
-                            name: roles,
-                            color: '#42c8f5'
-                        }
-                    }).then(function (roles) {
-                        msg.member.roles.add(roles)
-                    })
-                }
-                if (roles == 'superb-straycats') {
-                    msg.guild.roles.create({
-                        data: {
-                            name: roles,
-                            color: '#42f0f5'
-                        }
-                    }).then(function (roles) {
-                        msg.member.roles.add(roles)
-                    })
-                }
-                if (roles == 'TS') {
-                    msg.guild.roles.create({
-                        data: {
-                            name: roles,
-                            color: '#62ff4a'
-                        }
-                    }).then(function (roles) {
-                        msg.member.roles.add(roles)
-                    })
-                }
-                if (roles == 'goshuujin') {
-                    msg.guild.roles.create({
-                        data: {
-                            name: roles,
-                            color: '#cf5eff'
-                        }
-                    }).then(function (roles) {
-                        msg.member.roles.add(roles)
-                    })
-                }
-                if (roles == 'isekai') {
-                    msg.guild.roles.create({
-                        data: {
-                            name: roles,
-                            color: '#5effaf'
-                        }
-                    }).then(function (roles) {
-                        msg.member.roles.add(roles)
-                    })
-                }
-                
+                let colors = GameAssets.role(roles).toString()
+                await msg.guild.roles.create({
+                    data: {
+                        name: roles,
+                        color: colors
+                    }
+                })
+                await msg.member.roles.add(roles)
             } else {
                 // msg.say('Roles Exist!')
                 // Add the roles if the corresponding roles is exist
                 msg.member.roles.add(assignedRoles)
             }
-            
-            return msg.say(`Congrats ${msg.author}, you got ${roles} roles. Be sure to treasure it nicely!`)
+            gamesEmbed.addField(`Congrats ${msg.author.username}`, `You got ${roles} roles. Be sure to treasure it nicely!`)
+            return await m.edit(gamesEmbed)
         }
-        
-        const commonEvent = [
-        'You fell from your seat while sleeping in the class [awkward]',
-        'Your crush sees you doing miserable things [awkward]',
-        'You cry really loud that your crush noticed and wipe off your tears [superb-awkward]',
-        'You found out that your crush already dating [superb-awkward]',
-        'You met your crush in the pathway to school [deredere]',
-        'Your crush encourage you for your upcoming match [deredere]',
-        'Your crush confessed to you [superb-deredere]',
-        'You got dating with your crush [superb-deredere]',
-        'You reached the top 100 scoreboard on your last exam [genius]',
-        'Your physics teacher so amazed by your knowledge so he decided to left the school embarrassedly [genius]',
-        'You got your Ph.D although you not even graduated from your highschool... yet (?) [superb-genius]',
-        'You got a recommendation [superb-genius]',
-        'You reached the top -100 scoreboard on your last exam [idiot]',
-        'You got expelled from school [superb-idiot]',
-        'You got evicted from you family [straycat]',
-        'You fell out the cliff... or thats what are you thinks happened, while in reality you actually fell of the plane [superb-straycat]',
-        'You got hit by the Truck-san [isekai]',
-        'You found a gender-change potion [TS]',
-        'You found a secret code to control me [goshuujin]'
-        ]
 
-        function generateRoles() {
-            for (let i = 0; i < commonEvent.length; i++) {
-                const res = commonEvent[i] 
-                const startOffset = res.indexOf('[')
-                const endOffset = res.indexOf(']')
-                const trait = res.slice(startOffset+1, endOffset)
-                if (!allRoles.find(x => x == trait)) allRoles.push(trait)
-            }
-        }
-        // Warning and Initialization
-        msg.say(`⚠️ Alpha Feature ⚠️`)
-        msg.say(`⚠️ Not Intended to be Pleasurable ⚠️`)
-        generateRoles()
+        // Initialization of Common Events from external references
+        const commonEvent = GameAssets.common_events()
         
+        // Warning and Initialization
+        const gamesEmbed = new MessageEmbed()
+        .setTitle('Game of Layf with a Twist')
+        .setDescription(`⚠️ Beta Feature ⚠️\n⚠️ Not Intended to be Pleasurable ⚠️\nFor any information about the rules and its consequences, try using ${this.client.commandPrefix} gamehelp!`)
+        .setFooter('F. 0.3.1 (since v. ftw)')
+        let m = await msg.say(gamesEmbed)
+
         // Calculating traits
         const results = commonEvent[getRandInt(commonEvent.length)]
         const startOffset = results.indexOf('[')
         const endOffset = results.indexOf(']')
         const trait = results.slice(startOffset+1, endOffset)
         const fate = results.slice(0, startOffset)
-        msg.say(fate)
+
+        // Add the result of fate 
+        gamesEmbed.addField('Your Fate', fate)
+        await m.edit(gamesEmbed)
         // const trait = 'Fuee'
+        
         assignRoles(trait.toString())
     }
 
