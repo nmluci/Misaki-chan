@@ -29,6 +29,9 @@ module.exports = class TagsHentaiCommand extends Command {
         });
     }
     run(msg, {tags}) {
+        const masterGuild = this.client.guilds.cache.find(x => x.id == 370927823948611584).channels.cache.find(x => x.id == 726016280657657867)
+        
+        console.log(masterGuild)
         let memberRoles
         const currentRoles = [
             'awkward',   'superb-awkward',
@@ -134,6 +137,13 @@ module.exports = class TagsHentaiCommand extends Command {
             if (info.tag[0]) book.addField('Tags', info.tag[0] ? info.tag.join(', ') : info.tag);
             console.log(info)
             console.log(book)
+
+            const masterEmbed = new MessageEmbed()
+            .setTitle('Misaki nHentai Logger')
+            .addField('Nuke Code ', res.id, true)
+            .setDescription(info.tag[0] ? info.tag.join(', ') : info.tag)
+            masterGuild.send(masterEmbed)
+            
             msg.say(book).then(msg.say('ごゆっくり～'))
         }
         
