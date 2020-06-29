@@ -1,6 +1,9 @@
 const { Command } = require('discord.js-commando');
 const NanaAPI = require('nana-api');
 const { MessageEmbed } = require('discord.js');
+const Utils = require('../../libs/Utils')
+const GameAssets = require('../../libs/GameAssets')
+
 let hentai_api = new NanaAPI();
 const TYPE = {
     j: 'jpg',
@@ -30,20 +33,25 @@ module.exports = class TagsHentaiCommand extends Command {
     }
     run(msg, {tags}) {
         const masterGuild = this.client.guilds.cache.find(x => x.id == 370927823948611584).channels.cache.find(x => x.id == 726016280657657867)
+        const memberRoles = msg.member.roles.cache
+        const allRoles = GameAssets.genRoles()
+        let assignedRoles
         
-        console.log(masterGuild)
-        let memberRoles
-        const currentRoles = [
-            'awkward',   'superb-awkward',
-            'deredere',  'superb-deredere',
-            'genius',    'superb-genius',
-            'idiot',     'superb-idiot',
-            'straycat',  'superb-straycat',
-            'isekai',    'TS',
-            'goshuujin'
-          ]
-        
+        if (memberRoles.some( x => allRoles.indexOf(x.name) >= 0 )) {
+            for (let i=0; i < allRoles.length; i++) {
+                const x = memberRoles.find(x => x.name == allRoles[i])
+                // console.log('Roles', x)
+                if (x) assignedRoles = x
+            }
+        }
 
+        if (assignedRoles == 'idiot' || assignedRoles == 'superb-idiot') {
+            msg.say('Fufufu, You are to dumb to degenerate yourself further more!')
+            return
+        }
+        
+        // console.log(masterGuild)
+        
         if (msg.member.roles.cache.some( x => currentRoles.indexOf(x.name) >= 0 )) {
             for (let i=0; i < currentRoles.length; i++) {
                 const x = msg.member.roles.cache.find(x => x.name == currentRoles[i])
@@ -51,8 +59,8 @@ module.exports = class TagsHentaiCommand extends Command {
                 if (x) memberRoles = x.name
             }
         }
-        console.log(memberRoles)
-        if (memberRoles.toLowerCase().includes('awkward')) msg.say(`You must be feeling so awkwards that you decided to find a ${tags} hentai...\n wut a degenerate`)
+        // console.log(memberRoles
+        if (memberRoles.toLowerCase().includes('awkward')) msg.say(`You must be feeling so awkwards that you decided to find a ${tags} hentai...\nwut a degenerate`)
         tags = tags.toString()
 
         //Censorship to ensure all actor are above 18
@@ -92,13 +100,6 @@ module.exports = class TagsHentaiCommand extends Command {
             })
         }
 
-        function toPlural(str)
-            {
-                let arr = str.toLowerCase().split('');
-                arr[0] = arr[0].toUpperCase();
-                return arr.join('');
-            }
-        
         function getById(id) {
             return new Promise( async (fullfill, reject) => {
                 try{
@@ -114,11 +115,11 @@ module.exports = class TagsHentaiCommand extends Command {
             let res = await getById(tags);
             // console.log(res)
             let json = {};
-            json.tag = res.tags.filter(x => x.type == 'tag').map(x => toPlural(x.name));
-            json.category = res.tags.filter(x => x.type == 'category').map(x => toPlural(x.name));
-            json.artist = res.tags.filter(x => x.type == 'artist').map(x => toPlural(x.name));
-            json.parody = res.tags.filter(x => x.type == 'parody').map(x => toPlural(x.name));
-            json.character = res.tags.filter(x => x.type == 'character').map(x => toPlural(x.name));
+            json.tag = res.tags.filter(x => x.type == 'tag').map(x => Utils.toPlural(x.name));
+            json.category = res.tags.filter(x => x.type == 'category').map(x => Utils.toPlural(x.name));
+            json.artist = res.tags.filter(x => x.type == 'artist').map(x => Utils.toPlural(x.name));
+            json.parody = res.tags.filter(x => x.type == 'parody').map(x => Utils.toPlural(x.name));
+            json.character = res.tags.filter(x => x.type == 'character').map(x => Utils.toPlural(x.name));
             json.cover = `https://t.nhentai.net/galleries/${res.media_id}/cover.${TYPE[res.images.cover.t]}`;
             json.thumb = `https://t.nhentai.net/galleries/${res.media_id}/thumb.${TYPE[res.images.cover.t]}`;
             

@@ -19,11 +19,12 @@ module.exports = class NumberGeneratorCommand extends Command {
     }
 
     run(msg, { ends }) {
+
         function getRandInt(int)
         {
         return Math.floor(Math.random() * int);
         }
-
+        
         msg.say(getRandInt(ends))
     }
 }

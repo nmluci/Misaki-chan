@@ -1,6 +1,5 @@
 
-class Util {
-
+module.exports = class FynUtil {
     static toPlural(str)
     {
         let arr = str.toLowerCase().split('');
@@ -29,5 +28,3 @@ class Util {
         return fin.join(' ');
     }
 }
-
-module.exports = Util;
