@@ -33,25 +33,11 @@ module.exports = class TagsHentaiCommand extends Command {
     }
     run(msg, {tags}) {
         const masterGuild = this.client.guilds.cache.find(x => x.id == 370927823948611584).channels.cache.find(x => x.id == 726016280657657867)
-        const memberRoles = msg.member.roles.cache
-        const allRoles = GameAssets.genRoles()
-        let assignedRoles
-        
-        if (memberRoles.some( x => allRoles.indexOf(x.name) >= 0 )) {
-            for (let i=0; i < allRoles.length; i++) {
-                const x = memberRoles.find(x => x.name == allRoles[i])
-                // console.log('Roles', x)
-                if (x) assignedRoles = x
-            }
-        }
-
-        if (assignedRoles == 'idiot' || assignedRoles == 'superb-idiot') {
-            msg.say('Fufufu, You are to dumb to degenerate yourself further more!')
-            return
-        }
-        
+        const currentRoles = GameAssets.genRoles()
+        let memberRoles
         // console.log(masterGuild)
         
+        // enumerating member's roles
         if (msg.member.roles.cache.some( x => currentRoles.indexOf(x.name) >= 0 )) {
             for (let i=0; i < currentRoles.length; i++) {
                 const x = msg.member.roles.cache.find(x => x.name == currentRoles[i])
@@ -59,16 +45,39 @@ module.exports = class TagsHentaiCommand extends Command {
                 if (x) memberRoles = x.name
             }
         }
-        // console.log(memberRoles
+        // give appropriate responses
         if (memberRoles.toLowerCase().includes('awkward')) msg.say(`You must be feeling so awkwards that you decided to find a ${tags} hentai...\nwut a degenerate`)
-        tags = tags.toString()
+        if (memberRoles.toLowerCase().includes('idiot')) {
+            msg.say(`Why don't you instead learn some stuff to fix that idiotness of yours huh? ${msg.author}`)
+            return
+        }
+        if (memberRoles.toLowerCase().includes('genius')) msg.say(`Don't forget to keep ur self as a ${memberRoles}, okay?`)
+        if (memberRoles.includes('TS')) {
+            console.log(tags)
+            if (tags.toLowerCase().includes('genderbender')) msg.say(`Soooo, you still ain't sastified by your new self huh? well its fine for me though...`)
+            if (tags.toLowerCase().includes('yuri')) msg.say('Hmm... so you are into that kind of thing eh?')
+            if (tags.toLowerCase().includes('yaoi')) msg.say(`SO...\nyou have accepted your fate...\nit's good to hear(?)`)
+        }
+        if (memberRoles.toLowerCase().includes('deredere')) {
+            if (tags.toLowerCase().includes('ntr')) msg.say(`Seriously? That's your fetish?`)
+            if (tags.toLowerCase().includes('yuri')) msg.say('Okay...')
+            if (tags.toLowerCase().includes('yaoi')) msg.say('...')
+        }
+        if (memberRoles.toLowerCase().includes('goshuujin')) {
+            if (tags.toLowerCase().includes('maid')) msg.say('ご主人様、激しくしないよね？')
+            if (tags.toLowerCase().includes('slave')) msg.say('あたし、ご主人様の奴隷になります、永遠に')
+            if (tags.toLowerCase().includes('prostitution')) msg.say('いやあああああああああああああだ、お願いご主人、それだけはダメ')
+        }
+        if (memberRoles.toLowerCase().includes('straycat')) {
+            if (tags.toLowerCase().includes('prostitution')) msg.say(`Fuee... are you that badly wants to be a cumdumpster?`)
+            if (tags.toLowerCase().includes('maid')) msg.say(`Fuee... are you that desperately to become one's slave?`)
+            if (tags.toLowerCase().includes('slave')) msg.say(`Fuee... are you really REALLY really REALLY wAnNa tO bE a SlAvE hUh?`)
+        }
 
+        tags = tags.toString()
         //Censorship to ensure all actor are above 18
         if (tags.toLowerCase().includes('brainfuck')) tags = tags.replace('brainfuck', 'yaoi')
-        if (tags.toLowerCase().includes('loli')) msg.say('Lolicon...')
-        if (tags.toLowerCase().includes('milf')) msg.say('ara ara')
-        if (tags.toLowerCase().includes('shounen ai') || tags.toLowerCase().includes('shounenai')) msg.direct('Are you one of my Master friends?')
-        if (tags.toLowerCase().includes('Big Oppai')) msg.direct('Normies')
+
         // console.log(tags, typeof(tags))
         // console.log('lol')
         

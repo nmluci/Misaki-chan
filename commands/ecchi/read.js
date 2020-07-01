@@ -34,22 +34,25 @@ module.exports = class ReadHentaiCommand extends Command {
 
     run(msg, {sauce}) {
         const masterGuild = this.client.guilds.cache.find(x => x.id == 370927823948611584).channels.cache.find(x => x.id == 726016280657657867)
-        const memberRoles = msg.member.roles.cache
-        const allRoles = GameAssets.genRoles()
-        let assignedRoles
+        const currentRoles = GameAssets.genRoles()
+        let memberRoles
+        // console.log(masterGuild)
         
-        if (memberRoles.some( x => allRoles.indexOf(x.name) >= 0 )) {
-            for (let i=0; i < allRoles.length; i++) {
-                const x = memberRoles.find(x => x.name == allRoles[i])
+        // enumerating member's roles
+        if (msg.member.roles.cache.some( x => currentRoles.indexOf(x.name) >= 0 )) {
+            for (let i=0; i < currentRoles.length; i++) {
+                const x = msg.member.roles.cache.find(x => x.name == currentRoles[i])
                 // console.log('Roles', x)
-                if (x) assignedRoles = x
+                if (x) memberRoles = x.name
             }
         }
-
-        if (assignedRoles == 'idiot' || assignedRoles == 'superb-idiot') {
-            msg.say('Fufufu, You are to dumb to degenerate yourself further more!')
+        // give appropriate responses
+        if (memberRoles.toLowerCase().includes('awkward')) msg.say(`You must be feeling so awkwards that you decided to find a ${tags} hentai...\nwut a degenerate`)
+        if (memberRoles.toLowerCase().includes('idiot')) {
+            msg.say(`Why don't you instead learn some stuff to fix that idiotness of yours huh? ${msg.author}`)
             return
         }
+        if (memberRoles.toLowerCase().includes('genius')) msg.say(`Don't forget to keep ur self as a ${memberRoles}, okay?`)
 
         sauce = sauce.toString()
         getInfo(sauce)
