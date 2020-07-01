@@ -46,32 +46,34 @@ module.exports = class TagsHentaiCommand extends Command {
             }
         }
         // give appropriate responses
-        if (memberRoles.toLowerCase().includes('awkward')) msg.say(`You must be feeling so awkwards that you decided to find a ${tags} hentai...\nwut a degenerate`)
-        if (memberRoles.toLowerCase().includes('idiot')) {
-            msg.say(`Why don't you instead learn some stuff to fix that idiotness of yours huh? ${msg.author}`)
-            return
-        }
-        if (memberRoles.toLowerCase().includes('genius')) msg.say(`Don't forget to keep ur self as a ${memberRoles}, okay?`)
-        if (memberRoles.includes('TS')) {
-            console.log(tags)
-            if (tags.toLowerCase().includes('genderbender')) msg.say(`Soooo, you still ain't sastified by your new self huh? well its fine for me though...`)
-            if (tags.toLowerCase().includes('yuri')) msg.say('Hmm... so you are into that kind of thing eh?')
-            if (tags.toLowerCase().includes('yaoi')) msg.say(`SO...\nyou have accepted your fate...\nit's good to hear(?)`)
-        }
-        if (memberRoles.toLowerCase().includes('deredere')) {
-            if (tags.toLowerCase().includes('ntr')) msg.say(`Seriously? That's your fetish?`)
-            if (tags.toLowerCase().includes('yuri')) msg.say('Okay...')
-            if (tags.toLowerCase().includes('yaoi')) msg.say('...')
-        }
-        if (memberRoles.toLowerCase().includes('goshuujin')) {
-            if (tags.toLowerCase().includes('maid')) msg.say('ご主人様、激しくしないよね？')
-            if (tags.toLowerCase().includes('slave')) msg.say('あたし、ご主人様の奴隷になります、永遠に')
-            if (tags.toLowerCase().includes('prostitution')) msg.say('いやあああああああああああああだ、お願いご主人、それだけはダメ')
-        }
-        if (memberRoles.toLowerCase().includes('straycat')) {
-            if (tags.toLowerCase().includes('prostitution')) msg.say(`Fuee... are you that badly wants to be a cumdumpster?`)
-            if (tags.toLowerCase().includes('maid')) msg.say(`Fuee... are you that desperately to become one's slave?`)
-            if (tags.toLowerCase().includes('slave')) msg.say(`Fuee... are you really REALLY really REALLY wAnNa tO bE a SlAvE hUh?`)
+        if (memberRoles) {
+            if (memberRoles.toLowerCase().includes('awkward')) msg.say(`You must be feeling so awkwards that you decided to find a ${tags} hentai...\nwut a degenerate`)
+            if (memberRoles.toLowerCase().includes('idiot')) {
+                msg.say(`Why don't you instead learn some stuff to fix that idiotness of yours huh? ${msg.author}`)
+                return
+            }
+            if (memberRoles.toLowerCase().includes('genius')) msg.say(`Don't forget to keep ur self as a ${memberRoles}, okay?`)
+            if (memberRoles.includes('TS')) {
+                console.log(tags)
+                if (tags.toLowerCase().includes('genderbender')) msg.say(`Soooo, you still ain't sastified by your new self huh? well its fine for me though...`)
+                if (tags.toLowerCase().includes('yuri')) msg.say('Hmm... so you are into that kind of thing eh?')
+                if (tags.toLowerCase().includes('yaoi')) msg.say(`SO...\nyou have accepted your fate...\nit's good to hear(?)`)
+            }
+            if (memberRoles.toLowerCase().includes('deredere')) {
+                if (tags.toLowerCase().includes('ntr')) msg.say(`Seriously? That's your fetish?`)
+                if (tags.toLowerCase().includes('yuri')) msg.say('Okay...')
+                if (tags.toLowerCase().includes('yaoi')) msg.say('...')
+            }
+            if (memberRoles.toLowerCase().includes('goshuujin')) {
+                if (tags.toLowerCase().includes('maid')) msg.say('ご主人様、激しくしないよね？')
+                if (tags.toLowerCase().includes('slave')) msg.say('あたし、ご主人様の奴隷になります、永遠に')
+                if (tags.toLowerCase().includes('prostitution')) msg.say('いやあああああああああああああだ、お願いご主人、それだけはダメ')
+            }
+            if (memberRoles.toLowerCase().includes('straycat')) {
+                if (tags.toLowerCase().includes('prostitution')) msg.say(`Fuee... are you that badly wants to be a cumdumpster?`)
+                if (tags.toLowerCase().includes('maid')) msg.say(`Fuee... are you that desperately to become one's slave?`)
+                if (tags.toLowerCase().includes('slave')) msg.say(`Fuee... are you really REALLY really REALLY wAnNa tO bE a SlAvE hUh?`)
+            }
         }
 
         tags = tags.toString()

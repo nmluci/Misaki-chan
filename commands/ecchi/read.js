@@ -47,12 +47,14 @@ module.exports = class ReadHentaiCommand extends Command {
             }
         }
         // give appropriate responses
-        if (memberRoles.toLowerCase().includes('awkward')) msg.say(`You must be feeling so awkwards that you decided to find a ${tags} hentai...\nwut a degenerate`)
-        if (memberRoles.toLowerCase().includes('idiot')) {
-            msg.say(`Why don't you instead learn some stuff to fix that idiotness of yours huh? ${msg.author}`)
-            return
+        if (memberRoles) {
+            if (memberRoles.toLowerCase().includes('awkward')) msg.say(`You must be feeling so awkwards that you decided to find a ${tags} hentai...\nwut a degenerate`)
+            if (memberRoles.toLowerCase().includes('idiot')) {
+                msg.say(`Why don't you instead learn some stuff to fix that idiotness of yours huh? ${msg.author}`)
+                return
+            }
+            if (memberRoles.toLowerCase().includes('genius')) msg.say(`Don't forget to keep ur self as a ${memberRoles}, okay?`)
         }
-        if (memberRoles.toLowerCase().includes('genius')) msg.say(`Don't forget to keep ur self as a ${memberRoles}, okay?`)
 
         sauce = sauce.toString()
         getInfo(sauce)
