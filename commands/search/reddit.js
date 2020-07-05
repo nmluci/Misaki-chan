@@ -85,7 +85,7 @@ module.exports = class RedditSearchCommand extends Command{
             .setColor('#CCCCFF')
             .setImage(redData.image)
             .setTitle(redData.title)
-            .setFooter('Ehm... [BETA]')
+            .setFooter('Ehm... || Beware its may be extremely nsfw')
             msg.say(redditEmbed)
         } catch (err) {
             return console.log(err)

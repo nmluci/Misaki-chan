@@ -11,7 +11,7 @@ module.exports = class VNDBSearchByTitleCommand extends Command {
     constructor(client) {
         super(client, {
             name: 'vnsearchtitle',
-            aliases: ['vnsearch', 'vns', 'erogesearch', 'esearch'],
+            aliases: ['vnsearch', 'vns', 'erogesearch', 'eroge'],
             group: 'search',
             memberName: 'vnsearchtitle',
             description: 'Search Visual Novel from VNDB Listing by Title Only (Exact Title Only)',
@@ -45,7 +45,7 @@ module.exports = class VNDBSearchByTitleCommand extends Command {
         if (memberRoles) {
             if (memberRoles.includes('idiot')) return msg.say('G.O.S.T.U.D.Y YOU RETARDED')
         }
-        
+
         // Check is debugging on
         if (title == 'debug') {
             if (ctx.length == 0) msg.say('None')

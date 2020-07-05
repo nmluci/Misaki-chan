@@ -1,6 +1,5 @@
 const { CommandoClient, Command } = require('discord.js-commando');
 const path = require('path');
-const { Message } = require('discord.js');
 const { readdirSync } = require('fs');
 
 const client = new CommandoClient({
@@ -13,7 +12,7 @@ client.registry
 .registerGroups([
     ['ecchi', 'Ecchi'],
     ['admin', 'Admin only'],
-    ['annoyance', 'Annoyance :V'],
+    ['annoyance', 'Annoyance'],
     ['search', 'Search'],
     ['games', 'Games']
 ])
