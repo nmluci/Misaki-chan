@@ -1,23 +1,7 @@
 const {Command} = require ('discord.js-commando');
 const pkg = require('../../package.json');
 const { MessageEmbed } = require('discord.js');
-const { version } = require('snekfetch');
-
-function parseDur(ms){
-    let seconds = ms / 1000;
-    let days = parseInt(seconds / 86400);
-    seconds = seconds % 86400;
-    let hours = parseInt(seconds / 3600);
-    seconds = seconds % 3600;
-    let minutes = parseInt(seconds / 60);
-    seconds = parseInt(seconds % 60);
-    let fin = [];
-    if(days) fin.push(`${days}d`);
-    if(hours) fin.push(`${hours}h`);
-    if(minutes) fin.push(`${minutes}m`);
-    fin.push(`${seconds}s`);
-    return fin.join(' ');
-}
+const Utils = require('../../libs/Utils')
 
 module.exports = class BotStatus extends Command{
     constructor(client) {
@@ -32,7 +16,7 @@ module.exports = class BotStatus extends Command{
     }
     
     run(msg) {
-        const uptime = (client.uptime() / 60000);
+        const uptime = (Utils.parseDur(this.client.uptime));
         const botVersion = pkg.version;
         const botAuthor = pkg.author;
         const statsMsg = new MessageEmbed()
@@ -43,7 +27,6 @@ module.exports = class BotStatus extends Command{
         .addField('Node', `${process.version}`, true)
         .addField(`Owner`, `${botAuthor}`)
         .setColor('#b16ffc')
-
         msg.say(statsMsg)
     }
 }

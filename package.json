@@ -10,7 +10,8 @@
     "nana-api": "^1.0.3",
     "nhentai-api-js": "^1.1.2",
     "node-superfetch": "^0.1.10",
-    "snekfetch": "^4.0.4"
+    "snekfetch": "^4.0.4",
+    "vndb-api": "^1.0.3"
   },
   "devDependencies": {},
   "scripts": {
