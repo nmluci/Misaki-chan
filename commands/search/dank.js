@@ -6,12 +6,11 @@ const { MessageEmbed } = require('discord.js')
 module.exports = class RedditSearchCommand extends Command{
     constructor(client) {
         super(client, {
-            name: 'dark',
-            aliases: ['dark', 'd'],
+            name: 'dank',
+            aliases: ['dank', 'dk'],
             group: 'search',
-            memberName: 'dark',
-            description: 'Heals your darksouls...',
-            nsfw: true,
+            memberName: 'dank',
+            description: 'Ma wallet go brrrrrrrr...',
             clientPermissions: ['MANAGE_MESSAGES', 'EMBED_LINKS']
         })
     }
@@ -27,23 +26,23 @@ module.exports = class RedditSearchCommand extends Command{
             async function getPost() {
                 let icon = null
                 const { body } = await request
-                .get(`https://www.reddit.com/r/darkjokes/new.json`)
+                .get(`https://www.reddit.com/r/dankmemes/hot.json`)
                 .query({ limit: 100 });
-                console.log(`[CURRENT REDDIT] DARK`)
+                // console.log(`[CURRENT REDDIT] DANK`)
                 // console.log(body.data.children)
                 if (!body.data.children.length) return
                 for (let i=0; i < body.data.children.length; i++) {
-                    if (body.data.children[i].data.stickied == false) {
+                    if (body.data.children[i].data.post_hint == 'image') {
                         list_array.push(body.data.children[i].data.title)
-                        ctx_array.push(body.data.children[i].data.selftext)
+                        ctx_array.push(body.data.children[i].data.url)
                     }
                 }
                 const rand = getRandInt(list_array.length)
-                return {ans: ctx_array[rand], title: list_array[rand]}
+                return {image: ctx_array[rand], title: list_array[rand]}
             }
             
             async function fetchIcon() {
-                const { body } = await request.get(`https://www.reddit.com/r/darkjokes/about.json`)
+                const { body } = await request.get(`https://www.reddit.com/r/dankmemes/about.json`)
                 if(!body.data.icon_img && !body.data.community_icon) return
                 return body.data.icon_img || body.data.community_icon.replace(/\?.+/, '')
             }
@@ -52,18 +51,14 @@ module.exports = class RedditSearchCommand extends Command{
             const redData = await getPost()
 
             const redditEmbed = new MessageEmbed()
-            .setAuthor(`Dark JOKES`, icon)
+            .setAuthor(`Dank Memes`, icon)
             .setColor('#CCCCFF')
             .setTitle(redData.title)
-            .setDescription(redData.ans)
-            .setFooter('Dark Jokes go BRRRRRRRRRRR')
+            .setImage(redData.image)
+            .setFooter('Steam Wallet go BRRRRRRRRRRR')
             msg.say(redditEmbed)
         } catch (err) {
             return console.log(err)
         }
-    }
-
-    onBlock (msg,reason){
-        if(reason == 'nsfw') return msg.say(`Next time, I gonna make ${msg.author.id} life, become dark af... `)
     }
 }

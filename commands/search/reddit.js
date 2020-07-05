@@ -51,6 +51,9 @@ module.exports = class RedditSearchCommand extends Command{
     async run(msg, { subreddit }) {
         let ctx_array = []
         let list_array = []
+        ctx_array.length = 0
+        list_array.length = 0
+
 
         try{
 
