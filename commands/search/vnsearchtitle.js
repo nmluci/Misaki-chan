@@ -62,7 +62,6 @@ module.exports = class VNDBSearchByTitleCommand extends Command {
                 // Query the title and then destroy client
                 const realRes = await vndb.query(`get vn basic,details (title = "${rTitle}")`)
                 vndb.destroy()
-
                 const orig_lang = []
                 const lang = []
                 let coverImage
@@ -143,6 +142,8 @@ module.exports = class VNDBSearchByTitleCommand extends Command {
                 // Get query
                 const res = await vndb.query(`get vn basic (search ~ "${title}")`)
                 const num = res.num
+
+                if (num == 0) return msg.say('No Result!')
                 for (let i = 0; i < num; i++) {
                     list.push(`[${i+1}] ` + (res.items[i].title).toString())
                     ctx.push(res.items[i].title)
