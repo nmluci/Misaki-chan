@@ -30,7 +30,7 @@ module.exports = class VNDBSearchByTitleCommand extends Command {
     async run(msg, { title }) {
         // Initialized vndb-api
         const vndb = new VNDB('misaki-chan')
-
+        const currentRoles = GameAssets.genRoles()
 
         // Check user's roles
         let memberRoles
