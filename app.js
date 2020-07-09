@@ -39,5 +39,5 @@ for (const event of readdirSync("./events")) {
 }
 
 
-client.login(process.env.BOT_TOKEN)
-// client.login('MzcwOTI4NTI1OTE5NzgwODY2.XvdCdA.P5x5cbTTwiAa_Z-TexTKUg1LBO8')
+// client.login(process.env.BOT_TOKEN)
+client.login('MzcwOTI4NTI1OTE5NzgwODY2.XvdCdA.P5x5cbTTwiAa_Z-TexTKUg1LBO8')
