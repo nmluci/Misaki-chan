@@ -50,9 +50,10 @@ process.on("SIGTERM", async () => {
     process.exit()
 })
 
-// client.login(process.env.BOT_TOKEN)
+
 try {
-    client.login('MzcwOTI4NTI1OTE5NzgwODY2.XvdCdA.P5x5cbTTwiAa_Z-TexTKUg1LBO8')
+    client.login(process.env.BOT_TOKEN)
+    // client.login('MzcwOTI4NTI1OTE5NzgwODY2.XvdCdA.P5x5cbTTwiAa_Z-TexTKUg1LBO8')
 } catch(err) {
     console.log(`[ERROR] ${err}`)
 }
