@@ -6,6 +6,7 @@ const client = new CommandoClient({
     commandPrefix: 'misaki',
     owner: '360824982789685248'
 })
+let masterGuild
 
 client.registry
 .registerDefaultTypes()
@@ -30,7 +31,8 @@ client.on('ready', () => {
         },
         status: 'idle'
     })
-    
+    masterGuild = client.guilds.cache.find(x => x.id == 370927823948611584).channels.cache.find(x => x.id == 726016280657657867)
+    masterGuild.send(`[SYS] I'm Ready for Slooting up (Teehee)`)
 })
 
 // Extensions outside of commandos
@@ -38,6 +40,19 @@ for (const event of readdirSync("./events")) {
     client.on(event.split(".")[0], (...args) => require(`./events/${event}`)(...args));
 }
 
+// Kill or Suicide events
+process.on("SIGINT", async () => {
+    await masterGuild.send('[SYS] Shutting Down')
+    process.exit()
+})
+process.on("SIGTERM", async () => {
+    await masterGuild.send('[SYS] Rebooting for Update (Heroku says so)')
+    process.exit()
+})
 
 // client.login(process.env.BOT_TOKEN)
-client.login('MzcwOTI4NTI1OTE5NzgwODY2.XvdCdA.P5x5cbTTwiAa_Z-TexTKUg1LBO8')
+try {
+    client.login('MzcwOTI4NTI1OTE5NzgwODY2.XvdCdA.P5x5cbTTwiAa_Z-TexTKUg1LBO8')
+} catch(err) {
+    console.log(`[ERROR] ${err}`)
+}
