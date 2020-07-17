@@ -4,16 +4,20 @@ const { MessageEmbed } = require('discord.js');
 const Utils = require('../../libs/Utils')
 const GameAssets = require('../../libs/GameAssets')
 const HentaiHelper = require('../../libs/HentaiHelper')
+
 let hentai_api = new NanaAPI();
+let list = []
+let ctx = []
+let page = 1
 
 
-module.exports = class TagsHentaiCommand extends Command {
+module.exports = class TagsSearchHentaiCommand extends Command {
     constructor(client) {
         super(client, {
-            name: 'tags',
-            aliases: ['t'],
+            name: 'searchtags',
+            aliases: ['st'],
             group: 'ecchi',
-            memberName: 'tags',
+            memberName: 'searchtags',
             description: 'Sastifies your lust',
             args: [
                 {
@@ -48,7 +52,6 @@ module.exports = class TagsHentaiCommand extends Command {
             }
             if (memberRoles.toLowerCase().includes('genius')) msg.say(`Don't forget to keep ur self as a ${memberRoles}, okay?`)
             if (memberRoles.includes('TS')) {
-                console.log(tags)
                 if (tags.toLowerCase().includes('genderbender')) msg.say(`Soooo, you still ain't sastified by your new self huh? well its fine for me though...`)
                 if (tags.toLowerCase().includes('yuri')) msg.say('Hmm... so you are into that kind of thing eh?')
                 if (tags.toLowerCase().includes('yaoi')) msg.say(`SO...\nyou have accepted your fate...\nit's good to hear(?)`)
@@ -74,9 +77,71 @@ module.exports = class TagsHentaiCommand extends Command {
         //Censorship to ensure all actor are above 18
         if (tags.toLowerCase().includes('brainfuck')) tags = tags.replace('brainfuck', 'yaoi')
 
-        let meta_res = await HentaiHelper.getByTags(tags)
-        console.log(meta_res)
-        await HentaiHelper.makeDoujinEmbed(meta_res, msg.channel)
+        searchTitle(tags)
+        page = 1
+
+        async function searchTitle(title) {
+            try {
+                if (list.length > 0) list.length = 0
+                if (ctx.length > 0) ctx.length = 0
+                let res = await hentai_api.tag(title, page)
+                let num = res.num_pages
+
+                // handle no result
+                if (num == 0) return msg.say('No Results!')
+                
+                let resTitle = res.results.filter(x => x.language == 'english').map(x => (x.title))
+                let resId = res.results.filter(x => x.language == 'english').map(x => (x.id))
+                let resNum = resTitle.length
+                for (let i=0 ; i < resNum; i++) {
+                    list.push(`[${i+1}] ` + (resTitle[i]))
+                    ctx.push(resTitle[i])
+                }
+                
+                if (ctx.length == 1) {
+                    return resId[0]
+                }
+                if (ctx.length > 0) {
+                    const listEmbed = new MessageEmbed()
+                    .setTitle('nHentai Listing')
+                    .setDescription(list)
+    
+                    const n = await msg.say(listEmbed)
+                    const m = await msg.say('Enter your desired number with st (enter ur nambah)')
+                    let ans = await Utils.verify(msg.channel, 'st')
+    
+                    if (ans) await m.delete()
+                    if (ans) await n.delete()
+                    
+                    // return the selected title
+                    if (ans == 'next') {
+                        page++
+                        searchTitle(tags)
+                    }
+    
+                    if (ans == 'prev') {
+                        if (page > 1) {
+                            page--
+                        } else {
+                            return msg.say('lol, first page')
+                        }
+                    }
+    
+                    if (!isNaN(ans)) {
+                        ans = parseInt(ans)
+                        let searchID = resId[ans-1]
+                        let meta_res = await HentaiHelper.getById(searchID)
+                        await HentaiHelper.makeDoujinEmbed(meta_res, msg.channel)
+                    }
+                } else {
+                    return msg.say('Not Found')
+                }
+
+            } catch (err) {
+                console.log(`[ERROR] ${err}`)
+                return msg.say('error')
+            }
+        }
     }
 
     onBlock(msg, reason) {

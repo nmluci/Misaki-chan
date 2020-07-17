@@ -10,6 +10,7 @@ const subreddit = [
     "legalteens",
     "xsmallgirls",
     "porngif",
+    "porngifs",
     "collared",
     "gwcumsluts",
     "blowjobs",

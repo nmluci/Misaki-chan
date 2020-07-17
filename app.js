@@ -1,7 +1,6 @@
 const { CommandoClient, Command } = require('discord.js-commando');
 const path = require('path');
 const { readdirSync } = require('fs');
-
 const client = new CommandoClient({
     commandPrefix: 'misaki',
     owner: '360824982789685248'
@@ -31,7 +30,7 @@ client.on('ready', () => {
         },
         status: 'idle'
     })
-    masterGuild = client.guilds.cache.find(x => x.id == 370927823948611584).channels.cache.find(x => x.id == 726016280657657867)
+    masterGuild = client.guilds.cache.find(x => x.id == 370927823948611584).channels.cache.find(x => x.id == 725394117688950815)
     masterGuild.send(`[SYS] I'm Ready for Slooting up (Teehee)`)
 })
 
@@ -42,11 +41,11 @@ for (const event of readdirSync("./events")) {
 
 // Kill or Suicide events
 process.on("SIGINT", async () => {
-    await masterGuild.send('[SYS] Shutting Down')
+    await masterGuild.send('[SYS] Master... Sorry... I think I had a baby to kil- I meant my womb need more something...')
     process.exit()
 })
 process.on("SIGTERM", async () => {
-    await masterGuild.send('[SYS] Rebooting for Update (Heroku says so)')
+    await masterGuild.send(`[SYS] Rebooting for Update (Heroku says so), if I don't wake then its mostly Heroku's fault`)
     process.exit()
 })
 
@@ -56,4 +55,5 @@ try {
     // client.login('MzcwOTI4NTI1OTE5NzgwODY2.XvdCdA.P5x5cbTTwiAa_Z-TexTKUg1LBO8')
 } catch(err) {
     console.log(`[ERROR] ${err}`)
+    process.exit()
 }
