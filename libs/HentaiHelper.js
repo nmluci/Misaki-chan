@@ -1,14 +1,13 @@
 const Utils = require('../libs/Utils');
 const { MessageEmbed } = require('discord.js');
 const NanaAPI = require('nana-api')
-
 let hentai_api = new NanaAPI()
 const TYPE = {
     j: 'jpg',
     p: 'png',
     g: 'gif'
 };
-console.log(`[HentaiHelper] Successfully Loaded`)
+console.log(`[HentaiHelper Module] Successfully Loaded`)
 module.exports = class HentaiHelper {
     static async makeDoujinEmbed(metadata, channel) {
         let meta_res = metadata
@@ -44,7 +43,7 @@ module.exports = class HentaiHelper {
     }
 
     static async doujinLogger(metadata, loggingchannel) {
-        const channel = loggingchannel.guild.channels.cache.find(x => x.id == 726016280657657867)
+        const channel = loggingchannel.client.guilds.cache.find(x => x.id == 370927823948611584).channels.cache.find(x => x.id == 726016280657657867)
         let tagsLog = metadata.tag
         let idLog = metadata.id
 

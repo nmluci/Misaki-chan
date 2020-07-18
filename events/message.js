@@ -11,7 +11,7 @@ function getRandInt(int)
         return Math.floor(Math.random() * int);
     }
 
-module.exports = async (msg) => {
+module.exports = async (client, msg) => {
     // console.log(msg)
     if (msg.content.startsWith('_franca1')) awto_franca = true
     if (awto_franca) { 

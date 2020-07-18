@@ -3,6 +3,8 @@ let deredere = {}
 let slave = {}
 let ero = {}
 
+console.log(`[Personality Modules] Successfully Loaded`)
+
 tsundere.logon = `I'm coming, its not like I was so exicted before, Okay?`
 tsundere.logoff = `I'm leaving, 'kay?`
 tsundere.loli = `Eww, lolicon aren't you?`

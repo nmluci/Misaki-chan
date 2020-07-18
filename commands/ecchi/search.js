@@ -25,7 +25,6 @@ module.exports = class SearchHentaiCommand extends Command {
                 }
             ],
             nsfw: true,
-            ownerOnly: true,
             clientPermissions: ['MANAGE_MESSAGES']
         });
     }
@@ -36,9 +35,9 @@ module.exports = class SearchHentaiCommand extends Command {
         page = 1
         
         async function searchTitle(title) {
+            if (list.length > 0) list.length = 0
+            if (ctx.length > 0) ctx.length = 0
             try {
-                if (list.length > 0) list.length = 0
-                if (ctx.length > 0) ctx.length = 0
                 let res = await hentai_api.look(title, page)
                 let num = res.num_pages
 

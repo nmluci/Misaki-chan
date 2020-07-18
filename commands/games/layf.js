@@ -2,6 +2,8 @@ const { Command } = require('discord.js-commando')
 const { stripIndents } = require('common-tags')
 const { MessageEmbed } = require('discord.js')
 const GameAssets = require('../../libs/GameAssets')
+const Utils = require('../../libs/Utils')
+const {tsundere, deredere, slave, ero} = require('../../libs/Personality')
 
 module.exports = class LayfGameCommand extends Command {
     constructor(client) {
@@ -63,7 +65,12 @@ module.exports = class LayfGameCommand extends Command {
 
         // Initialization of Common Events from external references
         const commonEvent = GameAssets.common_events()
-        
+        let pernum = Utils.getRandInt(3)
+        if (pernum == 0) msg.say(tsundere.gameoflayf)
+        if (pernum == 1) msg.say(deredere.gameoflayf)
+        if (pernum == 2) msg.say(slave.gameoflayf)
+        if (pernum == 3) msg.say(ero.gameoflayf)
+
         // Warning and Initialization
         const gamesEmbed = new MessageEmbed()
         .setTitle('Game of Layf with a Twist')

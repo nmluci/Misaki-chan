@@ -3,7 +3,8 @@ const NanaAPI = require('nana-api');
 const { MessageEmbed } = require('discord.js');
 const Utils = require('../../libs/Utils')
 const GameAssets = require('../../libs/GameAssets')
-const HentaiHelper = require('../../libs/HentaiHelper')
+const HentaiHelper = require('../../libs/HentaiHelper');
+const { tsundere, deredere, slave, ero } = require('../../libs/Personality');
 
 let hentai_api = new NanaAPI();
 let list = []
@@ -73,6 +74,40 @@ module.exports = class TagsSearchHentaiCommand extends Command {
             }
         }
 
+        if (memberRoles) {
+            if (memberRoles.includes('tsundere')) {
+                if (tags.toLowerCase().includes('yuri')) { msg.say(tsundere.yuri) }
+                else if (tags.toLowerCase().includes('yaoi')) { msg.say(tsundere.yaoi) }
+                else if (tags.toLowerCase().includes('milf')) { msg.say(tsundere.milf) }
+                else if (tags.toLowerCase().includes('dilf')) { msg.say(tsundere.dilf) }
+                else if (tags.toLowerCase().includes('loli')) { msg.say(tsundere.loli) }
+            } else if (memberRoles.includes('deredere')) {
+                if (tags.toLowerCase().includes('yuri')) { msg.say(deredere.yuri) }
+                else if (tags.toLowerCase().includes('yaoi')) { msg.say(deredere.yaoi) }
+                else if (tags.toLowerCase().includes('milf')) { msg.say(deredere.milf) }
+                else if (tags.toLowerCase().includes('dilf')) { msg.say(deredere.dilf) }
+                else if (tags.toLowerCase().includes('loli')) { msg.say(deredere.loli) }
+            } else if (memberRoles == 'goshuujin') {
+                if (tags.toLowerCase().includes('yuri')) { msg.say(slave.yuri) }
+                else if (tags.toLowerCase().includes('yaoi')) { msg.say(slave.yaoi) }
+                else if (tags.toLowerCase().includes('milf')) { msg.say(slave.milf) }
+                else if (tags.toLowerCase().includes('dilf')) { msg.say(slave.dilf) }
+                else if (tags.toLowerCase().includes('loli')) { msg.say(slave.loli) }
+            } else {
+                if (tags.toLowerCase().includes('yuri')) { msg.say(ero.yuri) }
+                else if (tags.toLowerCase().includes('yaoi')) { msg.say(ero.yaoi) }
+                else if (tags.toLowerCase().includes('milf')) { msg.say(ero.milf) }
+                else if (tags.toLowerCase().includes('dilf')) { msg.say(ero.dilf) }
+                else if (tags.toLowerCase().includes('loli')) { msg.say(ero.loli) }
+            }
+        } else {
+            if (tags.toLowerCase().includes('yuri')) { msg.say(ero.yuri) }
+            else if (tags.toLowerCase().includes('yaoi')) { msg.say(ero.yaoi) }
+            else if (tags.toLowerCase().includes('milf')) { msg.say(ero.milf) }
+            else if (tags.toLowerCase().includes('dilf')) { msg.say(ero.dilf) }
+            else if (tags.toLowerCase().includes('loli')) { msg.say(ero.loli) }
+        }
+
         tags = tags.toString()
         //Censorship to ensure all actor are above 18
         if (tags.toLowerCase().includes('brainfuck')) tags = tags.replace('brainfuck', 'yaoi')
@@ -81,9 +116,9 @@ module.exports = class TagsSearchHentaiCommand extends Command {
         page = 1
 
         async function searchTitle(title) {
+            if (list.length > 0) list.length = 0
+            if (ctx.length > 0) ctx.length = 0
             try {
-                if (list.length > 0) list.length = 0
-                if (ctx.length > 0) ctx.length = 0
                 let res = await hentai_api.tag(title, page)
                 let num = res.num_pages
 
@@ -139,7 +174,7 @@ module.exports = class TagsSearchHentaiCommand extends Command {
 
             } catch (err) {
                 console.log(`[ERROR] ${err}`)
-                return msg.say('error')
+                return msg.say('Fuee')
             }
         }
     }
