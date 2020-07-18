@@ -50,15 +50,15 @@ module.exports = class RateCommand extends Command {
         
         for (let i = 0; i < metadata.tag.length; i++) {
             let x = metadata.tag[i].toLowerCase()
-            if (x == 'rape' || x == 'mother' || x == 'father' || x == 'bestiality' || x == 'old man') doujinScore -= 20
-            if (x == 'milf' || x == 'dilf') doujinScore -= 10
-            if (x == 'yuri' || x == 'lesbian' || x == 'female only') doujinScore += 20
-            if (x == 'vanilla' || x == 'lolicon' || x == 'small breasts') doujinScore += 30
+            if (x == 'milf' || x == 'dilf') doujinScore -= 100
+            if (x == 'rape' || x == 'mother' || x == 'father' || x == 'bestiality' || x == 'old man') doujinScore -= 50
             if (x == 'mmf' || x == 'mff' || x == 'threesome' || x == 'ffm threesome' || x == 'mmf threesome' || x == 'bbm') doujinScore += 15
-            if (x == 'yaoi' || x == 'tomgirl' || x == 'gender bender' || x  == 'genderbender' || x == 'tomboy') doujinScore += 25
-            if (x == 'prostitution' || x == 'slave' || x == 'bondage' || x == 'group' || x == 'bdsm' || x == 'beauty mark' || x == 'blindfold' || x == 'gag' || x == 'collar' || x == 'crotch tattoo') doujinScore += 23
+            if (x == 'yuri' || x == 'lesbian' || x == 'female only') doujinScore += 20
             if (x == 'creampie' || x == 'nakadashi' || x == 'blowjob' || x == 'boobjob' || x == 'paizuri' || x == 'cunnilingus') doujinScore += 22
             if (x == 'sole female' || x == 'masturbation' || x == 'story arc' || x == 'virginity' || x == 'exhibitionism') doujinScore += 23
+            if (x == 'prostitution' || x == 'slave' || x == 'bondage' || x == 'group' || x == 'bdsm' || x == 'beauty mark' || x == 'blindfold' || x == 'gag' || x == 'collar' || x == 'crotch tattoo') doujinScore += 23
+            if (x == 'yaoi' || x == 'tomgirl' || x == 'gender bender' || x  == 'genderbender' || x == 'tomboy') doujinScore += 25
+            if (x == 'vanilla' || x == 'lolicon' || x == 'small breasts') doujinScore += 30
             if (x == 'body swap' || x == 'mind break' || x == 'mindbreak' || x == 'feminization' || x == 'maid' || x == 'crossdressing' || x == 'sex toys' || x  == 'breast expansion' || x == 'mind control' || x == 'mind control') doujinScore += 35
             if (x == 'sister' || x == 'incest') doujinScore += 40
         }
