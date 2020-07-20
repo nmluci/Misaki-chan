@@ -142,8 +142,8 @@ module.exports = class CharSearchHentaiCommand extends Command {
                     .setDescription(list)
     
                     const n = await msg.say(listEmbed)
-                    const m = await msg.say('Enter your desired number with st (enter ur nambah)')
-                    let ans = await Utils.verify(msg.channel, 'st')
+                    const m = await msg.say('Enter your desired number with sc (enter ur nambah)')
+                    let ans = await Utils.verify(msg.channel, 'sc')
     
                     if (ans) await m.delete()
                     if (ans) await n.delete()
