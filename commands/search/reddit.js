@@ -56,7 +56,6 @@ module.exports = class RedditSearchCommand extends Command{
 
 
         try{
-
             async function getPost(subreddit) {
                 let icon = null
                 const { body } = await request
@@ -91,6 +90,7 @@ module.exports = class RedditSearchCommand extends Command{
             .setFooter('Ehm... || Beware its may be extremely nsfw')
             msg.say(redditEmbed)
         } catch (err) {
+            msg.say('Not Found?')
             return console.log(err)
         }
     }

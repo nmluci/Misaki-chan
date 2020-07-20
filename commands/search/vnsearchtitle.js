@@ -1,6 +1,6 @@
 const { Command } = require('discord.js-commando')
 const VNDB = require('vndb-api')
-const { MessageEmbed, Collection } = require('discord.js')
+const { MessageEmbed} = require('discord.js')
 const Utils = require('../../libs/Utils')
 const GameAssets = require('../../libs/GameAssets')
 

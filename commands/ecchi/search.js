@@ -90,6 +90,7 @@ module.exports = class SearchHentaiCommand extends Command {
 
             } catch (err) {
                 console.log(`[ERROR] ${err}`)
+                msg.say('Not Found(likely)')
                 return
             }
         }

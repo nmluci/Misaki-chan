@@ -41,6 +41,7 @@ module.exports = class UrbanSearchCommand extends Command{
 
             return msg.say(infoEmbed)
         } catch(err) {
+            console.log(`[ERROR] ${err}`)
             msg.say('Fuee')
         }
     }

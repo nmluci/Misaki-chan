@@ -59,6 +59,7 @@ module.exports = class RedditSearchCommand extends Command{
             .setFooter('Dark Jokes go BRRRRRRRRRRR')
             msg.say(redditEmbed)
         } catch (err) {
+            msg.say('Not Found!')
             return console.log(err)
         }
     }

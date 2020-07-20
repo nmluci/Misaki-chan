@@ -67,23 +67,27 @@ module.exports = class AnimeSearchCommand extends Command{
     }
 
     async run(msg, { anime }) {
-        const id = await this.search(anime);
-        const animeData = await this.fetchAnime(id);
-        const animeEmbed = new MessageEmbed()
-        .setTitle(animeData.title.romaji)
-        .setAuthor('Misaki x AniList')
-        .setColor(0xfc3fb4)
-        .setThumbnail(animeData.coverImage.large || animeData.coverImage.medium || null )
-        .setURL(animeData.siteUrl)
-        .addField('Title', animeData.title.romaji, true)
-        .setDescription(animeData.description.replace('<br>', ' '))
-        .addField('Season', animeData.season, true)
-        .addField('Status', animeData.status, true)
-        .addField('Episodes', animeData.episodes, true)
-        .addField('Avg. Score', animeData.averageScore)
-        .addField('Genres', animeData.genres)
-        msg.say(animeEmbed)
-
+        try {
+            const id = await this.search(anime);
+            const animeData = await this.fetchAnime(id);
+            const animeEmbed = new MessageEmbed()
+            .setTitle(animeData.title.romaji)
+            .setAuthor('Misaki x AniList')
+            .setColor(0xfc3fb4)
+            .setThumbnail(animeData.coverImage.large || animeData.coverImage.medium || null )
+            .setURL(animeData.siteUrl)
+            .addField('Title', animeData.title.romaji, true)
+            .setDescription(animeData.description.replace('<br>', ' '))
+            .addField('Season', animeData.season, true)
+            .addField('Status', animeData.status, true)
+            .addField('Episodes', animeData.episodes, true)
+            .addField('Avg. Score', animeData.averageScore)
+            .addField('Genres', animeData.genres)
+            msg.say(animeEmbed)
+        } catch (err) {
+            msg.say('Not Found!')
+            console.log(`[ERROR] ${err}`)
+        }
     }
 
     async search(query) {

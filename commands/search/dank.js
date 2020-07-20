@@ -22,7 +22,6 @@ module.exports = class RedditSearchCommand extends Command{
         list_array.length = 0
 
         try{
-            
             async function getPost() {
                 let icon = null
                 const { body } = await request
@@ -58,7 +57,8 @@ module.exports = class RedditSearchCommand extends Command{
             .setFooter('Steam Wallet go BRRRRRRRRRRR')
             msg.say(redditEmbed)
         } catch (err) {
-            return console.log(err)
+            msg.say('Not Found?')
+            return console.log(`[ERROR] ${err}`)
         }
     }
 }

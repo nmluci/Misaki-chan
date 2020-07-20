@@ -66,22 +66,27 @@ module.exports = class MangaSearchCommand extends Command{
     }
 
     async run(msg, { manga }) {
-        const id = await this.search(manga);
-        const mangaData = await this.fetchManga(id);
-
-        const mangaEmbed = new MessageEmbed()
-        .setTitle(mangaData.title.romaji)
-        .setAuthor('Misaki x AniList')
-        .setColor(0xfc3fb4)
-        .setThumbnail(mangaData.coverImage.large || mangaData.coverImage.medium || null )
-        .setURL(mangaData.siteUrl)
-        .addField('Title', mangaData.title.romaji, true)
-        .setDescription(mangaData.description.replace('<br>', ' '))
-        .addField('Status', mangaData.status, true)
-        .addField('Chapters', mangaData.chapters, true)
-        .addField('Avg. Score', mangaData.averageScore)
-        .addField('Genres', mangaData.genres)
-        msg.say(mangaEmbed)
+        try {
+            const id = await this.search(manga);
+            const mangaData = await this.fetchManga(id);
+    
+            const mangaEmbed = new MessageEmbed()
+            .setTitle(mangaData.title.romaji)
+            .setAuthor('Misaki x AniList')
+            .setColor(0xfc3fb4)
+            .setThumbnail(mangaData.coverImage.large || mangaData.coverImage.medium || null )
+            .setURL(mangaData.siteUrl)
+            .addField('Title', mangaData.title.romaji, true)
+            .setDescription(mangaData.description.replace('<br>', ' '))
+            .addField('Status', mangaData.status, true)
+            .addField('Chapters', mangaData.chapters, true)
+            .addField('Avg. Score', mangaData.averageScore)
+            .addField('Genres', mangaData.genres)
+            msg.say(mangaEmbed)
+        } catch (err) {
+            console.log(`[ERROR] ${err}`)
+            msg.say('Not Found!')
+        }
 
     }
 

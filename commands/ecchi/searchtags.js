@@ -174,7 +174,7 @@ module.exports = class TagsSearchHentaiCommand extends Command {
 
             } catch (err) {
                 console.log(`[ERROR] ${err}`)
-                return msg.say('Fuee')
+                return msg.say('Not Found (likely)')
             }
         }
     }
