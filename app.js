@@ -3,8 +3,8 @@ const { tsundere, deredere, slave, ero} = require('./libs/Personality')
 const path = require('path');
 const { readdirSync } = require('fs');
 const client = new CommandoClient({
-    commandPrefix: 'misaki',
-    // commandPrefix: 'fyn',
+    // commandPrefix: 'misaki',
+    commandPrefix: 'fyn',
     owner: '360824982789685248'
 })
 let masterGuild
@@ -56,8 +56,8 @@ process.on("SIGTERM", async () => {
 
 
 try {
-    client.login(process.env.BOT_TOKEN)
-    // client.login('MzcwOTI4NTI1OTE5NzgwODY2.XvdCdA.P5x5cbTTwiAa_Z-TexTKUg1LBO8')
+    // client.login(process.env.BOT_TOKEN)
+    client.login('MzcwOTI4NTI1OTE5NzgwODY2.XvdCdA.P5x5cbTTwiAa_Z-TexTKUg1LBO8')
 } catch(err) {
     console.log(tsundere.misc.replace('KW', 'ERROR'))
     process.exit()
