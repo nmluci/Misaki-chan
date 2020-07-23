@@ -4,6 +4,7 @@ const path = require('path');
 const { readdirSync } = require('fs');
 const client = new CommandoClient({
     commandPrefix: 'misaki',
+    // commandPrefix: 'fyn',
     owner: '360824982789685248'
 })
 let masterGuild

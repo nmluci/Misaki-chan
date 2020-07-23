@@ -38,7 +38,7 @@ module.exports = class SetSlaveTags extends Command {
                 name: status,
                 type: fuee
             },
-            status: 'online'
+            status: 'idle'
         })
     } 
 };

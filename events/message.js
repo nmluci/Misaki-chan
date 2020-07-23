@@ -96,7 +96,7 @@ module.exports = async (client, msg) => {
         }
     }
     
-    if (msg.content.toLowerCase().includes('aaa')) {
+    if (msg.content.toLowerCase().startsWith('aaa')) {
         const emo = [
             'https://i.imgur.com/N0BacOB.png',
             'https://i.imgur.com/106Z3ez.png',
@@ -110,13 +110,13 @@ module.exports = async (client, msg) => {
         })
     }
 
-    if (msg.content.toLowerCase().includes('umm')) {
+    if (msg.content.toLowerCase().startsWith('umm')) {
         msg.channel.send({
             files: ['https://i.imgur.com/rdKrEkE.png']
         })
     }
 
-    if (msg.content.toLowerCase().includes('kyaa')) {
+    if (msg.content.toLowerCase().startsWith('kyaa')) {
         const emo = [
             'https://i.imgur.com/5YL83h3.png',
             'https://i.imgur.com/t6nnwVA.png',
@@ -131,7 +131,7 @@ module.exports = async (client, msg) => {
         })
     }
 
-    if (msg.content.toLowerCase().includes('oppai') | msg.content.toLowerCase().includes('boobs')) {
+    if (msg.content.toLowerCase().startsWith('oppai') | msg.content.toLowerCase().startsWith('boobs')) {
         const emo = [
             'https://i.imgur.com/Ux8uEfB.jpg'
         ]

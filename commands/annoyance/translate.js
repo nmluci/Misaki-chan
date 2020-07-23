@@ -1,5 +1,6 @@
 const {Command} = require ('discord.js-commando');
-const translate = require('@vitalets/google-translate-api')
+const translate = require('@vitalets/google-translate-api');
+const { MessageEmbed } = require('discord.js');
 
 module.exports = class TranslateCommand extends Command {
     constructor (client) {
@@ -14,7 +15,7 @@ module.exports = class TranslateCommand extends Command {
                     key: 'lang',
                     prompt: 'language to',
                     type: 'string',
-                    oneOf: ['fr', 'it', 'id', 'ja', 'kr', 'ru', 'es', 'ml', 'ga', 'tl']
+                    oneOf: ['fr', 'it', 'id', 'ja', 'kr', 'ru', 'es', 'ml', 'ga', 'tl', 'de']
                 },
                 {
                     key: 'text',
@@ -28,9 +29,19 @@ module.exports = class TranslateCommand extends Command {
     }
 
     async run(msg, { lang , text }) {
-        const trans_text = await translate(text, {to: lang.toString()})
-        msg.say(msg.author.username + ': ' + trans_text.text)
-        msg.delete()
+        try {
+            const trans_text = await translate(text, {to: lang.toString()})
+            const transEmbed = new MessageEmbed()
+            .setAuthor('Misaki')
+            .setTitle('Translator')
+            .addField('Origin', text)
+            .addField('Translation', trans_text)
+            .setFooter(msg.author)
+            await msg.delete()
+            await msg.say(transEmbed)
+        } catch (err) {
+            console.log(`[ERROR] ${err}`)
+            return msg.say(`Err0r occured: ${err}`)
+        }
     }
-
 }
