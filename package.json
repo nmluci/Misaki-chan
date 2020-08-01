@@ -1,12 +1,14 @@
 {
   "name": "misaki-chan",
-  "version": "4.1.0",
+  "version": "4.2.1",
   "main": "app.js",
   "dependencies": {
     "@vitalets/google-translate-api": "^3.0.0",
     "common-tags": "^1.8.0",
     "discord.js": "^12.2.0",
     "discord.js-commando": "github:discordjs/Commando",
+    "dot-prop": ">=5.2.0",
+    "lodash": ">=4.17.19",
     "nana-api": "^1.0.3",
     "nhentai-api-js": "^1.1.2",
     "node-superfetch": "^0.1.10",
