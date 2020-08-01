@@ -9,6 +9,7 @@ module.exports = class HelpCommand extends Command {
             group: 'admin',
             memberName: 'fu',
             description: 'Probably your only commands that i will accept',
+            hidden: true,
             guarded: true,
             args: [
                 {
@@ -26,16 +27,21 @@ module.exports = class HelpCommand extends Command {
         try {
             let cmdgrps = this.client.registry.groups
             let grpkeys = cmdgrps.keyArray()
+            // console.log(cmdgrps)
             // console.log(this.client.registry.groups.get('ecchi'))
             let fHelp = new MessageEmbed()
             .setAuthor('Misaki-chan', `https://i.imgur.com/OFC149y.png`)
             .setColor('#b16ffc')
+
+            let cmd = cmdgrps.get('admin').commands.filter(x => x.ownerOnly != true).filter(x => x.guildOnly != true).keyArray()
+
+            console.log(cmd)
             // for (let i=0;i<grpkeys.length;i++) {
             //     let x = grpkeys[i]
             //     fHelp.addField(x, cmdgrps.get(x).commands.keyArray())
             // }
             // let m = await msg.say('fucc')
-            ReactionHelper.embedReaction(msg, fhelp, cmdgrps)
+            ReactionHelper.embedReaction(msg, fHelp, cmdgrps)
         } catch (err) {
             msg.say(`Err0r?`)
             return console.log(`[ERROR] ${err}`)

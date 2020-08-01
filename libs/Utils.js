@@ -29,9 +29,13 @@ module.exports = class FynUtil {
     }
 
     static async verify(channel, kw) {
-        const filter = x => x.content.startsWith(kw)
-        const verr = await channel.awaitMessages(filter, {max: 1, time: 60000, errors: ['time!']})
-        return verr.first().content.toLowerCase().split(' ')[1]
+        const filter = x => x.content.startsWith(kw) 
+        try {
+            const verr = await channel.awaitMessages(filter, {max: 1, time: 60000, errors: ['time!']})
+            return verr.first().content.toLowerCase().split(' ')[1]
+        } catch (err) {
+            return 'timeout'
+        }
     }
 
     static parseDur(ms){

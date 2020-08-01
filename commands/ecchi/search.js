@@ -51,7 +51,9 @@ module.exports = class SearchHentaiCommand extends Command {
                     list.push(`[${i+1}] ` + (resTitle[i]))
                     ctx.push(resTitle[i])
                 }
-                
+                if (ctx.length == 0) {
+                    return msg.say('No Results!')
+                }
                 if (ctx.length == 1) {
                     return resId[0]
                 }
@@ -67,6 +69,9 @@ module.exports = class SearchHentaiCommand extends Command {
                 if (ans) await n.delete()
                 
                 // return the selected title
+                if (ans == 'cancel') {
+                    return msg.say('Command Cancelled~')
+                }
                 if (ans == 'next') {
                     page++
                     searchTitle(tags)
@@ -87,11 +92,12 @@ module.exports = class SearchHentaiCommand extends Command {
                     await HentaiHelper.makeDoujinEmbed(meta_res, msg.channel)
                 }
 
-
+                if (ans == 'failed') {
+                    return msg.say('Timeout!')
+                }
             } catch (err) {
                 console.log(`[ERROR] ${err}`)
-                msg.say('Not Found(likely)')
-                return
+                return msg.say('Not Found(likely)')
             }
         }
         
