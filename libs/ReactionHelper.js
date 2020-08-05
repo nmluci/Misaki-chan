@@ -1,16 +1,17 @@
-console.log('[ReactionHelper Module] Sucessfully Loaded')
-let page, m, globalEmbed, arr, content, cmdname
-page = 1
+
 
 module.exports = class ReactionHelper {
-    static async embedReaction(msg, embed, item , botId='370928525919780866') {
+    static async embedReaction(client, msg, embed , botId='370928525919780866') {
         m = await msg.say(embed)
         globalEmbed = embed
-        arr = item
-        console.log(arr.keyArray())
-        content = item.get(arr.keyArray()[page=1]).commands.filter(x => x.ownerOnly != true && x.hidden != true)
-        cmdname = item.get(arr.keyArray()[page=1]).commands.filter(x => x.ownerOnly != true && x.hidden != true).keyArray()
-        embed.setTitle(arr.keyArray()[page=1])
+        cmdarr = client.registry.groups
+        cmdkeys = cmdarr.keyArray()
+        arr = cmdkeys[page]
+        item = cmdarr.get(arr)
+        console.log(item, typeof(item))
+        content = item.get(item.keyArray()[page=1]).commands.filter(x => x.ownerOnly != true && x.hidden != true)
+        cmdname = item.get(item.keyArray()[page=1]).commands.filter(x => x.ownerOnly != true && x.hidden != true).keyArray()
+        embed.setTitle(item.keyArray()[page=1])
 
         for (let i = 0; i < cmdname.length; i++) {
             let x = cmdname[i]
@@ -20,10 +21,29 @@ module.exports = class ReactionHelper {
         }
 
         m.edit(embed)
-        await this.readReaction(botId, m)
-        await this.backwardReaction(botId, m)
-        await this.deleteReaction(botId, m)
-        await this.forwardReaction(botId, m)
+
+        async function forwardReaction() {
+            await m.react('➡')
+            const forwardFilter = (reaction, user) => reaction.emoji.name === '➡' && user.id !== botId
+            const forward = msg.createReactionCollector(forwardFilter)
+    
+            forward.on('collect', f => {
+                page++
+                content = item.get(item.keyArray()[page=1]).commands.filter(x => x.ownerOnly != true && x.hidden != true)
+                cmdname = item.get(item.keyArray()[page=1]).commands.filter(x => x.ownerOnly != true && x.hidden != true).keyArray()
+                globalEmbed.setTitle(item.keyArray()[page=1])
+    
+                for (let i = 0; i < cmdname.length; i++) {
+                    let x = cmdname[i]
+                    let name = content.get(x).name
+                    let desc = content.get(x).description
+                    globalEmbed.addField(`${name} (${content.get(x).aliases ? content.get(x).aliases : 'No Alias'})`, desc, true)
+                }
+                return m.edit()
+            })
+        }
+
+        await forwardReaction()
     }
     
     static async deleteReaction(botId, msg) {
@@ -62,24 +82,7 @@ module.exports = class ReactionHelper {
     }
 
     static async forwardReaction(botId, msg) {
-        await msg.react('➡')
-        const forwardFilter = (reaction, user) => reaction.emoji.name === '➡' && user.id !== botId
-        const forward = msg.createReactionCollector(forwardFilter)
-
-        forward.on('collect', f => {
-            page++
-            content = arr.get(arr.keyArray()[page=1]).commands.filter(x => x.ownerOnly != true && x.hidden != true)
-            cmdname = arr.get(arr.keyArray()[page=1]).commands.filter(x => x.ownerOnly != true && x.hidden != true).keyArray()
-            globalEmbed.setTitle(arr.keyArray()[page=1])
-
-            for (let i = 0; i < cmdname.length; i++) {
-                let x = cmdname[i]
-                let name = content.get(x).name
-                let desc = content.get(x).description
-                globalEmbed.addField(`${name} (${content.get(x).aliases ? content.get(x).aliases : 'No Alias'})`, desc, true)
-            }
-            return msg.edit()
-        })
+        
     }
 
     static async backwardReaction(botId, msg, page) {

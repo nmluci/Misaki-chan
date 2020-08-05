@@ -15,7 +15,7 @@ function getRandInt(int)
 
 module.exports = async (client, msg) => {
     // console.log(msg)
-    console.log(msg.guild.id)
+    // console.log(msg.guild.id)
     if (msg.guild.id != 537585020219555850) {
         if (msg.content.startsWith('_franca1')) awto_franca = true
         if (awto_franca) { 

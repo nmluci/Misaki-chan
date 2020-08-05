@@ -1,16 +1,16 @@
 const { Command } = require('discord.js-commando');
 const { MessageEmbed } = require('discord.js');
-const ReactionHelper = require('../../libs/ReactionHelper')
+const { verify } = require('../../libs/Utils');
+
 module.exports = class HelpCommand extends Command {
     constructor(client) {
         super(client, {
-            name: 'fu',
+            name: 'help',
             aliases: ['h'],
             group: 'admin',
-            memberName: 'fu',
+            memberName: 'hel',
             description: 'Probably your only commands that i will accept',
             hidden: true,
-            guarded: true,
             args: [
                 {
                     key: 'cmd',
@@ -23,28 +23,112 @@ module.exports = class HelpCommand extends Command {
     }
 
     async run(msg, { cmd }) {
-        const botId = this.client.user.id
         try {
-            let cmdgrps = this.client.registry.groups
-            let grpkeys = cmdgrps.keyArray()
-            // console.log(cmdgrps)
-            // console.log(this.client.registry.groups.get('ecchi'))
-            let fHelp = new MessageEmbed()
+            let page = 1
+            let ctx
+            let cmdname 
+            let botId = 370928525919780866
+            // Declare currently available commands groups
+            let cmdgrp = this.client.registry.groups
+            let grpkeys = cmdgrp.keyArray()
+        
+            // Initial Embed Form
+            let helpEmbed = new MessageEmbed()
             .setAuthor('Misaki-chan', `https://i.imgur.com/OFC149y.png`)
-            .setColor('#b16ffc')
-
-            let cmd = cmdgrps.get('admin').commands.filter(x => x.ownerOnly != true).filter(x => x.guildOnly != true).keyArray()
-
-            console.log(cmd)
-            // for (let i=0;i<grpkeys.length;i++) {
-            //     let x = grpkeys[i]
-            //     fHelp.addField(x, cmdgrps.get(x).commands.keyArray())
-            // }
-            // let m = await msg.say('fucc')
-            ReactionHelper.embedReaction(msg, fHelp, cmdgrps)
+            .setColor('#ccccff')
+    
+            // Caches the Embed Object
+            let m = await msg.say(helpEmbed)
+    
+            // Initiates the function and then fetch the result
+            await makeList(m, helpEmbed, cmdgrp)
+    
+            async function makeList (msg, embed, data) {
+                let grp = data.get(data.keyArray()[page-1])
+                let name = grp.id
+                let grpname = grp.name
+                let maxpage = data.keyArray().length
+                ctx = grp.commands
+                .filter(x => x.ownerOnly != true)
+                .filter(x => x.guildOnly != true)
+                .filter(x => x.hidden != true)
+                cmdname = ctx.keyArray()
+                
+                embed.setTitle(`${name} (${grpname})`)
+                for (let i in cmdname) {
+                    let x = cmdname[i]
+                    let name = ctx.get(x).name
+                    let dsc = ctx.get(x).description
+                    embed.addField(`${name} (${ctx.get(x).aliases ? ctx.get(x).aliases : "No Aliases"})`, dsc)
+                }
+                m.edit(embed)
+    
+                // const n = await msg.say(`Enter h + next for next page, prev for previous page, delete for delete page`)
+                // let ans = await verify(msg.channel, 'h')
+    
+                // if ( ans ) {
+                //     await n.delete()
+                // }
+                // // return the selected choices (TEMP)
+                // switch (ans) {
+                //     case ('prev'):
+                //         if (page == 1) return msg.say("Fucc ma layf")
+                //         page--
+                //         makeList(m, embed, data)
+                //         break
+                //     case ('next'):
+                //         page++
+                //         makeList(m, embed, data)
+                //         break
+                //     case ('delete'):
+                //         return m.delete()
+                //         break
+                //     default:
+                //         return msg.say("Sloot")
+                // }
+                // // console.log(name, cmd)
+    
+                // Reaction-based navigaton
+                // Reaction Init
+                await m.react('⬅')
+                await m.react('🔴')
+                await m.react('➡')
+                // Reaction Filter
+                const deleteFilter = (reaction, user) => reaction.emoji.name === '🔴' && user.id != botId
+                const forwardFilter = (reaction, user) => reaction.emoji.name === '➡' && user.id != botId
+                const backwardFilter = (reaction, user) => reaction.emoji.name === '⬅' && user.id != botId
+                // Reaction Responses
+                const deletes = msg.createReactionCollector(deleteFilter)
+                const forwards = msg.createReactionCollector(forwardFilter)
+                const backwards = msg.createReactionCollector(backwardFilter)
+                // Reaction Emit Event
+                
+                deletes.on('collect', async dmsg => {
+                    await m.delete()
+                    return msg.say("U C NULL")
+                })
+                forwards.on('collect', async fmsg => {
+                    if (page == maxpage) return msg.say('shit')
+                    page++
+                    await fmsg.users.remove(fmsg.users.cache.filter(x => !x.bot).id)
+                    makeList(m, embed, data)
+                })
+                backwards.on('collect', async bmsg => {
+                    if (page == 0) return msg.say('stfu')
+                    page--
+                    await bmsg.users.remove(bmsg.users.cache.filter(x => !x.bot).id)
+                    makeList(m, embed, data)
+                })
+            }
+            
         } catch (err) {
-            msg.say(`Err0r?`)
             return console.log(`[ERROR] ${err}`)
+        }    
+    }
+
+    async onBlock(msg, reason) {
+        if (reason == "permission") {
+            await msg.say(`Apparently, you don't assigned me with ${response}.`)
         }
     }
-};
+}

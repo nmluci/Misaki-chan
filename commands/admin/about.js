@@ -8,7 +8,7 @@ module.exports = class AboutMe extends Command {
             aliases: ['ab'],
             group: 'admin',
             memberName: 'about',
-            description: 'Well... about'
+            description: 'About Me, and ma Owner~'
         })
     }
 

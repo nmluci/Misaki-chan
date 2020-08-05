@@ -1,3 +1,5 @@
+const debug = false
+if (debug) console.log('***DEBUG***')
 const { CommandoClient, Command } = require('discord.js-commando');
 const { tsundere, deredere, slave, ero} = require('./libs/Personality')
 const path = require('path');
@@ -7,6 +9,7 @@ const client = new CommandoClient({
     // commandPrefix: 'fyn',
     owner: '360824982789685248'
 })
+
 let masterGuild
 
 client.registry
@@ -20,7 +23,11 @@ client.registry
     ['waifu', 'Waifu-ing ME!']
 ])
 .registerDefaultGroups()
-.registerDefaultCommands()
+.registerDefaultCommands(
+    {
+        help: false
+    }
+)
 .registerCommandsIn(path.join(__dirname, 'commands'));
 
 // client.on('ready', () => {
@@ -41,19 +48,23 @@ client.registry
 for (const event of readdirSync("./events")) {
     client.on(event.split(".")[0], (...args) => require(`./events/${event}`)(client, ...args));
 }
-client.on('ready', () => {
-    masterGuild = client.guilds.cache.find(x => x.id == 370927823948611584).channels.cache.find(x => x.id == 725394117688950815)
-})
-// Kill or Suicide events
-process.on("SIGINT", async () => {
-    await masterGuild.send(`[SYS] ${ero.logoff}`)
-    process.exit()
-})
-process.on("SIGTERM", async () => {
-    await masterGuild.send(`[SYS HEROKU] ${slave.logoff}`)
-    process.exit()
-})
 
+// Kill or Suicide events
+if (!debug) {
+    client.on('ready', () => {
+        masterGuild = client.guilds.cache.find(x => x.id == 370927823948611584).channels.cache.find(x => x.id == 725394117688950815)
+    
+        process.on("SIGINT", async () => {
+            await masterGuild.send(`[SYS] ${ero.logoff}`)
+            process.exit()
+        })
+        process.on("SIGTERM", async () => {
+            await masterGuild.send(`[SYS HEROKU] ${slave.logoff}`)
+            process.exit()
+        })
+    
+    })
+}
 
 try {
     client.login(process.env.BOT_TOKEN)
