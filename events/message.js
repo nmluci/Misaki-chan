@@ -83,12 +83,12 @@ module.exports = async (client, msg) => {
             }
         }
         
-        if (msg.content.toLowerCase().match(/G!|\bdarling\b|\bhoney\b/gi)) {
-            const punpun = [`Kyaa?!`, `So Cruel`, `ひどい`, `ズルい`, `もうう`, `スケベ‼`, `ふええ`, `これやっぱ片思いよね～`, `ご主人、あたしが降られた、${msg.author}に`]
-            const henji = punpun[getRandInt(punpun.length)]
+        // if (msg.content.toLowerCase().match(/G!|\bdarling\b|\bhoney\b/gi)) {
+        //     const punpun = [`Kyaa?!`, `So Cruel`, `ひどい`, `ズルい`, `もうう`, `スケベ‼`, `ふええ`, `これやっぱ片思いよね～`, `ご主人、あたしが降られた、${msg.author}に`]
+        //     const henji = punpun[getRandInt(punpun.length)]
         
-            msg.channel.send(henji)
-        }
+        //     msg.channel.send(henji)
+        // }
         
         if (msg.content) {
             const lucc = getRandInt(10000)

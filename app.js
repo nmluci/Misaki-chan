@@ -4,6 +4,7 @@ const { CommandoClient, Command } = require('discord.js-commando');
 const { tsundere, deredere, slave, ero} = require('./libs/Personality')
 const path = require('path');
 const { readdirSync } = require('fs');
+const { flatMap } = require('lodash');
 const client = new CommandoClient({
     commandPrefix: 'misaki',
     // commandPrefix: 'fyn',
@@ -25,7 +26,8 @@ client.registry
 .registerDefaultGroups()
 .registerDefaultCommands(
     {
-        help: false
+        help: false,
+        unknownCommand: false
     }
 )
 .registerCommandsIn(path.join(__dirname, 'commands'));
