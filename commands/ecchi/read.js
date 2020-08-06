@@ -52,8 +52,7 @@ module.exports = class ReadHentaiCommand extends Command {
 
         } catch (err) {
             console.log(`[ERROR] ${err}`)
-            msg.say(`Not Found (likely)`)
-            return 1
+            return msg.say(`Not Found (likely)`)
         }
         
     }

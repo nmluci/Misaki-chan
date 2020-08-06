@@ -12,7 +12,6 @@ module.exports = class HentaiHelper {
     static async makeDoujinEmbed(metadata, channel) {
         let meta_res = metadata
         let json = {}
-
         json.tag = meta_res.tags.filter(x => x.type == 'tag').map(x => Utils.toPlural(x.name));
         json.category = meta_res.tags.filter(x => x.type == 'category').map(x => Utils.toPlural(x.name));
         json.artist = meta_res.tags.filter(x => x.type == 'artist').map(x => Utils.toPlural(x.name));

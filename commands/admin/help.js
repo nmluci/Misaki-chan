@@ -63,7 +63,7 @@ module.exports = class HelpCommand extends Command {
                         msg.say("Done~")
                     })
                     forwards.on('collect', async fmsg => {
-                        if (page === maxpage) return await fmsg.users.remove(fmsg.users.cache.filter(x => !x.bot).id)
+                        if (page === maxpage) return page = 0
                         page+=1
                         console.log("nmri")
                         await fmsg.users.remove(fmsg.users.cache.filter(x => !x.bot).id)
@@ -72,7 +72,7 @@ module.exports = class HelpCommand extends Command {
                         backwards.stop()
                     })
                     backwards.on('collect', async bmsg => {
-                        if (page === 0) return await bmsg.users.remove(bmsg.users.cache.filter(x => !x.bot).id)
+                        if (page === 0) return page = maxpage
                         page-=1
                         await bmsg.users.remove(bmsg.users.cache.filter(x => !x.bot).id)
                         makeList(m, helpEmbed, cmdgrp)

@@ -1,117 +1,71 @@
 
-
 module.exports = class ReactionHelper {
-    static async embedReaction(client, msg, embed , botId='370928525919780866') {
-        m = await msg.say(embed)
-        globalEmbed = embed
-        cmdarr = client.registry.groups
-        cmdkeys = cmdarr.keyArray()
-        arr = cmdkeys[page]
-        item = cmdarr.get(arr)
-        console.log(item, typeof(item))
-        content = item.get(item.keyArray()[page=1]).commands.filter(x => x.ownerOnly != true && x.hidden != true)
-        cmdname = item.get(item.keyArray()[page=1]).commands.filter(x => x.ownerOnly != true && x.hidden != true).keyArray()
-        embed.setTitle(item.keyArray()[page=1])
+    botId = 370928525919780866
 
-        for (let i = 0; i < cmdname.length; i++) {
-            let x = cmdname[i]
-            let name = content.get(x).name
-            let desc = content.get(x).description
-            embed.addField(`${name} (${content.get(x).aliases ? content.get(x).aliases : 'No Alias'})`, desc, true)
-        }
-
-        m.edit(embed)
-
-        async function forwardReaction() {
+    async getReaction (msg, m) {
+        try {
+            await m.react('⬅')
+            await m.react('🔴')
             await m.react('➡')
-            const forwardFilter = (reaction, user) => reaction.emoji.name === '➡' && user.id !== botId
-            const forward = msg.createReactionCollector(forwardFilter)
-    
-            forward.on('collect', f => {
-                page++
-                content = item.get(item.keyArray()[page=1]).commands.filter(x => x.ownerOnly != true && x.hidden != true)
-                cmdname = item.get(item.keyArray()[page=1]).commands.filter(x => x.ownerOnly != true && x.hidden != true).keyArray()
-                globalEmbed.setTitle(item.keyArray()[page=1])
-    
-                for (let i = 0; i < cmdname.length; i++) {
-                    let x = cmdname[i]
-                    let name = content.get(x).name
-                    let desc = content.get(x).description
-                    globalEmbed.addField(`${name} (${content.get(x).aliases ? content.get(x).aliases : 'No Alias'})`, desc, true)
-                }
-                return m.edit()
+            // Reaction Filter
+            const forwardFilter = (reaction, user) => reaction.emoji.name === '➡' && !user.bot
+            const deleteFilter = (reaction, user) => reaction.emoji.name === '🔴' && !user.bot
+            const backwardFilter = (reaction, user) => reaction.emoji.name === '⬅' && !user.bot
+            // Reaction Responses
+            const deletes = msg.createReactionCollector(deleteFilter, { maxUsers: 2 })
+            const forwards = msg.createReactionCollector(forwardFilter, { maxUsers: 2 })
+            const backwards = msg.createReactionCollector(backwardFilter, { maxUsers: 2 })
+            // Reaction Emit Event
+            deletes.on('collect', async dmsg => {
+                await m.delete()
+                deletes.stop()
+                msg.say("Done~")
             })
+            forwards.on('collect', async fmsg => {
+                if (page === maxpage) return await fmsg.users.remove(fmsg.users.cache.filter(x => !x.bot).id)
+                page+=1
+                console.log("nmri")
+                await fmsg.users.remove(fmsg.users.cache.filter(x => !x.bot).id)
+                makeList(m, helpEmbed, cmdgrp)
+                forwards.stop()
+                backwards.stop()
+            })
+            backwards.on('collect', async bmsg => {
+                if (page === 0) return await bmsg.users.remove(bmsg.users.cache.filter(x => !x.bot).id)
+                page-=1
+                await bmsg.users.remove(bmsg.users.cache.filter(x => !x.bot).id)
+                makeList(m, helpEmbed, cmdgrp)
+                forwards.stop()
+                backwards.stop()
+            })
+        } catch (err) {
+            msg.say(`[ERROR] ${err}`)
+            return console.log(`[ERROR] ${err}`)
         }
-
-        await forwardReaction()
-    }
-    
-    static async deleteReaction(botId, msg) {
-        await msg.react('🔴')
-        const deleteFilter = (reaction, user) => reaction.emoji.name === '🔴' && user.id !== botId
-        const deletes = msg.createReactionCollector(deleteFilter)
-
-        deletes.on('collect', async d => {
-            await msg.delete()
-            return await msg.say(`U c notin'`)
-        })
-
-    }
-    
-    static async readReaction(botId, msg) {
-        await msg.react('📖')
-        const readFilter = (reaction, user) => reaction.emoji.name === '📖' && user.id !== botId
-        const reads = msg.createReactionCollector(readFilter)
-
-        reads.on('collect', async d => {
-            // console.log(d.users.cache.filter(x => !x.bot))
-            await d.users.remove(d.users.cache.filter(x => !x.bot).id)
-            await console.log(d.users.cache)
-            return msg.say('Not yet Implemented')
-        })
-    }
-    
-    static async downloadReaction(botId, msg) {
-        await msg.react('💾')
-        const downloadFilter = (reaction, user) => reaction.emoji.name === '💾' && user.id !== botId
-        const downs = msg.createReactionCollector(downloadFilter)
-
-        downs.on('collect', d => {
-            return msg.say('Not yet Implemented')
-        })
     }
 
-    static async forwardReaction(botId, msg) {
+    async makeList (msg, embed, data) {
+        console.log(`Page: ${page}`)
+        if (help.length > 0) help = ' '
+        let grp = data.get(data.keyArray()[page])
+        let name = grp.id
+        let grpname = grp.name
+        ctx = grp.commands
+        .filter(x => x.ownerOnly != true)
+        .filter(x => x.guildOnly != true)
+        .filter(x => x.hidden != true)
+        cmdname = ctx.keyArray()
         
-    }
-
-    static async backwardReaction(botId, msg, page) {
-        await msg.react('⬅')
-        const backwardFilter = (reaction, user) => reaction.emoji.name === '⬅' && user.id !== botId
-        const backward = msg.createReactionCollector(backwardFilter)
-
-        backward.on('collect', b => {
-            return msg.say('Not yet Implemented')
-        })
-    }
-
-    static async forwardTenReaction(botId, msg, page) {
-        await msg.react('➡')
-        const forwardTenFilter = (reaction, user) => reaction.emoji.name === '➡' && user.id !== botId
-        const forwardTen = msg.createReactionCollector(forwardTenFilter)
-
-        forwardTen.on('collect', ft => {
-            return msg.say('Not yet Implemented')
-        })
-    }
-
-    static async backwardTenReaction(botId,msg, page) {
-        await msg.react('⬅')
-        const backwardTenFilter = (reaction, user) => reaction.emoji.name === '⬅' && user.id !== botId
-        const backwardTen = msg.createReactionCollector(backwardTenFilter)
-
-        backwardTen.on('collect', b => {
-            return msg.say('Not yet Implemented')
-        })
+        embed.setTitle(`${name} (${grpname})`)
+        for (let i in cmdname) {
+            let x = cmdname[i]
+            let name = ctx.get(x).name
+            let dsc = ctx.get(x).description
+            help += (`**${name}** (${ctx.get(x).aliases[0] ? ctx.get(x).aliases : "No Aliases"})\n${dsc}\n\n`)
+        }
+        // console.log(help)
+        embed.setDescription(help)
+        await m.edit(embed)
+        await getReaction(msg, m)
     }
 }
