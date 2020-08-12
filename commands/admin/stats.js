@@ -2,6 +2,7 @@ const {Command} = require ('discord.js-commando');
 const pkg = require('../../package.json');
 const { MessageEmbed } = require('discord.js');
 const Utils = require('../../libs/Utils')
+const { NAME } = process.env
 
 module.exports = class BotStatus extends Command{
     constructor(client) {
@@ -21,7 +22,7 @@ module.exports = class BotStatus extends Command{
         const cmdCount = this.client.registry.commands.keyArray()
         // console.log(cmdCount)
         const statsMsg = new MessageEmbed()
-        .setAuthor('Misaki-chan ID Card')
+        .setAuthor(`${NAME} ID Card`)
         .addField('Prefix', this.client.options.commandPrefix, true)
         .addField('Uptime', `${uptime}`)
         .addField('Mem. Usage', `${Math.floor(process.memoryUsage().heapUsed/1048675)} MB`, true)
