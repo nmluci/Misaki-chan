@@ -119,7 +119,7 @@ module.exports = class HelpCommand extends Command {
 
     async onBlock(msg, reason) {
         if (reason == "permission") {
-            await msg.say(`Apparently, you don't assigned me with ${response}.`)
+            await msg.say(`Apparently, you don't assigned me with ${reason}.`)
         }
     }
 }

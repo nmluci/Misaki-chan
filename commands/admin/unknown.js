@@ -9,6 +9,7 @@ module.exports = class BotStatus extends Command{
             group: 'admin',
             memberName: 'unknown',
             description: 'Well... this is kinda... ummm...',
+            hidden: true,
             unknown: true
         })
     }

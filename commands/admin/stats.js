@@ -19,7 +19,11 @@ module.exports = class BotStatus extends Command{
         const uptime = (Utils.parseDur(this.client.uptime));
         const botVersion = pkg.version;
         const botAuthor = pkg.author;
-        const cmdCount = this.client.registry.commands.keyArray()
+        const cmdCount = this.client.registry.commands
+        .filter(x => x.ownerOnly != true)
+        .filter(x => x.guildOnly != true)
+        .filter(x => x.hidden != true)
+        .keyArray()
         // console.log(cmdCount)
         const statsMsg = new MessageEmbed()
         .setAuthor(`${NAME} ID Card`)

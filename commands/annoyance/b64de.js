@@ -16,6 +16,7 @@ module.exports = class base64Decoder extends Command {
                     type: 'string'
                 }
             ],
+            hidden: true,
             clientPermissions: ['MANAGE_CHANNELS', 'MANAGE_MESSAGES']
             // patterns: [/fue+|kimoi+|yamete+|^kya+/i]
        })

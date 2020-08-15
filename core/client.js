@@ -3,6 +3,8 @@ const { readdirsync } = require('fs')
 const { Collection } = require('discord.js')
 const path = require('path')
 const { ero, tsundere, slave, deredere } = require('../libs/Personality')
+const { settings } = require('./settings')
+
 module.exports = class MisakiClient extends CommandoClient {
     constructor(options) {
         super(options)
@@ -14,4 +16,5 @@ module.exports = class MisakiClient extends CommandoClient {
     tsundere = tsundere
     slave = slave
     deredere = deredere
+    settings = settings
 }

@@ -1,5 +1,6 @@
 const {Command} = require ('discord.js-commando');
 const { MessageEmbed } = require('discord.js');
+const { stripIndent } = require('common-tags');
 
 function getRandInt(int)
     {
@@ -13,12 +14,21 @@ module.exports = class KataomoiCommand extends Command {
             aliases: ['k'],
             group: 'annoyance',
             memberName: 'kataomoi',
-            description: '片思いは本当に悔しいだよねー',
+            description: 'Heals your heart (perhaps)',
+            args: [
+                {
+                    key: 'lang',
+                    default: 'eng',
+                    prompt: 'kyaa~',
+                    type: 'string',
+                    oneOf: ['eng', 'jp']
+                }
+            ]
             // patterns: [/G!|\bdarling\b|\bhoney\b/gi]
        })
     }
 
-    run(msg) {
+    run(msg, { lang }) {
         const punpun = [
             'あたしはあなたが最初にデート、キスした人、あるいは最初の恋人じゃないかもしれませんが、あなたのさいごのひとになりたいです。',
             `愛することは何もありません。愛されることは何かがあります。でも、愛することと愛されることは全てです。`,
@@ -49,11 +59,12 @@ module.exports = class KataomoiCommand extends Command {
         const namba = getRandInt(punpun.length)
         const henji = punpun[namba]
         const henjiTrans = punpunTrans[namba]
-        const henjiEmbed = new MessageEmbed()
+        let henjiEmbed = new MessageEmbed()
         .setTitle('Misaki-chan Kataomoi Edition')
-        .addField(`日本語`,henji)
-        .addField(`English`,henjiTrans)
-        .setColor('#b16ffc')
+        if (lang == 'jp' ) henjiEmbed.addField(`日本語`,henji)
+        henjiEmbed.addField(`English`,henjiTrans)
+        henjiEmbed.setColor('#b16ffc')
+        henjiEmbed.setFooter(`Add 'jp' for jp language`)
 
         msg.say(henjiEmbed)
         // if (msg.author == 360824982789685248n) msg.say('Fueee');
