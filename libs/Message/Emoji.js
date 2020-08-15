@@ -1,6 +1,11 @@
+const { getRandInt } = require('../Utils')
+
 let emoji_cx = async function emoji_cx (client, msg) {
     if (!client.settings.emoji) return
     if (msg.author.bot) return
+    
+
+    console.log(client.settings.emoji)
     
     let ctx = msg.content.toLowerCase()
     if (ctx.startsWith('aaa')) {
