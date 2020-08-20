@@ -56,7 +56,7 @@ let emoji_cx = async function emoji_cx (client, msg) {
     }
    
     if (ctx.startsWith('_')) {
-        const emoji = ctx.slice(1);
+        const ctx = ctx.slice(1);
             
             if (ctx.includes('annoyed')) {
                 msg.channel.send({

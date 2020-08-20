@@ -10,7 +10,7 @@ module.exports = class RedditSearchCommand extends Command{
             aliases: ['dank', 'dk'],
             group: 'search',
             memberName: 'dank',
-            description: 'Ma wallet go brrrrrrrr...',
+            description: 'Give a random *DANK MEME*',
             clientPermissions: ['MANAGE_MESSAGES', 'EMBED_LINKS']
         })
     }

@@ -9,11 +9,11 @@ module.exports = class ReadHentaiCommand extends Command {
             aliases: ['r'],
             group: 'ecchi',
             memberName: 'read',
-            description: 'Sastifies your lust',
+            description: 'Read a *sauce*',
             args: [
                 {
                     key: "sauce",
-                    prompt: 'Ehm',
+                    prompt: 'sauce pls',
                     type: "integer"
                 }
             ],

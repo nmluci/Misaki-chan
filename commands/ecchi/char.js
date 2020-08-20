@@ -19,7 +19,7 @@ module.exports = class CharSearchHentaiCommand extends Command {
             aliases: ['sc'],
             group: 'ecchi',
             memberName: 'searchchar',
-            description: 'Sastifies your lust',
+            description: 'Search **doujin** by character name',
             args: [
                 {
                     key: "tags",

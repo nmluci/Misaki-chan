@@ -19,11 +19,11 @@ module.exports = class TagsSearchHentaiCommand extends Command {
             aliases: ['st'],
             group: 'ecchi',
             memberName: 'searchtags',
-            description: 'Sastifies your lust',
+            description: 'Search for **doujin** by tags',
             args: [
                 {
                     key: "tags",
-                    prompt: 'Ehm',
+                    prompt: 'tags',
                     type: "string"
                 }
             ],

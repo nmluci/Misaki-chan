@@ -9,7 +9,7 @@ module.exports = class RandHentaiCommand extends Command {
             aliases: ['rand'],
             group: 'ecchi',
             memberName: 'random',
-            description: 'Sastifies your lust',
+            description: 'Sastify your lust with random **doujin**',
             nsfw: true,
             clientPermissions: ['MANAGE_MESSAGES']
         });

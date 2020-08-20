@@ -18,6 +18,7 @@ module.exports = class ReadHentaiCommand extends Command {
             memberName: 'dumphentai',
             description: 'Burden for HEROKU',
             nsfw: true,
+            hidden: true,
             clientPermissions: ['MANAGE_MESSAGES']
         });
     }
