@@ -42,7 +42,7 @@ module.exports = class HentaiHelper {
     }
 
     static async doujinLogger(metadata, loggingchannel) {
-        const channel = loggingchannel.client.guilds.cache.find(x => x.id == 370927823948611584).channels.cache.find(x => x.id == 726016280657657867)
+        const channel = loggingchannel.client.guilds.cache.find(x => x.id == 751325116759015546).channels.cache.find(x => x.id == 753577783661428756)
         let tagsLog = metadata.tag
         let idLog = metadata.id
 

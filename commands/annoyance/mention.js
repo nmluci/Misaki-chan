@@ -23,6 +23,12 @@ module.exports = class MentionHelperCommand extends Command {
 
     run(msg, { state }) {
         if (!this.client.owners.includes(msg.author)) return msg.say(`hey, u suld't be in here!`)
+        if (state == 'on') {
+            if (!this.client.settings.mention) this.client.settings.mention = true
+        }
+        if (state == 'off') {
+            if (this.client.settings.mention) this.client.settings.mention = false
+        }
         const helpEmbed = new MessageEmbed()
         .setTitle(`Misaki's Mention Setting`)
         .setAuthor('Misaki-chan')
@@ -30,12 +36,6 @@ module.exports = class MentionHelperCommand extends Command {
         .addField('State', this.client.settings.mention ? 'On' : 'Off')
         .setFooter(`Fufufu`)
         msg.say(helpEmbed);
-        if (state == 'on') {
-            if (!this.client.settings.mention) this.client.settings.mention = true
-        }
-        if (state == 'off') {
-            if (this.client.settings.mention) this.client.settings.mention = false
-        }
         
     } 
 };

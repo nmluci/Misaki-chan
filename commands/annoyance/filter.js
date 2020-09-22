@@ -24,6 +24,12 @@ module.exports = class ToxicHelperCommand extends Command {
 
     run(msg, { state }) {
         if (!this.client.owners.includes(msg.author)) return msg.say(`hey, u suld't be in here!`)
+        if (state == 'on') {
+            if (!this.client.settings.msgFilter) this.client.settings.msgFilter = true
+        }
+        if (state == 'off') {
+            if (this.client.settings.msgFilter) this.client.settings.msgFilter = false
+        }
         const helpEmbed = new MessageEmbed()
         .setTitle(`${NAME}'s Toxicity Setting`)
         .setAuthor(`${NAME}-chan`)
@@ -31,12 +37,6 @@ module.exports = class ToxicHelperCommand extends Command {
         .addField('State', this.client.settings.msgFilter ? 'On' : 'Off')
         .setFooter(`Fufufu`)
         msg.say(helpEmbed);
-        if (state == 'on') {
-            if (!this.client.settings.msgFilter) this.client.settings.msgFilter = true
-        }
-        if (state == 'off') {
-            if (this.client.settings.msgFilter) this.client.settings.msgFilter = false
-        }
         
     } 
 };

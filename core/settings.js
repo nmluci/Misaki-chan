@@ -1,7 +1,7 @@
 let settings = {}
 //default
 settings.mention = false
-settings.msgFilter = true
+settings.msgFilter = false
 settings.emoji = true
 
 exports.settings = settings

@@ -11,11 +11,30 @@ module.exports = class BotStatus extends Command{
             aliases: ['stats'],
             group: 'admin',
             memberName: 'stats',
-            description: 'Well... status'
+            description: 'Well... status',
+            args: [
+                {
+                    key: 'args',
+                    prompt: 'Hey, U!, U suld be here!',
+                    type: 'string',
+                    default: 'all'
+                }
+            ]
         })
     }
     
-    run(msg) {
+    run(msg, { args }) {
+        if (args == 'set') {
+            const settingEmbeds = new MessageEmbed()
+            .setAuthor(`${NAME}`)
+            .setTitle(`${NAME}'s Current Settings Params`)
+            .addField('Mention', this.client.settings.mention)
+            .addField('Message Filter', this.client.settings.msgFilter)
+            .addField('Emoji', this.client.settings.emoji)
+            await msg.delete()
+            return await msg.say(settingEmbeds)
+        }
+        
         const uptime = (Utils.parseDur(this.client.uptime));
         const botVersion = pkg.version;
         const botAuthor = pkg.author;

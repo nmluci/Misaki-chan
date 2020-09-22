@@ -25,6 +25,12 @@ module.exports = class EmojiHelperCommand extends Command {
     }
 
     run(msg, { state }) {
+        if (state == 'on') {
+            if (!this.client.settings.emoji) this.client.settings.emoji = true
+        }
+        if (state == 'off') {
+            if (this.client.settings.emoji) this.client.settings.emoji = false
+        }
         const helpEmbed = new MessageEmbed()
         .setTitle(`${NAME}'s Emoji Sender`)
         .setAuthor(`${NAME}-chan`)
@@ -34,12 +40,6 @@ module.exports = class EmojiHelperCommand extends Command {
         .addField(`Example`, '_potato')
         .addField("State", this.client.settings.emoji ? 'On' : 'Off')
         .setColor('#b16ffc')
-        if (state == 'on') {
-            if (!this.client.settings.emoji) this.client.settings.emoji = true
-        }
-        if (state == 'off') {
-            if (this.client.settings.emoji) this.client.settings.emoji = false
-        }
         msg.say(helpEmbed);
     } 
 };
