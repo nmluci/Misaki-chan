@@ -23,7 +23,7 @@ module.exports = class BotStatus extends Command{
         })
     }
     
-    run(msg, { args }) {
+    async run(msg, { args }) {
         if (args == 'set') {
             const settingEmbeds = new MessageEmbed()
             .setAuthor(`${NAME}`)
