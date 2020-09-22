@@ -10,7 +10,7 @@ module.exports = async (client, msg) => {
     })
     
     if (!process.env.DEBUG) {
-        let masterGuild = client.guilds.cache.find(x => x.id == 370927823948611584).channels.cache.find(x => x.id == 725394117688950815)
+        let masterGuild = client.guilds.cache.find(x => x.id == 751325116759015546).channels.cache.find(x => x.id == 757930629529862184)
         masterGuild.send(`${client.ero.logon}`)
     }
 }
