@@ -9,7 +9,7 @@
     "discord.js-commando": "github:discordjs/Commando",
     "dot-prop": ">=5.2.0",
     "dotenv": "^8.2.0",
-    "lodash": ">=4.17.19",
+    "lodash": ">=4.17.21",
     "nana-api": "^1.0.3",
     "nhentai-api-js": "^1.1.2",
     "node-superfetch": "^0.1.10",
