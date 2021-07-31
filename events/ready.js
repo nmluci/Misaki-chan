@@ -3,8 +3,8 @@ module.exports = async (client, msg) => {
     console.log(`Currently establishing a sub-slavery as ${client.user.username}! (${client.user.id})`)
     client.user.setPresence({
         activity: {
-            name: `Vibing`,
-            type: 'LISTENING'
+            name: `Genshit Impact`,
+            type: 'PLAYING'
         },
         status: 'idle'
     })
