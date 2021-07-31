@@ -27,7 +27,7 @@ module.exports = async (client, msg) => {
                 msg.channel.send({
                     files: ['https://i.imgur.com/t57h37K.png']
                 })
-            }
+            }  
         }
         
         

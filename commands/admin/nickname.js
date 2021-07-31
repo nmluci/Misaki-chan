@@ -1,5 +1,4 @@
 const { Command } = require('discord.js-commando');
-const { MessageEmbed, Message } = require('discord.js');
 
 module.exports = class NicknameChangerCommand extends Command {
     constructor(client) {
@@ -25,7 +24,7 @@ module.exports = class NicknameChangerCommand extends Command {
 
     async run(msg, { name }) {
         try {
-            msg.guild.member(client.user).setNickname(name)
+            await msg.guild.member(client.user).setNickname(name)
             return msg.say(`Ma Nem Naw is ${name}`)
         } catch (err) {
             return err

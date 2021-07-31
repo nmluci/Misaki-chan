@@ -8,6 +8,8 @@ let emoji_cx = async function emoji_cx (client, msg) {
     console.log(client.settings.emoji)
     
     let ctx = msg.content.toLowerCase()
+		
+	
     if (ctx.startsWith('aaa')) {
         const emo = [
             'https://i.imgur.com/N0BacOB.png',
@@ -56,7 +58,7 @@ let emoji_cx = async function emoji_cx (client, msg) {
     }
    
     if (ctx.startsWith('_')) {
-        const ctx = ctx.slice(1);
+        ctx = ctx.slice(1);
             
             if (ctx.includes('annoyed')) {
                 msg.channel.send({

@@ -7,6 +7,7 @@ const TYPE = {
     p: 'png',
     g: 'gif'
 };
+
 console.log(`[HentaiHelper Module] Successfully Loaded`)
 module.exports = class HentaiHelper {
     static async makeDoujinEmbed(metadata, channel) {
