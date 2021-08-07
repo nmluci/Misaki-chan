@@ -1,59 +1,42 @@
-require('dotenv').config()
-const { BOT_TOKEN, PREFIX, OWNER, DEBUG, MASTERGUILD, MASTERCH } = process.env
-const MisakiClient = require('./core/client')
-const { readdirSync } = require('fs')
-const path = require('path')
-const pkg = require('./package.json')
-const { ero, tsundere } = require('./libs/Personality')
+require("dotenv").config()
+const {BOT_TOKEN, DEBUG, PREFIX} = process.env
+const {Client, Intents, Collection} = require("discord.js")
+const fs = require("fs")
 
-const client = new MisakiClient({
-    commandPrefix: PREFIX,
-    owner: OWNER,
-})
+const misaki = new Client({
+    intents: [
+        Intents.FLAGS.GUILDS,
+        Intents.FLAGS.GUILD_BANS,
+        Intents.FLAGS.GUILD_MEMBERS,
+        Intents.FLAGS.GUILD_INVITES,
+        Intents.FLAGS.GUILD_MESSAGES,
+        Intents.FLAGS.GUILD_PRESENCES,
+        Intents.FLAGS.DIRECT_MESSAGES,
+        Intents.FLAGS.DIRECT_MESSAGE_REACTIONS
+    ]})
+misaki.commands = new Collection()
 
-client.registry
-.registerDefaultTypes()
-.registerGroups([
-    ['ecchi', 'Ecchi'],
-    ['admin', 'Admin'],
-    ['annoyance', 'Annoyance'],
-    ['search', 'Search'],
-    ['games', 'Games'],
-    ['waifu', 'Waifu']
-])
-.registerDefaultGroups()
-.registerDefaultCommands(
-    {
-        help: false,
-        unknownCommand: false
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith(".js"))
+const eventFiles = fs.readdirSync("./events").filter(file => file.endsWith(".js"))
+
+for (const file of eventFiles) {
+    const event = require(`./events/${file}`)
+    if (event.once) {
+        misaki.once(event.name, (...args) => event.execute(...args, misaki))
     }
-)
-.registerCommandsIn(path.join(__dirname, 'commands'));
-
-for (const event of readdirSync("./events")) {
-    client.on(event.split(".")[0], (...args) => require(`./events/${event}`)(client, ...args));
+    else {
+        misaki.on(event.name, (...args) => event.execute(...args, misaki))
+    }
 }
 
-const debug = DEBUG
-if (!debug) {
-    client.on('ready', () => {
-        let m_guild = client.guilds.cache.find(x => x.id == MASTERGUILD).channels.cache.find(x => x.id == MASTERCH)
-
-        process.on('SIGINT', async () => {
-            await m_guild.send(client.ero.logoff)
-            process.exit()
-        })
-
-        process.on('SIGTERM', async () => {
-            await m_guild.send(`[HEROKU] ${client.slave.logoff}`)
-            process.exit()
-        })
-    })
+for (const file of commandFiles) {
+    const command = require(`./commands/${file}`)
+    console.log(`Loaded ${command.name}`)
+    misaki.commands.set(command.name, command)
 }
 
 try {
-    client.login(BOT_TOKEN)
+    misaki.login(BOT_TOKEN)
 } catch (err) {
-    console.log(tsundere.misc.replace('KW', err))
-    process.exit()
+    console.log(err)
 }
