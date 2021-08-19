@@ -3,6 +3,7 @@ const { MessageEmbed } = require("discord.js")
 module.exports = {
     name: "prs",
     description: "Change my pressence status",
+    admin: true,
     options: [
         {
             name: "type",

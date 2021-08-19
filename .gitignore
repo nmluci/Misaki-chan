@@ -106,3 +106,8 @@ dist
 debug.js
 tesd.js
 old/
+
+*.yarn
+*.cjs
+*.editorconfig
+*.eslintrc.json

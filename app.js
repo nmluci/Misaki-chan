@@ -14,9 +14,20 @@ const misaki = new Client({
         Intents.FLAGS.DIRECT_MESSAGES,
         Intents.FLAGS.DIRECT_MESSAGE_REACTIONS
     ]})
+
+const commandDir = ["admin", "ecchi"]
 misaki.commands = new Collection()
 
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith(".js"))
+
+// const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith(".js"))
+
+let commandFiles = []
+for (dir of commandDir) {
+    commandFiles.push(...fs.readdirSync(`./commands/${dir}`)
+                .filter(file => file.endsWith(".js"))
+                .map(file => `${dir}/${file}`))
+}
+
 const eventFiles = fs.readdirSync("./events").filter(file => file.endsWith(".js"))
 
 for (const file of eventFiles) {
@@ -35,8 +46,10 @@ for (const file of commandFiles) {
     misaki.commands.set(command.name, command)
 }
 
+
 try {
     misaki.login(BOT_TOKEN)
 } catch (err) {
-    console.log(err)
+    console.log("An error occured during deployment")
+    process.exit()
 }
