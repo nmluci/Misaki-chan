@@ -1,0 +1,7 @@
+version: "3.3"
+services:
+  backend:
+    container_name: dsc-misaki-chan
+    image: nmluci/misaki:discord
+    restart: unless-stopped
+    build: .
