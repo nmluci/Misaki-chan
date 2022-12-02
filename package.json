@@ -2,7 +2,6 @@
   "name": "misaki-chan",
   "version": "4.4.2",
   "main": "app.js",
-  
   "dependencies": {
     "@vitalets/google-translate-api": "^7.0.0",
     "common-tags": "^1.8.0",
@@ -17,16 +16,12 @@
     "snekfetch": "^4.0.4",
     "vndb-api": "^1.0.3"
   },
-  "devDependencies": {},
   "scripts": {
     "start": "node app.js"
   },
   "keywords": [],
   "author": "Lynne Fuyuna",
   "license": "MIT",
-  "directories": {
-    "lib": "lib"
-  },
   "description": "Misaki-chan is an all purpose bot to serve only ME",
   "repository": {
     "type": "git",
