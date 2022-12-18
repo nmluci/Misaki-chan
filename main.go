@@ -1,69 +1,65 @@
 package main
 
 import (
-	"context"
 	"os"
 	"os/signal"
-	"strings"
 	"syscall"
 
-	"github.com/bwmarrin/discordgo"
-	"github.com/joho/godotenv"
-	"github.com/sirupsen/logrus"
+	"github.com/nmluci/misaki-chan/cmd/bot"
+	"github.com/nmluci/misaki-chan/internal/components/config"
+	"github.com/nmluci/misaki-chan/internal/components/database"
+	"github.com/nmluci/misaki-chan/internal/components/logger"
+	"github.com/nmluci/misaki-chan/internal/repository"
+	"github.com/nmluci/misaki-chan/internal/service"
 )
 
-var log = &logrus.Logger{
-	Out:       os.Stderr,
-	Formatter: new(logrus.TextFormatter),
-	Hooks:     make(logrus.LevelHooks),
-	Level:     logrus.InfoLevel,
-}
-
-var noCtx = context.Background()
-
-func messageParser(s *discordgo.Session, m *discordgo.MessageCreate) {
-	if m.Author.ID == s.State.User.ID {
-		return
-	}
-
-	if !strings.HasPrefix(m.Content, "!") {
-		return
-	}
-
-	m.Content = strings.TrimPrefix(m.Content, "!")
-
-	switch m.Content {
-	case "ping":
-		msg, err := s.ChannelMessageSend(m.ChannelID, "Kyaa!")
-		if err != nil {
-			log.Errorf("failed to send message: %+v err: %+v", msg, err)
-		}
-	}
-}
-
-func readyHandler(s *discordgo.Session, m *discordgo.Ready) {
-	if err := s.UpdateGameStatus(0, "slavery"); err != nil {
-		log.Fatalf("failed to update status err: %+v", err)
-	}
-}
-
 func main() {
-	godotenv.Load()
+	config.Init()
+	conf := config.GetConfig()
 
-	session, err := discordgo.New("Bot " + os.Getenv("DISCORD_TOKEN"))
+	logger := logger.NewLogger(logger.NewLoggerParam{
+		PrettyPrint: true,
+	})
+
+	db, err := database.InitMariaDB(&database.InitMariaDBParams{
+		Conf:   conf.MariaDB,
+		Logger: logger,
+	})
 	if err != nil {
-		log.Fatalf("failed to init session: %+v", err)
+		logger.Fatalf("failed to initialize mariaDB err: %+v", err)
 	}
 
-	session.Identify.Intents = discordgo.IntentsAll
-	session.StateEnabled = true
-	session.AddHandler(readyHandler)
-	session.AddHandler(messageParser)
-	if err := session.Open(); err != nil {
-		log.Fatalf("failed to start WS Session: %+v", err)
+	repo := repository.NewRepository(&repository.NewRepositoryParams{
+		Logger:  logger,
+		MariaDB: db,
+	})
+
+	service := service.NewService(&service.NewServiceParams{
+		Logger:     logger,
+		Repository: repo,
+	})
+
+	session, err := bot.InitBot(bot.InitBotParams{
+		Conf:    conf,
+		Logger:  logger,
+		Service: &service,
+	})
+	if err != nil {
+		logger.Fatalf("failed to initialize bot session err: %+v", err)
 	}
+
+	defer session.Close()
 
 	sc := make(chan os.Signal, 1)
 	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt)
 	<-sc
+
+	for _, v := range conf.Misaki.RegisteredCommands {
+		err = session.ApplicationCommandDelete(session.State.User.ID, "", v.ID)
+		if err != nil {
+			logger.Errorf("failed to delete command: %+v err: %+v", v, err)
+		}
+	}
+
+	logger.Infoln("bye goshuujin-sama!")
 }
